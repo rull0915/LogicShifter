@@ -10,6 +10,7 @@ LogicCircuit::LogicCircuit()
 	: m_freeManager{}
 	, m_stageManager{}
 	, m_editManager{}
+	, m_modeSelect{ this }
 {
 	LoadBlockColors();
 }
@@ -25,6 +26,9 @@ void LogicCircuit::Initialize(PlayMode playMode)
 
 	switch (m_nowPlayMode)
 	{
+	case PlayMode::Select:
+		m_modeSelect.Initialize();
+		break;
 	case PlayMode::Stage:
 		m_stageManager.Initialize();
 		m_stageManager.Load(LoadFileDialog());
@@ -47,6 +51,9 @@ void LogicCircuit::Update(float elapsedTime)
 
 	switch (m_nowPlayMode)
 	{
+	case PlayMode::Select:
+		m_modeSelect.Update(elapsedTime);
+		break;
 	case PlayMode::Stage:
 		m_stageManager.Update(elapsedTime);
 		break;
@@ -59,12 +66,24 @@ void LogicCircuit::Update(float elapsedTime)
 	default:
 		break;
 	}
+
+	if(m_stageManager.IsReset() || m_editManager.IsReset() || m_freeManager.IsReset())
+	{
+		m_stageManager.Reset();
+		m_editManager.Reset();
+		m_freeManager.Reset();
+
+		Initialize(PlayMode::Select);
+	}
 }
 
 void LogicCircuit::Render()
 {
 	switch (m_nowPlayMode)
 	{
+	case PlayMode::Select:
+		m_modeSelect.Render();
+		break;
 	case PlayMode::Stage:
 		m_stageManager.Render();
 		break;

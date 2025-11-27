@@ -19,6 +19,8 @@ void StageManager::Initialize()
 	// ƒtƒ‰ƒO‚Ì‰Šú‰»
 	m_clearFrag = false;
 
+	m_resetButton.Initialize();
+
 	// Šeİ’è‚Ì‰Šú‰»
 	m_conditions.Initialize();
 	m_conditionString.clear();

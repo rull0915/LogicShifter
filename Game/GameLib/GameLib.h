@@ -3,6 +3,7 @@
 // ----- —ñ‹“Œ^éŒ¾ ----- //
 enum class PlayMode
 {
+	Select,
 	Stage,
 	Edit,
 	Free,

@@ -28,5 +28,8 @@ public:
 
 	void UndoCommand();
 	void RedoCommand();
+
+	// ÉQÉbÉ^Å[
+	int GetUndoCommandNum(){ return m_pUndoCommands.size(); }
 };
 

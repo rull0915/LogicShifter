@@ -15,6 +15,15 @@ Button::Button(Vector2D pos, Vector2D size, bool mode, int paramator)
 	else m_color = paramator;
 }
 
+void Button::Initialize()
+{
+	m_isPressed = false;
+	m_isPressedRight = false;
+
+	m_mouseInput = 0;
+	m_oldMouseInput = 0;
+}
+
 void Button::Update()
 {
 	m_oldMouseInput = m_mouseInput;
@@ -50,7 +59,7 @@ void Button::Render()
 	}
 	else
 	{
-		DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_color, true);
+		MyDrawRoundBox({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }, { m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }, (m_size.x < m_size.y ? m_size.x : m_size.y) / 10, m_color, true);
 	}
 
 	if(m_isPressed)

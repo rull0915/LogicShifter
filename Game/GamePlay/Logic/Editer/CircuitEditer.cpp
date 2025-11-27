@@ -102,6 +102,8 @@ void CircuitEditer::PutUpdate()
 	// 設置
 	if(MouseEnter() & MOUSE_INPUT_LEFT) 
 	{
+		if (m_commandManager.GetUndoCommandNum() == 0) return;
+
 		//　カーソルの範囲分ループ
 		for (int i = 0; i < m_stageReceiver.GetCursorSize().y; i++) 
 		{

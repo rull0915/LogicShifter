@@ -21,6 +21,8 @@ void FreeManager::Initialize()
 	m_cells.clear();
 	m_nextCells.clear();
 
+	m_resetButton.Initialize();
+
 	m_cells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
 	m_nextCells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
 	std::fill(m_cells.begin(), m_cells.end(), 0);

@@ -3,6 +3,7 @@
 #include "../EditManager.h"
 #include "../StageManager.h"
 #include "../FreeManager.h"
+#include "../ModeSelect.h"
 
 class LogicCircuit
 {
@@ -11,6 +12,8 @@ private:
 	StageManager m_stageManager;
 	FreeManager m_freeManager;
 	EditManager m_editManager;
+
+	ModeSelect m_modeSelect;
 
 	PlayMode m_nowPlayMode;
 
@@ -23,11 +26,6 @@ public:
 	void Update(float elapsedTime);
 
 	void Render();
-
-	bool IsReset()
-	{
-		return  m_stageManager.IsReset() || m_freeManager.IsReset() || m_editManager.IsReset();
-	}
 
 private:
 	// ブロックの色の保存

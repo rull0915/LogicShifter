@@ -16,7 +16,7 @@ GamePlayScene::~GamePlayScene()
 // 初期化関数
 void GamePlayScene::Initialize()
 {
-	m_logic.Initialize(PlayMode::Free);
+	m_logic.Initialize(PlayMode::Select);
 }
 
 // 更新関数 
@@ -24,8 +24,6 @@ void GamePlayScene::Update(float elapsedTime)
 {
 	// 論理回路の更新
 	m_logic.Update(elapsedTime);
-
-	if(m_logic.IsReset()) Initialize();
 }
 
 // 描画関数

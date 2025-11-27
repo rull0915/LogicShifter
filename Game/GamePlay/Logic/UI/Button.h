@@ -20,6 +20,8 @@ class Button
 public:
 	Button(Vector2D pos, Vector2D size, bool mode, int paramator);
 
+	void Initialize();
+
 	void Update();
 
 	void Render();

@@ -38,6 +38,8 @@ public:
 
 	bool IsReset() { return m_resetButton.GetIsPressed(); }
 
+	void Reset() { m_resetButton.Initialize(); }
+
 protected:
 	// ‚»‚Ì‘¼ŠÖ”
 	

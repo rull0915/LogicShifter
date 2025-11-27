@@ -19,6 +19,8 @@ void EditManager::Initialize()
 {
 	m_stageUi.Initialize();
 
+	m_resetButton.Initialize();
+
 	// サイズ確保
 	m_cells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
 	m_nextCells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
