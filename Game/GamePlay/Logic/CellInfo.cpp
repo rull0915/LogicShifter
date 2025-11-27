@@ -1,0 +1,26 @@
+#include "CellInfo.h"
+
+std::map<std::pair<CellType, CellSubType>, int> Cell::COLORS = 
+{
+		{{TYPE_WIRE,   SUBTYPE_NORMAL}, 0x444444},
+		{{TYPE_WIRE,   SUBTYPE_CROSS}, 0x55CC55},
+		{{TYPE_WIRE,   SUBTYPE_LIGHT}, 0x555555},
+		{{TYPE_OTHERS, SUBTYPE_WALL}, 0xAAAAFF},
+		{{TYPE_INPUT,  SUBTYPE_AND}, 0xff7777},
+		{{TYPE_INPUT,  SUBTYPE_OR},  0xffff77},
+		{{TYPE_OUTPUT, SUBTYPE_NORMAL}, 0x77ffff},
+		{{TYPE_OUTPUT, SUBTYPE_NOT},  0xFBB161},
+};
+
+std::map<std::pair<CellType, CellSubType>, int> Cell::ON_SIGNAL_COLORS =
+{
+	{ { TYPE_WIRE, SUBTYPE_NORMAL }, 0x777777 },
+	{ {TYPE_WIRE,   SUBTYPE_CROSS}, 0xAAffAA },
+	{ {TYPE_WIRE,   SUBTYPE_LIGHT}, 0xFFFFFF },
+	{ {TYPE_OTHERS, SUBTYPE_WALL}, 0xAAAAFF },
+	{ {TYPE_INPUT,  SUBTYPE_AND}, 0xff7777 },
+	{ {TYPE_INPUT,  SUBTYPE_OR},  0xffff77 },
+	{ {TYPE_INPUT, SUBTYPE_BUTTON}, 0x7777ff},
+	{ {TYPE_OUTPUT, SUBTYPE_NORMAL}, 0x77ffff },
+	{ {TYPE_OUTPUT, SUBTYPE_NOT},  0xFBB161 },
+};

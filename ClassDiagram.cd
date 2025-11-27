@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CircuitEditer" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQACBQRQQAARQAEgAEQAABAACAAEgQABRAAAAEACAE=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\CircuitEditer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CircuitEditer2">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="CircuitEditer2::PutMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Game\GamePlay\Logic\Editer\CircuitEditer2.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgQBQAAUQAIgJQAEAIAQggBBAAAAkCAAQTAQAAAAAAg=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\CircuitEditer2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommandManager" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAgAAAAAAAAAAAAAAAAAIAAIAQAAIAAAAAEAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\CommandManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClearCommand" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAYAAAAAAAABAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\ClearCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CopyCommand" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\CopyCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditCommand" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAQAAAAAAAAAAgAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\EditCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditManager" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAIAAAQAAAAAAAAAAAAQAAAAAABACAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\EditManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FreeManager" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KASAAAAAAAQAAQACAAABAAoAAABIAAACABAAAAAgAAA=</HashCode>
+      <FileName>Game\GamePlay\FreeManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UndoEditCommand" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAABAAAAACAAAAAAAAACAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\UndoEditCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorPallet" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECAAAQAAEABAAIEAUAAAAIhAABAAEAAAAgA=</HashCode>
+      <FileName>Game\GamePlay\Logic\UI\ColorPallet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAAABACAAACAAAAAAAAAAAAABAAABAAAAABAAAAA=</HashCode>
+      <FileName>Game\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="5.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAQAAgAAAAAAAQAAAgAAAABAAAAAAAgA=</HashCode>
+      <FileName>Game\Common\Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneManager" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAEAAIAACAAgAQAAAAAAAABAAAAAEAgQ=</HashCode>
+      <FileName>Game\Common\SceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAEEAAQAAAAQABAAAAAAAAAAiAAAAAABAAABAAAAA=</HashCode>
+      <FileName>Game\Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Screen" Collapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Game\GameLib\Screen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GamePlayScene" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAAAQAAAAgAAAAAAAAAgAACABAAAAAACgA=</HashCode>
+      <FileName>Game\GamePlay\GamePlayScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQCAQAAAiAAEgAAAAAAAAgAgAABAAAgAJQAAAoAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\UI\Button.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CircuitSimulator" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAQAAAAAgACCAQARAAAIAAAAAAAAAAQA=</HashCode>
+      <FileName>Game\GamePlay\Logic\CircuitSimulator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogicCircuit" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAEAAgSQAAAAAAgQAAAAAAAAAAABAAAAAEAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\LogicCircuit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SelectUI" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>WAQEBAAABKgAAQAAIAkFAAAAAAAAABAAAFAIAgQAAgA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\SelectUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorButtons" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABQACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\SelectUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextBox" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAACAAAAAAEAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\UI\TextBox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModeManager" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQBAAAQAAAAIQAAEAAAAAAEAABAAAAAABAAgAAACAA=</HashCode>
+      <FileName>Game\GamePlay\ModeManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PasteCommand" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAABAYAAAAAAAARAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\PasteCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadCommand" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAABAYAAAAAAAABBAAAAABAAAAAAAAAACA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\LoadCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StageManager" Collapsed="true">
+    <Position X="19.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\StageManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StageUI" Collapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAQEEgAEACBCA4QAACAEAAAAAAAAQAEAABAJQBAAAgA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Stage\StageUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Setting" Collapsed="true">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAACAAQAAAACBAAABAAAAAAFIAABABAABAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Stage\StageUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Switch" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAACAAAMAgAAAEAAAAAAQAAAAAABAIAAIAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Stage\Switch.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextInputManager" Collapsed="true">
+    <Position X="19.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAKAAAQAABAAIgAAAAAQAABAAABAAAAICAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Stage\TextInputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetCommand" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAAAAAQRAAAAAAAAEAAAAAQAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\Commands\SetCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StageReceiver" Collapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAkCAAAAQABAAAACQAAAAAQAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\StageReceiver.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SaveCell" Collapsed="true">
+    <Position X="17.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\CircuitEditer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AABB" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameLib\GameLib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AttackAABB" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAABAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameLib\GameLib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SquareMatrix3" Collapsed="true">
+    <Position X="19.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAABAAAAAAIACAAIAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Game\GameMath\SquareMatrix3.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="SquareMatrix4" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAABAAAAAAIACAAIAAAAAAAAAAAAAAEAAAAAQAAA=</HashCode>
+      <FileName>Game\GameMath\SquareMatrix4.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector2D" Collapsed="true">
+    <Position X="14" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector2D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector2DInt" Collapsed="true">
+    <Position X="15.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector2D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector3D" Collapsed="true">
+    <Position X="17.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector3D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector3DInt" Collapsed="true">
+    <Position X="19.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector3D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector4D" Collapsed="true">
+    <Position X="12.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhgAQAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector4D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vector4DInt" Collapsed="true">
+    <Position X="14" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhgAQAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector4D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="std::hash&lt;Vector2DInt&gt;" Collapsed="true">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameMath\Vector2D.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="PutMode" Collapsed="true">
+    <Position X="15.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAEAAAg=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\CircuitEditer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayMode" Collapsed="true">
+    <Position X="14" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAgAAAAAAAI=</HashCode>
+      <FileName>Game\GameLib\GameLib.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="State" Collapsed="true">
+    <Position X="17.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAABAAAgAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\SelectUI.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Function" Collapsed="true">
+    <Position X="12.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAhIAAAABADAAAAAAAIAIBAgAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Game\GamePlay\Logic\Editer\SelectUI.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Sound::Type" Collapsed="true">
+    <Position X="19.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAIAAACAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\GameLib\Sound.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

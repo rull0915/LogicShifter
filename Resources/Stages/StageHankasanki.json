@@ -1,0 +1,533 @@
+{
+    "Condition": [
+        {
+            "Input": [
+                0,
+                0
+            ],
+            "Output": [
+                false,
+                false
+            ]
+        },
+        {
+            "Input": [
+                1,
+                0
+            ],
+            "Output": [
+                true,
+                false
+            ]
+        },
+        {
+            "Input": [
+                0,
+                1
+            ],
+            "Output": [
+                true,
+                false
+            ]
+        },
+        {
+            "Input": [
+                1,
+                1
+            ],
+            "Output": [
+                false,
+                true
+            ]
+        }
+    ],
+    "ConditionString": [
+        21322,
+        21152,
+        31639,
+        22120,
+        12434,
+        20316,
+        12428
+    ],
+    "Height": 19,
+    "Inputs": [
+        {
+            "PosX": -9,
+            "PosY": -5
+        },
+        {
+            "PosX": -9,
+            "PosY": 5
+        }
+    ],
+    "Outputs": [
+        {
+            "PosX": 9,
+            "PosY": -5
+        },
+        {
+            "PosX": 9,
+            "PosY": 5
+        }
+    ],
+    "Stage": [
+        {
+            "PosX": -8,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -7,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -6,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -5,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -4,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -3,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -2,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -1,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 0,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 1,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 2,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 3,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 4,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 5,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 6,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 7,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -8,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -8,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -7,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -7,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -6,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -6,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -9,
+            "PosY": -5,
+            "SubType": 2,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": -7,
+            "PosY": -5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 7,
+            "PosY": -5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 8,
+            "PosY": -5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 9,
+            "PosY": -5,
+            "SubType": 3,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -4,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -4,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -3,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -3,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -2,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -2,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": -1,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": -1,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 0,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 0,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 1,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 1,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 2,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 2,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 3,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 3,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 4,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 4,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -9,
+            "PosY": 5,
+            "SubType": 2,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": -7,
+            "PosY": 5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 7,
+            "PosY": 5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 8,
+            "PosY": 5,
+            "SubType": 1,
+            "Type": 1
+        },
+        {
+            "PosX": 9,
+            "PosY": 5,
+            "SubType": 3,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 6,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 6,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 7,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 7,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 8,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 8,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -8,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -7,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -6,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -5,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -4,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -3,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -2,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": -1,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 0,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 1,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 2,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 3,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 4,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 5,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 6,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 7,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        },
+        {
+            "PosX": 8,
+            "PosY": 9,
+            "SubType": 1,
+            "Type": 0
+        }
+    ],
+    "Width": 19
+}
