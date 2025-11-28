@@ -181,6 +181,7 @@
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\LoadCommand.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\InverseCommand.h" />
     <ClInclude Include="Game\GamePlay\ModeSelect.h" />
+    <ClInclude Include="Game\GamePlay\Logic\UI\Gauge.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\GamePlay\StageManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Stage\StageUI.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Game\GamePlay\Logic\UI\TextBox.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\LoadCommand.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\InverseCommand.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\UI\Gauge.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game\GameLib\Mouse.cpp" />
     <ClCompile Include="Game\GamePlay\ModeManager.cpp" />

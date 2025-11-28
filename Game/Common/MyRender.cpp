@@ -18,13 +18,13 @@ void MyDrawRoundBox(Vector2D p1, Vector2D p2, float radius, int color, bool fill
 {
 	if (fillFrag)
 	{
-		DrawBoxAA(p1.x + radius, p1.y, p2.x - radius + 1, p2.y + 1, color, fillFrag);
-		DrawBoxAA(p1.x, p1.y + radius, p2.x + 1, p2.y - radius + 1, color, fillFrag);
+		DrawBox(p1.x + radius, p1.y - 1, p2.x - radius + 1, p2.y + 1, color, fillFrag);
+		DrawBox(p1.x, p1.y + radius, p2.x + 1, p2.y - radius + 1, color, fillFrag);
 
-		DrawCircleAA(p1.x + radius, p1.y + radius, radius, 32, color, fillFrag);
-		DrawCircleAA(p2.x - radius, p1.y + radius, radius, 32, color, fillFrag);
-		DrawCircleAA(p1.x + radius, p2.y - radius, radius, 32, color, fillFrag);
-		DrawCircleAA(p2.x - radius, p2.y - radius, radius, 32, color, fillFrag);
+		DrawCircle(p1.x + radius, p1.y + radius, radius, color, fillFrag);
+		DrawCircle(p2.x - radius, p1.y + radius, radius, color, fillFrag);
+		DrawCircle(p1.x + radius, p2.y - radius, radius, color, fillFrag);
+		DrawCircle(p2.x - radius, p2.y - radius, radius, color, fillFrag);
 	}
 	else 
 	{
@@ -35,6 +35,32 @@ void MyDrawRoundBox(Vector2D p1, Vector2D p2, float radius, int color, bool fill
 
 		MyDrawArc({ p1.x + radius, p1.y + radius }, radius, DX_PI_F, DX_PI_F * (3.f / 2), color);
 		MyDrawArc({ p2.x - radius, p1.y + radius},	radius, DX_PI_F * (3.f / 2), DX_PI_F * 2, color);
+		MyDrawArc({ p1.x + radius, p2.y - radius }, radius, DX_PI_F * (1.f / 2), DX_PI_F, color);
+		MyDrawArc({ p2.x - radius, p2.y - radius }, radius, 0, DX_PI_F * (1.f / 2), color);
+	}
+}
+
+void MyDrawRoundBoxAA(Vector2D p1, Vector2D p2, float radius, int color, bool fillFrag)
+{
+	if (fillFrag)
+	{
+		DrawBoxAA(p1.x + radius, p1.y, p2.x - radius + 1, p2.y + 1, color, fillFrag);
+		DrawBoxAA(p1.x, p1.y + radius, p2.x + 1, p2.y - radius + 1, color, fillFrag);
+
+		DrawCircleAA(p1.x + radius, p1.y + radius, radius, 32, color, fillFrag);
+		DrawCircleAA(p2.x - radius, p1.y + radius, radius, 32, color, fillFrag);
+		DrawCircleAA(p1.x + radius, p2.y - radius, radius, 32, color, fillFrag);
+		DrawCircleAA(p2.x - radius, p2.y - radius, radius, 32, color, fillFrag);
+	}
+	else
+	{
+		DrawLine(p1.x + radius, p1.y, p2.x - radius, p1.y, color, fillFrag);
+		DrawLine(p2.x, p1.y + radius, p2.x, p2.y - radius, color, fillFrag);
+		DrawLine(p1.x + radius, p2.y, p2.x - radius, p2.y, color, fillFrag);
+		DrawLine(p1.x, p1.y + radius, p1.x, p2.y - radius, color, fillFrag);
+
+		MyDrawArc({ p1.x + radius, p1.y + radius }, radius, DX_PI_F, DX_PI_F * (3.f / 2), color);
+		MyDrawArc({ p2.x - radius, p1.y + radius }, radius, DX_PI_F * (3.f / 2), DX_PI_F * 2, color);
 		MyDrawArc({ p1.x + radius, p2.y - radius }, radius, DX_PI_F * (1.f / 2), DX_PI_F, color);
 		MyDrawArc({ p2.x - radius, p2.y - radius }, radius, 0, DX_PI_F * (1.f / 2), color);
 	}

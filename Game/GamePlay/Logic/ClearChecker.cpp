@@ -5,10 +5,12 @@ ClearChecker::ClearChecker(std::vector<PackedCell>& stage, std::vector<PackedCel
 	, m_nextStage{ nextStage }
 	, m_circuitSimulator{ stage, nextStage }
 	, m_conditions{ con }
-	, m_nowPlaySpeed{ 1.0f / 30 }
+	, m_nowPlaySpeed{ 1.0f / 10 }
 	, m_nowElapsedTime{ -1 }
 	, m_isActive{ false }
+	, m_gauge{ {200, Screen::HEIGHT * (7.f / 8)}, {300, 40}, GaugeMode::Right, 0x666666, 0x22FF22}
 {
+	m_gauge.Initialize();
 }
 
 void ClearChecker::Initialize(std::vector<PackedCell>& stage)
@@ -22,10 +24,14 @@ void ClearChecker::Initialize(std::vector<PackedCell>& stage)
 	ToNextCondition();
 
 	m_circuitSimulator.ResetGenerationNum();
+
+	m_gauge.Initialize();
 }
 
 bool ClearChecker::Update(float elapsedTime) 
 {
+	m_gauge.Update(elapsedTime);
+
 	// 非アクティブなら実行しない
 	if (!m_isActive) return false;
 
@@ -46,6 +52,7 @@ bool ClearChecker::Update(float elapsedTime)
 			if (CheckCondition())
 			{
 				// クリアだったら
+				m_gauge.SetRatio(static_cast<float>(m_nowCheckingNum + 1) / m_conditions.conditions.size());
 
 				// 最後の条件だったら
 				if (m_nowCheckingNum == m_conditions.conditions.size() - 1)
@@ -91,9 +98,9 @@ bool ClearChecker::Update(float elapsedTime)
 	return false;
 }
 
-void Render()
-{
-
+void ClearChecker::Render()
+{		
+	m_gauge.Render();
 }
 
 void ClearChecker::ToNextCondition()

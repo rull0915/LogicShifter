@@ -17,6 +17,12 @@ EditManager::~EditManager()
 
 void EditManager::Initialize()
 {
+	STAGE_WIDTH = 300;
+	STAGE_HEIGHT = 300;
+
+	OFFSET_X = STAGE_WIDTH / 2;
+	OFFSET_Y = STAGE_HEIGHT / 2;
+
 	m_stageUi.Initialize();
 
 	m_resetButton.Initialize();

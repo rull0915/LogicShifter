@@ -17,6 +17,12 @@ FreeManager::~FreeManager()
 
 void FreeManager::Initialize()
 {
+	STAGE_WIDTH = 300;
+	STAGE_HEIGHT = 300;
+
+	OFFSET_X = STAGE_WIDTH / 2;
+	OFFSET_Y = STAGE_HEIGHT / 2;
+
 	// サイズ確保
 	m_cells.clear();
 	m_nextCells.clear();

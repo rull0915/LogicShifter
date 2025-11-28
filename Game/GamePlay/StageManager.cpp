@@ -106,6 +106,8 @@ void StageManager::Render()
 	if (m_clearFrag) DrawFormatStringToHandle(0, 500, 0xFF5555, GetFontHandle(64), L"CLEAR!!!!");
 
 	m_resetButton.Render();
+
+	m_clearChecker.Render();
 }
 
 void StageManager::Load(std::wstring fileName)

@@ -24,6 +24,9 @@ void LogicCircuit::Initialize(PlayMode playMode)
 {
 	m_nowPlayMode = playMode;
 
+	std::wstring fileName;
+
+
 	switch (m_nowPlayMode)
 	{
 	case PlayMode::Select:
@@ -31,7 +34,15 @@ void LogicCircuit::Initialize(PlayMode playMode)
 		break;
 	case PlayMode::Stage:
 		m_stageManager.Initialize();
-		m_stageManager.Load(LoadFileDialog());
+		fileName = (LoadFileDialog());
+
+		if(fileName == L"")
+		{
+			m_nowPlayMode = PlayMode::Select;
+			return;
+		}
+
+		m_stageManager.Load(fileName);
 		break;
 	case PlayMode::Edit:
 		m_editManager.Initialize();

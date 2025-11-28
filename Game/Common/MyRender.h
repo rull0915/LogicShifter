@@ -5,6 +5,7 @@ void DrawQuadrangle(Vector3D p1, Vector3D p2, Vector3D p3, Vector3D p4, int colo
 void MyDrawBox(Vector2D p1, Vector2D p2, SquareMatrix3 view, int color, bool fillFrag);
 
 void MyDrawRoundBox(Vector2D p1, Vector2D p2, float radius , int color, bool fillFrag);
+void MyDrawRoundBoxAA(Vector2D p1, Vector2D p2, float radius , int color, bool fillFrag);
 
 // ŒÊ‚Ì•`‰æ
 void MyDrawArc(Vector2D centerPos, float radius, float startRad, float endRad, int color);

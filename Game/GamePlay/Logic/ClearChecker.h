@@ -5,6 +5,8 @@
 
 #include "Condition.h"
 
+#include "UI/Gauge.h"
+
 class ClearChecker
 {
 	static constexpr int MAX_GENERATION = 500;
@@ -34,6 +36,9 @@ private:
 
 	// クリアチェック中かどうか
 	bool m_isActive;
+
+	// ゲージ
+	Gauge m_gauge;
 
 public:
 	ClearChecker(std::vector<PackedCell>& m_stage, std::vector<PackedCell>& m_nextStage, Conditions& con);

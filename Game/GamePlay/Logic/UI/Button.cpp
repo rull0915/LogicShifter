@@ -59,7 +59,7 @@ void Button::Render()
 	}
 	else
 	{
-		MyDrawRoundBox({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }, { m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }, (m_size.x < m_size.y ? m_size.x : m_size.y) / 10, m_color, true);
+		MyDrawRoundBoxAA({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }, { m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }, (m_size.x < m_size.y ? m_size.x : m_size.y) / 10, m_color, true);
 	}
 
 	if(m_isPressed)
