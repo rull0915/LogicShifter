@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../UI/Button.h"
+#include "../Game/Common/UI/Button.h"
 #include "../CellInfo.h"
-#include "../UI/ColorPallet.h"
-#include "../UI/TextBox.h"
+#include "../Game/Common/UI/ColorPallet.h"
+#include "../Game/Common/UI/TextBox.h"
 
 class CircuitEditer;
 
@@ -72,7 +72,7 @@ class SelectUI
 		{Function::Redo,		{ "Redo"		, L"Undo: 一手進めます"}},
 	};
 
-	std::wstring blockExplain = L"Block: 左クリック 設置するブロックの変更\n		   右クリック 色の変更";
+	std::wstring blockExplain = L"Block: 左クリック 設置するブロックの変更 右クリック 色の変更";
 
 	std::map < std::pair < CellType, CellSubType > , std::wstring > blockButtonExplains =
 	{
@@ -126,6 +126,8 @@ public:
 	void Update(float elapsedTime);
 
 	void Render();
+
+	void Finalize();
 
 	// 指定したスクリーン座標がUI内にあるかどうか
 	bool GetInSelectUI(Vector2DInt screenPos);

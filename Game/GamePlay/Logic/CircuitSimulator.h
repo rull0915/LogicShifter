@@ -1,5 +1,7 @@
 #pragma once
 #include "CellInfo.h"
+#include <condition_variable>
+#include <future>
 
 class CircuitSimulator
 {
@@ -14,6 +16,12 @@ class CircuitSimulator
 	// 世代数
 	int m_generationNum;
 
+	// 同じかどうかのフラグ
+	bool m_isSame;
+
+	// 分割実行用
+	std::vector<std::future<void>> m_tasks;
+
 public:
 	CircuitSimulator(std::vector<PackedCell>& cells, std::vector<PackedCell>& nextCells);
 	~CircuitSimulator() {
@@ -25,13 +33,15 @@ public:
 
 	bool ToNextCells();
 
-	bool UpdateOnCPU(PackedCell* devCells, PackedCell* devNextCells);
+	bool UpdateOnCPU();
 
 	void ResetGenerationNum() { m_generationNum = 0; }
 
 	int GetGenerationNum() const { return m_generationNum; }
 
 private:
-	PackedCell getCellSafe(std::vector<PackedCell>& cells, int x, int y);
+	inline PackedCell getCellSafe(std::vector<PackedCell>& cells, int x, int y);
+
+	void ToNextCellsOnThread(int minX, int minY, int maxX, int maxY);
 };
 

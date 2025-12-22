@@ -8,6 +8,11 @@ StageManager::StageManager()
 	, m_clearChecker{ m_cells, m_nextCells, m_conditions }
 	, m_clearCheckButton{ {70, 70}, {60, 60}, true, m_ghIcons["Play"]}
 	, m_clearFrag{ false }
+	, m_conditionChecker{}
+	, m_sumElapsedTime{ 0 }
+	, m_executeNum{ 0 }
+	, m_toResult{ false }
+	, m_pTutorial{}
 {
 }
 
@@ -19,36 +24,52 @@ void StageManager::Initialize()
 	// フラグの初期化
 	m_clearFrag = false;
 
-	m_resetButton.Initialize();
-
 	// 各設定の初期化
 	m_conditions.Initialize();
 	m_conditionString.clear();
 
 	m_fixedPos.clear();
+
+	m_conditionChecker = nullptr;
+
+	m_sumElapsedTime = 0;
+	m_executeNum = 0;
+
+	m_toResult = false;
+
+	m_cameraPos = { Screen::WIDTH / 2, Screen::HEIGHT / 2 };
+	m_cameraScale = 1.0f;
 }
 
 void StageManager::Update(float elapsedTime)
 {
-	if (MouseEnter() & MOUSE_INPUT_MIDDLE)
+	// 経過時間の加算
+	m_sumElapsedTime += elapsedTime;
+
+	if (m_pTutorial) m_pTutorial->Update();
+
+	bool tutorialIsActive = !m_pTutorial || (m_pTutorial && m_pTutorial->GetIsActive());
+
+	if (!tutorialIsActive && MouseEnter() & MOUSE_INPUT_MIDDLE)
 	{
 		m_cameraPos += { static_cast<float>(GetMouseMoveValue().x), static_cast<float>(GetMouseMoveValue().y) };
+
+		m_mouseDrawMode = MouseMode::Move;
 	}
 
-	ChangeScale(m_cameraScale - static_cast<float>(MouseWheelRot()) / 5);
-
-	// ボタン上にないか
-	bool mouseIsOnButton = m_resetButton.MouseIsOnButton();
+	if (!tutorialIsActive) ChangeScale(m_cameraScale - static_cast<float>(MouseWheelRot()) / 5);
 
 	// エディタの更新
 	m_circuitEditer.Update(elapsedTime);
 
 	// ボタン上になく、UI上になかったら
-	if (!mouseIsOnButton && !m_circuitEditer.PointIsOnUI({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) }))
+	if (!m_circuitEditer.PointIsOnUI({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) }))
 	{
 		// クリア判定中じゃなかったら
-		if(!m_clearChecker.GetIsActive())
-		if(m_fixedPos.find(GetCellIndex(m_mousePos, m_cameraPos, 1.0f / m_cameraScale)) == m_fixedPos.end()) m_circuitEditer.CellUpdate();
+		if (!m_clearChecker.GetIsActive()) 
+		{
+			if (m_fixedPos.find(GetCellIndex(m_mousePos, m_cameraPos, 1.0f / m_cameraScale)) == m_fixedPos.end()) m_circuitEditer.CellUpdate();
+		}
 	}
 
 	// ボタンの更新
@@ -62,17 +83,22 @@ void StageManager::Update(float elapsedTime)
 		{
 			// クリア判定開始
 			m_clearChecker.Initialize(m_cells);
+
+			// 実行回数の加算
+			m_executeNum++;
 		}
 
 		m_clearFrag = false;
 	}
 
-	m_resetButton.Update();
-
 	// クリア判定の更新
 	if (m_clearChecker.Update(elapsedTime) && !m_clearChecker.GetIsActive())
 	{
+		if (!m_clearFrag) CheckConditions();
+
 		m_clearFrag = true;
+
+		m_toResult = true;
 	};
 }
 
@@ -103,11 +129,19 @@ void StageManager::Render()
 	int width = GetDrawFormatStringWidthToHandle(GetFontHandle(48), m_conditionString.c_str());
 	DrawFormatStringToHandle(Screen::WIDTH - width, 0, 0xBBBBBB, GetFontHandle(48), m_conditionString.c_str());
 
-	if (m_clearFrag) DrawFormatStringToHandle(0, 500, 0xFF5555, GetFontHandle(64), L"CLEAR!!!!");
-
-	m_resetButton.Render();
-
 	m_clearChecker.Render();
+
+	if (m_clearChecker.GetIsActive()) DrawFormatStringToHandle(120, 50, 0xFFFFFF, GetFontHandle(32), L"実行中...");
+	if (m_clearFrag) DrawFormatStringToHandle(120, 50, 0xFFFFFF, GetFontHandle(32), L"Success!");
+
+	if (m_pTutorial) m_pTutorial->Render();
+}
+
+void StageManager::Finalize()
+{
+	m_clearCheckButton.Finalize();
+
+	m_circuitEditer.Finalize();
 }
 
 void StageManager::Load(std::wstring fileName)
@@ -201,4 +235,78 @@ void StageManager::Load(std::wstring fileName)
 
 	m_circuitEditer.SetCellInfo({ TYPE_OTHERS, SUBTYPE_INPUT }, m_conditions.inputPoses);
 	m_circuitEditer.SetCellInfo({ TYPE_OTHERS, SUBTYPE_OUTPUT }, m_conditions.outputPoses);
+
+	// リザルト関連
+
+	// 第二条件の値を取得
+	int secondValue = data["Conditions"][0]["second"];
+
+	// 第三条件の値を取得
+	int thirdValue = data["Conditions"][1]["Value"];
+
+	// 第三条件の条件文を取得
+	std::wstring thirdConditionString;
+	thirdConditionString.resize(data["Conditions"][1]["Condition"].size());
+	for (int i = 0; i < data["Conditions"][1]["Condition"].size(); i++)
+	{
+		thirdConditionString[i] = data["Conditions"][1]["Condition"][i];
+	}
+
+	// 条件のidを取得
+	m_conditionID = data["Conditions"][1]["ConditionId"];
+
+	// リザルト構造体に保存
+	ResultInfo::GetInstance().SetStageName(m_conditionString);
+	ResultInfo::GetInstance().SetConditions(m_conditions.conditions);
+
+	ResultInfo::GetInstance().SetSecondConditionValue(secondValue);
+	ResultInfo::GetInstance().SetThirdConditionValue(thirdValue);
+	ResultInfo::GetInstance().SetThirdCondition(thirdConditionString);
+
+	// チュートリアル
+	int tutorialID = data["Tutorial"];
+	m_pTutorial = std::make_unique<Tutorial>();
+	if (m_pTutorial) m_pTutorial->Initialize(static_cast<TutorialType>(tutorialID));
+}
+
+void StageManager::CheckConditions()
+{
+	// 第二条件のチェック
+	bool second = m_executeNum <= ResultInfo::GetInstance().GetSecondConditionValue();
+
+	// 第三引数のチェック
+	int value = ResultInfo::GetInstance().GetThirdConditionValue();
+
+	switch (m_conditionID)
+	{
+		// ID 0: NotUsed
+	case 0:
+		m_conditionChecker = std::make_unique<NotUsedChecker>(value, m_cells, m_fixedPos);
+		break;
+		// ID 1: TimeChecker
+	case 1:
+		m_conditionChecker = std::make_unique<TimeChecker>(value, m_sumElapsedTime);
+		break;
+		// ID 2: CountChecker
+	case 2:
+		m_conditionChecker = std::make_unique<CountChecker>(value, m_cells, m_fixedPos);
+		break;
+		// ID 3: HeightChecker
+	case 3:
+		m_conditionChecker = std::make_unique<HeightChecker>(value, m_cells, m_fixedPos);
+		break;
+		// ID 4: WidthChecker
+	case 4:
+		m_conditionChecker = std::make_unique<WidthChecker>(value, m_cells, m_fixedPos);
+		break;
+	default:
+		break;
+	}
+
+	bool third = (m_conditionChecker ? m_conditionChecker->IsSatisfied() : false);
+
+	// リザルト構造体にセット
+	ResultInfo::GetInstance().SetIsSatisfied(0, true);
+	ResultInfo::GetInstance().SetIsSatisfied(1, second);
+	ResultInfo::GetInstance().SetIsSatisfied(2, third);
 }

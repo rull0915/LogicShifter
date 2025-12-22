@@ -1,12 +1,6 @@
 #include "DxLib.h"
 #include "Game/Game.h"
 
-//bool hasCuda() {
-//    int deviceCount = 0;
-//    cudaError_t error = cudaGetDeviceCount(&deviceCount);
-//    return (error == cudaSuccess && deviceCount > 0);
-//}
-
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -14,11 +8,15 @@ int WINAPI WinMain(
     _In_ int nCmdShow
 )
 {
+    // スレッド数を取得
+    m_threadNum = std::thread::hardware_concurrency() / 2;
+    if (m_threadNum == 0) m_threadNum = 1;
+
     // 画面モードのセット
     SetGraphMode(Screen::WIDTH, Screen::HEIGHT, 32);
 
     // ウインドウのタイトルを変更する
-    SetMainWindowText(L"RhythmDungeon");
+    SetMainWindowText(L"CircuitMaker");
 
     // ウインドウモードへ変更
     ChangeWindowMode(TRUE);
@@ -30,15 +28,18 @@ int WINAPI WinMain(
         return -1;              // エラーが起きたら直ちに終了
     }
 
+    // 乱数の種の生成
+    SRand(GetNowCount());
+
     // フォントのロード
-    AddFontResourceExA("Resources/Fonts/Makinas-4-Flat.otf", FR_PRIVATE, NULL);
+    AddFontResourceExW(GetAbsolutePath(L"Resources/Fonts/Makinas-4-Flat.otf").c_str(), FR_PRIVATE, NULL);
+
+    // マウス非表示
+    SetMouseDispFlag(false);
 
     // ゲームの初期化
     Game game;
     game.Initialize();
-
-    // GPUが使えるかチェック
-//    m_isCanUseGPU = hasCuda();
 
     // 時間計測用
     LONGLONG m_time = GetNowHiPerformanceCount();
@@ -48,7 +49,7 @@ int WINAPI WinMain(
     SetDrawScreen(DX_SCREEN_BACK);
 
     // ループ
-    while (ProcessMessage() == 0)// && !CheckHitKey(KEY_INPUT_ESCAPE))
+    while (ProcessMessage() == 0 && !game.GetEndFrag())// && !CheckHitKey(KEY_INPUT_ESCAPE))
     {
         m_oldTime = m_time;
         m_time = GetNowHiPerformanceCount();
@@ -63,15 +64,6 @@ int WINAPI WinMain(
         {
             DrawFormatStringToHandle(0, 0, 0xDDDDDD, GetFontHandle(28), L"FPS: %d", static_cast<int>(1.0f / (static_cast<float>(m_time - m_oldTime) / 1000000)));
         }
-
-        //if(m_isCanUseGPU)
-        //{
-        //    DrawFormatStringToHandle(1100, 0, 0xDDDDDD, GetFontHandle(28), L"GPU使用中");
-        //}
-        //else
-        //{
-        //    DrawFormatStringToHandle(1100, 0, 0xDDDDDD, GetFontHandle(28), L"CPU使用中");
-        //}
 
         // 裏画面の内容を表画面に反映
         ScreenFlip();

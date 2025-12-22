@@ -7,7 +7,7 @@
 
 #include "../Camera.h"
 
-#include "Logic/UI/Gauge.h"
+#include "../Game/Common/UI/Gauge.h"
 
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾
 class Game;

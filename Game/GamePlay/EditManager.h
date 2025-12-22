@@ -34,5 +34,7 @@ public:
 	void Update(float elapsedTime) override;
 
 	void Render() override;
+
+	void Finalize() override;
 };
 

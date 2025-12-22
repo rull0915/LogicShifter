@@ -64,6 +64,8 @@ public:
 
 	void Render();
 
+	void Finalize();
+
 	// 設置タイプ切り替え
 	void ChangePutCell(PackedCell type) { m_putCell = type; };
 	void ChangePutMode(PutMode putmode) { 

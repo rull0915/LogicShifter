@@ -97,19 +97,24 @@ void CircuitEditer::Render()
 	m_selectUI.Render();
 }
 
+void CircuitEditer::Finalize()
+{
+	m_selectUI.Finalize();
+}
+
 void CircuitEditer::PutUpdate()
 {
 	// 設置
-	if(MouseEnter() & MOUSE_INPUT_LEFT) 
+	if (MouseEnter() & MOUSE_INPUT_LEFT)
 	{
 		if (m_commandManager.GetUndoCommandNum() == 0) return;
 
 		//　カーソルの範囲分ループ
-		for (int i = 0; i < m_stageReceiver.GetCursorSize().y; i++) 
+		for (int i = 0; i < m_stageReceiver.GetCursorSize().y; i++)
 		{
-			for(int j = 0; j < m_stageReceiver.GetCursorSize().x; j++)
+			for (int j = 0; j < m_stageReceiver.GetCursorSize().x; j++)
 			{
-				auto com = std::make_unique<SetCommand>(m_stageReceiver, m_mouseIndex - Vector2DInt{ j, i },m_putCell);
+				auto com = std::make_unique<SetCommand>(m_stageReceiver, m_mouseIndex - Vector2DInt{ j, i }, m_putCell);
 
 				m_commandManager.AddUndoCommand(std::move(com));
 			}
@@ -123,11 +128,13 @@ void CircuitEditer::PutUpdate()
 		{
 			for (int j = 0; j < m_stageReceiver.GetCursorSize().x; j++)
 			{
-				auto com = std::make_unique<SetCommand>(m_stageReceiver,m_mouseIndex - Vector2DInt{ j, i },0);
+				auto com = std::make_unique<SetCommand>(m_stageReceiver, m_mouseIndex - Vector2DInt{ j, i }, 0);
 
 				m_commandManager.AddUndoCommand(std::move(com));
 			}
 		}
+
+		m_mouseDrawMode = MouseMode::Erase;
 	}
 }
 

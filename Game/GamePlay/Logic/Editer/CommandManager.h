@@ -30,6 +30,6 @@ public:
 	void RedoCommand();
 
 	// ÉQÉbÉ^Å[
-	int GetUndoCommandNum(){ return m_pUndoCommands.size(); }
+	int GetUndoCommandNum(){ return static_cast<int>(m_pUndoCommands.size()); }
 };
 

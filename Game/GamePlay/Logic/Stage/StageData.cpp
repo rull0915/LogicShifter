@@ -15,11 +15,9 @@ StageData::StageData(std::vector<PackedCell>& stage)
 	for (int i = 0; i < m_conditions.size(); i++) m_conditions[i].resize(Cell::CELL_MAX_COUNT[{TYPE_OTHERS, SUBTYPE_OUTPUT}]);
 }
 
-void StageData::Save()
+void StageData::Save(json& data)
 {
-	std::wstring fileName = SaveFileDialog();
-
-	json data =
+	data =
 	{
 		{"ConditionString" , m_conditionString},
 		{"Width" , m_stageSize.x},
@@ -79,12 +77,6 @@ void StageData::Save()
 			data["Stage"].push_back(cell);
 		}
 	}
-
-	std::ofstream ofs(fileName);
-
-	if(ofs.is_open()) ofs << data.dump(4);
-
-	ofs.close();
 }
 
 void StageData::SetCondition(int inputNum, int outputNum, bool condition)

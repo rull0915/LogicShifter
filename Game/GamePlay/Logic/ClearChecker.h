@@ -5,11 +5,11 @@
 
 #include "Condition.h"
 
-#include "UI/Gauge.h"
+#include "../Game/Common/UI/Gauge.h"
 
 class ClearChecker
 {
-	static constexpr int MAX_GENERATION = 500;
+	static constexpr int MAX_GENERATION = 100;
 
 private:
 
@@ -59,4 +59,3 @@ private:
 	// ğŒ‚Ì”»’è‚ğ‚·‚éŠÖ”
 	bool CheckCondition();
 };
-

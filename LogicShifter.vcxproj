@@ -138,10 +138,27 @@
     </CudaLink>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Common\Particles\BaseParticle.h" />
+    <ClInclude Include="Game\GamePlay\Logic\Tutorial\BaseTutorial.h" />
+    <ClInclude Include="Game\Common\ThreadPool.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\BaseChecker.h" />
+    <ClInclude Include="Game\Common\Transition\BlocksTransition.h" />
+    <ClInclude Include="Game\Common\MaskManager.h" />
+    <ClInclude Include="Game\Common\Transition\CirclesTransition.h" />
+    <ClInclude Include="Game\Common\Transition\ClockTransition.h" />
+    <ClInclude Include="Game\GameMath\GameMath.h" />
+    <ClInclude Include="Game\Common\Transition\FadeTransition.h" />
+    <ClInclude Include="Game\Common\Transition\Transitions.h" />
     <ClInclude Include="Game\GameLib\OpenFileDialog.h" />
     <ClInclude Include="Game\GamePlay\Logic\ClearChecker.h" />
     <ClInclude Include="Game\GamePlay\Logic\CellRenderer.h" />
     <ClInclude Include="Game\GamePlay\Logic\Condition.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\Checkers.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\CountChecker.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\HeightChecker.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\NotUsedChecker.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\TimeChecker.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\WidthChecker.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\CircuitEditer.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\CommandManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\ClearCommand.h" />
@@ -151,7 +168,7 @@
     <ClInclude Include="Game\GamePlay\EditManager.h" />
     <ClInclude Include="Game\GamePlay\FreeManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\UndoEditCommand.h" />
-    <ClInclude Include="Game\GamePlay\Logic\UI\ColorPallet.h" />
+    <ClInclude Include="Game\Common\UI\ColorPallet.h" />
     <ClInclude Include="Game\Camera.h" />
     <ClInclude Include="Game\Common\MyRender.h" />
     <ClInclude Include="Game\Common\Scene.h" />
@@ -168,20 +185,23 @@
     <ClInclude Include="Game\GameMath\Vector3D.h" />
     <ClInclude Include="Game\GameMath\Vector4D.h" />
     <ClInclude Include="Game\GamePlay\GamePlayScene.h" />
-    <ClInclude Include="Game\GamePlay\Logic\UI\Button.h" />
+    <ClInclude Include="Game\Common\UI\Button.h" />
     <ClInclude Include="Game\GamePlay\Logic\Cell.h" />
     <ClInclude Include="Game\GamePlay\Logic\CellInfo.h" />
     <ClInclude Include="Game\GamePlay\Logic\CircuitSimulator.h" />
     <ClInclude Include="Game\GamePlay\Logic\LogicCircuit.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\SelectUI.h" />
-    <ClInclude Include="Game\GamePlay\Logic\UI\TextBox.h" />
+    <ClInclude Include="Game\Common\UI\TextBox.h" />
     <ClInclude Include="Game\GameLib\Mouse.h" />
+    <ClInclude Include="Game\GamePlay\Logic\ResultInfo.h" />
     <ClInclude Include="Game\GamePlay\ModeManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\PasteCommand.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\LoadCommand.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\InverseCommand.h" />
-    <ClInclude Include="Game\GamePlay\ModeSelect.h" />
-    <ClInclude Include="Game\GamePlay\Logic\UI\Gauge.h" />
+    <ClInclude Include="Game\ModeSelect\ModeSelectScene.h" />
+    <ClInclude Include="Game\Common\UI\Gauge.h" />
+    <ClInclude Include="Game\Common\Transition\IrisTransition.h" />
+    <ClInclude Include="Game\Pause.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game\GamePlay\StageManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Stage\StageUI.h" />
@@ -192,11 +212,33 @@
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\RangeCommand.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\SaveCommand.h" />
     <ClInclude Include="Game\GamePlay\Logic\Stage\StageData.h" />
+    <ClInclude Include="Game\Select\SelectScene.h" />
+    <ClInclude Include="Game\Title\TitleScene.h" />
+    <ClInclude Include="Game\Common\Transition\SceneTransition.h" />
+    <ClInclude Include="Game\Common\Transition\SlideTransition.h" />
+    <ClInclude Include="Game\Common\UI\SelectList.h" />
+    <ClInclude Include="Game\GamePlay\Logic\Stage\StarCondition.h" />
+    <ClInclude Include="Game\Result\ResultScene.h" />
+    <ClInclude Include="Game\GamePlay\Logic\Tutorial\StartTutorial.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Common\Particles\BaseParticle.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\Tutorial\BaseTutorial.cpp" />
+    <ClCompile Include="Game\Common\ThreadPool.cpp" />
+    <ClCompile Include="Game\Common\Transition\BlocksTransition.cpp" />
+    <ClCompile Include="Game\Common\MaskManager.cpp" />
+    <ClCompile Include="Game\Common\Transition\CirclesTransition.cpp" />
+    <ClCompile Include="Game\Common\Transition\ClockTransition.cpp" />
+    <ClCompile Include="Game\GameMath\GameMath.cpp" />
+    <ClCompile Include="Game\Common\Transition\FadeTransition.cpp" />
     <ClCompile Include="Game\GameLib\OpenFileDialog.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\ClearChecker.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\CellRenderer.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\ConditionChecker\CountChecker.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\ConditionChecker\HeightChecker.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\ConditionChecker\NotUsedChecker.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\ConditionChecker\TimeChecker.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\ConditionChecker\WidthChecker.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\CircuitEditer.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\CommandManager.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\ClearCommand.cpp" />
@@ -204,7 +246,7 @@
     <ClCompile Include="Game\GamePlay\EditManager.cpp" />
     <ClCompile Include="Game\GamePlay\FreeManager.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\CellInfo.cpp" />
-    <ClCompile Include="Game\GamePlay\Logic\UI\ColorPallet.cpp" />
+    <ClCompile Include="Game\Common\UI\ColorPallet.cpp" />
     <ClCompile Include="Game\Camera.cpp" />
     <ClCompile Include="Game\Common\MyRender.cpp" />
     <ClCompile Include="Game\Common\Scene.cpp" />
@@ -216,19 +258,21 @@
     <ClCompile Include="Game\GameMath\SquareMatrix3.cpp" />
     <ClCompile Include="Game\GameMath\SquareMatrix4.cpp" />
     <ClCompile Include="Game\GamePlay\GamePlayScene.cpp" />
-    <ClCompile Include="Game\GamePlay\Logic\UI\Button.cpp" />
+    <ClCompile Include="Game\Common\UI\Button.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\CircuitSimulator.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\LogicCircuit.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\SelectUI.cpp" />
-    <ClCompile Include="Game\GamePlay\Logic\UI\TextBox.cpp" />
+    <ClCompile Include="Game\Common\UI\TextBox.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\LoadCommand.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\InverseCommand.cpp" />
-    <ClCompile Include="Game\GamePlay\Logic\UI\Gauge.cpp" />
+    <ClCompile Include="Game\Common\UI\Gauge.cpp" />
+    <ClCompile Include="Game\Common\Transition\IrisTransition.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game\GameLib\Mouse.cpp" />
     <ClCompile Include="Game\GamePlay\ModeManager.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\PasteCommand.cpp" />
-    <ClCompile Include="Game\GamePlay\ModeSelect.cpp" />
+    <ClCompile Include="Game\ModeSelect\ModeSelectScene.cpp" />
+    <ClCompile Include="Game\Pause.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -242,6 +286,14 @@
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\RangeCommand.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Editer\Commands\SaveCommand.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Stage\StageData.cpp" />
+    <ClCompile Include="Game\Select\SelectScene.cpp" />
+    <ClCompile Include="Game\Title\TitleScene.cpp" />
+    <ClCompile Include="Game\Common\Transition\SceneTransition.cpp" />
+    <ClCompile Include="Game\Common\Transition\SlideTransition.cpp" />
+    <ClCompile Include="Game\Common\UI\SelectList.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\Stage\StarCondition.cpp" />
+    <ClCompile Include="Game\Result\ResultScene.cpp" />
+    <ClCompile Include="Game\GamePlay\Logic\Tutorial\StartTutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

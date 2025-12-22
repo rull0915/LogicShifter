@@ -5,6 +5,8 @@
 
 std::wstring SaveFileDialog()
 {
+	SetMouseDispFlag(true);
+
 	wchar_t filename[MAX_PATH];
 	filename[0] = L'\0'; // 最初にヌル文字入れておく
 
@@ -26,7 +28,6 @@ std::wstring SaveFileDialog()
 	std::wstring path = iniFileFolderPath;
 	path += L"\\Resources\\Stages";
 
-
 	// フィルター文字列のバッファー
 	ofn.lpstrFilter = L"ステージ\0*.json\0";
 
@@ -46,14 +47,20 @@ std::wstring SaveFileDialog()
 
 	if (GetOpenFileNameW(&ofn))
 	{
+		SetMouseDispFlag(false);
+
 		return std::wstring(filename);
 	}
+
+	SetMouseDispFlag(false);
 
 	return L"";
 }
 
 std::wstring LoadFileDialog()
 {
+	SetMouseDispFlag(true);
+
 	wchar_t filename[MAX_PATH];
 	filename[0] = L'\0'; // 最初にヌル文字入れておく
 
@@ -97,8 +104,12 @@ std::wstring LoadFileDialog()
 
 	if (GetOpenFileNameW(&ofn))
 	{
+		SetMouseDispFlag(false);
+
 		return std::wstring(filename);
 	}
+
+	SetMouseDispFlag(false);
 
 	return L"";
 }

@@ -37,17 +37,17 @@ inline Vector2DInt operator-(Vector2DInt v1, Vector2DInt v2)
 }
 
 // *‰‰ŽZŽq
-inline Vector2D operator*(int a, Vector2D v1)
+inline Vector2D operator*(float a, Vector2D v1)
 {
 	return Vector2D{ v1.x * a, v1.y * a };
 }
-inline Vector2D operator*(Vector2D v1, int a)
+inline Vector2D operator*(Vector2D v1, float a)
 {
 	return a * v1;
 }
 
 // /‰‰ŽZŽq
-inline Vector2D operator/(Vector2D v1, int a)
+inline Vector2D operator/(Vector2D v1, float a)
 {
 	return Vector2D{ v1.x / a, v1.y / a };
 }

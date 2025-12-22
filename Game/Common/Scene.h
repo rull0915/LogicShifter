@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Transition/Transitions.h"
+
 // 前方宣言
 class SceneManager;
 
@@ -34,6 +36,5 @@ public:
 protected:
 
 	// シーンの変更
-	void ChangeScene(const std::string& nextSceneName);
-
+	void ChangeScene(const std::string& nextSceneName, std::unique_ptr<SceneTransition> inTrans, std::unique_ptr<SceneTransition> outTrans);
 };

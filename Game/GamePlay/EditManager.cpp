@@ -17,15 +17,13 @@ EditManager::~EditManager()
 
 void EditManager::Initialize()
 {
-	STAGE_WIDTH = 300;
-	STAGE_HEIGHT = 300;
+	STAGE_WIDTH = 512;
+	STAGE_HEIGHT = 512;
 
 	OFFSET_X = STAGE_WIDTH / 2;
 	OFFSET_Y = STAGE_HEIGHT / 2;
 
 	m_stageUi.Initialize();
-
-	m_resetButton.Initialize();
 
 	// サイズ確保
 	m_cells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
@@ -39,12 +37,14 @@ void EditManager::Initialize()
 void EditManager::Update(float elapsedTime)
 {
 	bool OnUI = 
-		(m_stageUi.PointIsOnMe({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) }) || m_circuitEditer.PointIsOnUI({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) })) || m_resetButton.MouseIsOnButton() || m_saveButton.MouseIsOnButton();
+		(m_stageUi.PointIsOnMe({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) }) || m_circuitEditer.PointIsOnUI({ static_cast<float>(m_mousePos.x), static_cast<float>(m_mousePos.y) })) || m_saveButton.MouseIsOnButton();
 
 	// カメラの移動
 	if (!OnUI && MouseEnter() & MOUSE_INPUT_MIDDLE)
 	{
 		m_cameraPos += { static_cast<float>(GetMouseMoveValue().x), static_cast<float>(GetMouseMoveValue().y) };
+
+		m_mouseDrawMode = MouseMode::Move;
 	}
 
 	// ステージ上でマウスが押されたら
@@ -67,7 +67,6 @@ void EditManager::Update(float elapsedTime)
 	// UIの更新
 	m_stageUi.Update(elapsedTime);
 	
-	// todo
 	// エディタからInput,Outputの数を取得しStageUIのChangeを呼ぶ
 	m_stageUi.SetInputNum(m_circuitEditer.GetCellCount({ TYPE_OTHERS, SUBTYPE_INPUT }));
 	m_stageUi.SetOutputNum(m_circuitEditer.GetCellCount({ TYPE_OTHERS, SUBTYPE_OUTPUT }));
@@ -79,9 +78,26 @@ void EditManager::Update(float elapsedTime)
 	m_stageData.SetOutputInfo(m_circuitEditer.GetCellInfo({ TYPE_OTHERS, SUBTYPE_OUTPUT }));
 
 	m_saveButton.Update();
-	if (m_saveButton.GetIsPressed()) m_stageData.Save();
 
-	m_resetButton.Update();
+	// セーブボタンが押されたら
+	if (m_saveButton.GetIsPressed())
+	{
+		// jsonの作成
+		json data;
+
+		m_stageData.Save(data);
+
+		m_stageUi.Save(data);
+
+		// ファイルを開く
+		std::wstring fileName = SaveFileDialog();
+
+		std::ofstream ofs(fileName);
+
+		if (ofs.is_open()) ofs << data.dump(4);
+
+		ofs.close();
+	}
 }
 
 void EditManager::Render()
@@ -110,7 +126,14 @@ void EditManager::Render()
 	// UIの描画
 	m_stageUi.Render();
 
-	m_resetButton.Render();
-
 	m_saveButton.Render();
+}
+
+void EditManager::Finalize()
+{
+	m_circuitEditer.Finalize();
+
+	m_stageUi.Finalize();
+
+	m_saveButton.Finalize();
 }

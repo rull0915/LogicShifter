@@ -1,8 +1,9 @@
 #pragma once
-#include "../UI/Button.h"
+#include "../Game/Common/UI/Button.h"
 #include "TextInputManager.h"
 #include "Switch.h"
 #include "StageData.h"
+#include "StarCondition.h"
 
 class Setting;
 
@@ -35,6 +36,9 @@ private:
 
 	// 条件文
 	std::wstring m_conditionString, m_widthStr, m_heightStr;
+
+	// チュートリアル選択
+	SelectList m_tutorialSelect;
 	
 	// 開閉ボタン
 	Button m_button;
@@ -60,6 +64,9 @@ private:
 	// データの参照
 	StageData& m_stageData;
 
+	// リザルト条件設定変数
+	StarCondition m_starCondition;
+
 	// ----- 関数宣言 ----- //
 public:
 	StageUI(StageData& stageData);
@@ -70,10 +77,14 @@ public:
 
 	void Render();
 
+	void Finalize();
+
 	void SetInputNum(int num) { m_inputNum = num; }
 	void SetOutputNum(int num) { m_outputNum = num; }
 
 	bool PointIsOnMe(Vector2D point);
+
+	void Save(json& data);
 private:
 
 	void StateUpdate(float);

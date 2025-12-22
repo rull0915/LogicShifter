@@ -23,6 +23,7 @@ void ClearChecker::Initialize(std::vector<PackedCell>& stage)
 
 	ToNextCondition();
 
+	m_circuitSimulator.Initialize();
 	m_circuitSimulator.ResetGenerationNum();
 
 	m_gauge.Initialize();
@@ -100,7 +101,7 @@ bool ClearChecker::Update(float elapsedTime)
 
 void ClearChecker::Render()
 {		
-	m_gauge.Render();
+//	m_gauge.Render();
 }
 
 void ClearChecker::ToNextCondition()

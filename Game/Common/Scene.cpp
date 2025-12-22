@@ -15,7 +15,7 @@ Scene::~Scene()
 }
 
 // ƒV[ƒ“‚Ì•ÏX
-void Scene::ChangeScene(const std::string& nextSceneName)
+void Scene::ChangeScene(const std::string& nextSceneName, std::unique_ptr<SceneTransition> inTrans, std::unique_ptr<SceneTransition> outTrans)
 {
-	m_pSceneManager->RequestSceneChange(nextSceneName);
+	m_pSceneManager->RequestSceneChange(nextSceneName, std::move(inTrans), std::move(outTrans));
 }

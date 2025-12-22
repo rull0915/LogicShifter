@@ -27,8 +27,6 @@ void FreeManager::Initialize()
 	m_cells.clear();
 	m_nextCells.clear();
 
-	m_resetButton.Initialize();
-
 	m_cells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
 	m_nextCells.resize(STAGE_WIDTH * STAGE_HEIGHT + 1);
 	std::fill(m_cells.begin(), m_cells.end(), 0);
@@ -50,13 +48,15 @@ void FreeManager::Update(float elapsedTime)
 	if (MouseEnter() & MOUSE_INPUT_MIDDLE)
 	{
 		m_cameraPos += { static_cast<float>(GetMouseMoveValue().x), static_cast<float>(GetMouseMoveValue().y) };
+
+		m_mouseDrawMode = MouseMode::Move;
 	}
 
 	ChangeScale(m_cameraScale - static_cast<float>(MouseWheelRot()) / 5);
 
 
 	// ボタン上にないか
-	bool mouseIsOnButton = m_resetButton.MouseIsOnButton();
+	bool mouseIsOnButton = false;
 	for (auto& button : m_playButtons) if (button.second->MouseIsOnButton()) mouseIsOnButton = true;
 
 
@@ -117,12 +117,14 @@ void FreeManager::Update(float elapsedTime)
 
 	if (m_nowElapsedTime > m_playSpeed)
 	{
-		m_circuitSimulator.ToNextCells();
+		if(m_playSpeed == UPDATE_DISTANCE_FASTTEST)
+		{
+			for(int i = 0; i < 10; i++) m_circuitSimulator.ToNextCells();
+		}
+		else m_circuitSimulator.ToNextCells();
 
 		m_nowElapsedTime = 0;
 	}
-
-	m_resetButton.Update();
 }
 
 void FreeManager::Render()
@@ -148,6 +150,11 @@ void FreeManager::Render()
 
 	// ボタンの描画
 	for (auto& button : m_playButtons) button.second->Render();
+}
 
-	m_resetButton.Render();
+void FreeManager::Finalize()
+{
+	m_circuitEditer.Finalize();
+
+	for (auto& button : m_playButtons) button.second->Finalize();
 }

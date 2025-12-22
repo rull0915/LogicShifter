@@ -30,6 +30,11 @@ namespace Easing
 		return (1 - std::pow(1 - x, 4));
 	}
 
+	inline float EaseInExpo(float x)
+	{
+		return x == 0 ? 0 : std::pow(2, 10 * x - 10);
+	}
+
 	inline float EaseOutExpo(float x)
 	{
 		return x == 1.0f ? 1.0f : 1.0f - std::pow(2.0f, -10.0f * x);

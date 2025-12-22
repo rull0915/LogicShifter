@@ -16,7 +16,9 @@ GamePlayScene::~GamePlayScene()
 // 初期化関数
 void GamePlayScene::Initialize()
 {
-	m_logic.Initialize(PlayMode::Select);
+	m_logic.SetFileName(m_pGame->GetStageFileName());
+
+	m_logic.Initialize(m_pGame->GetPlayMode());
 }
 
 // 更新関数 
@@ -24,6 +26,14 @@ void GamePlayScene::Update(float elapsedTime)
 {
 	// 論理回路の更新
 	m_logic.Update(elapsedTime);
+
+	if (m_logic.ToResult())
+	{
+		ChangeScene("Result",
+			std::make_unique<FadeTransition>(0.5f, Transition::Mode::In, 0x000000),
+			std::make_unique<FadeTransition>(0.5f, Transition::Mode::Out, 0x000000)
+		);
+	}
 }
 
 // 描画関数
@@ -35,4 +45,5 @@ void GamePlayScene::Render()
 // 終了関数
 void GamePlayScene::Finalize()
 {
+	m_logic.Finalize();
 }

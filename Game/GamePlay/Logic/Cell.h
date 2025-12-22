@@ -10,32 +10,6 @@
 
 // çáåv1byteÇÃÇΩÇﬂcharå^àÍÇ¬Ç≈ä«óù
 
-// Type
-// 0: Wire
-// 1: Input
-// 2: Output
-// 3: Others
-
-// SubType
-// Wire
-// 0: None
-// 1: Normal
-// 2: Cross
-// 3: Light
-
-// Input
-// 1: And
-// 2: Or
-// 3: Xor
-
-// Output
-// 1: Normal
-// 2: Not
-
-// Others
-// 1: Wall
-// 2: Button
-
 // Signal
 // è„à Ç©ÇÁ0,1,2,3bitÇ∆Ç∑ÇÈÇ∆ÅA
 // 0: up

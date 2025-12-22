@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Logic/CellInfo.h"
-#include "Logic/UI/Button.h"
+#include "../Game/Common/UI/Button.h"
 
 // マネージャー基底クラス
 class ModeManager
@@ -15,14 +15,11 @@ protected:
 
 	// スケールの限界値
 	float m_minScale = 0;
-	float m_maxScale = 10;
+	float m_maxScale = 30;
 
 	// ステージ
 	std::vector<PackedCell> m_cells;
 	std::vector<PackedCell> m_nextCells;
-
-	// リセットボタン
-	Button m_resetButton;
 
 	// ------- 関数宣言 ------- //
 public:
@@ -36,9 +33,7 @@ public:
 
 	virtual void Render() = 0;
 
-	bool IsReset() { return m_resetButton.GetIsPressed(); }
-
-	void Reset() { m_resetButton.Initialize(); }
+	virtual void Finalize() = 0;
 
 protected:
 	// その他関数

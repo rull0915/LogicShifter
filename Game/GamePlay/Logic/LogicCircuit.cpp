@@ -10,7 +10,7 @@ LogicCircuit::LogicCircuit()
 	: m_freeManager{}
 	, m_stageManager{}
 	, m_editManager{}
-	, m_modeSelect{ this }
+	, m_toResult{ false }
 {
 	LoadBlockColors();
 }
@@ -24,25 +24,12 @@ void LogicCircuit::Initialize(PlayMode playMode)
 {
 	m_nowPlayMode = playMode;
 
-	std::wstring fileName;
-
-
 	switch (m_nowPlayMode)
 	{
-	case PlayMode::Select:
-		m_modeSelect.Initialize();
-		break;
 	case PlayMode::Stage:
 		m_stageManager.Initialize();
-		fileName = (LoadFileDialog());
-
-		if(fileName == L"")
-		{
-			m_nowPlayMode = PlayMode::Select;
-			return;
-		}
-
-		m_stageManager.Load(fileName);
+	
+		m_stageManager.Load(m_selectedFileName);
 		break;
 	case PlayMode::Edit:
 		m_editManager.Initialize();
@@ -57,16 +44,17 @@ void LogicCircuit::Initialize(PlayMode playMode)
 
 void LogicCircuit::Update(float elapsedTime)
 {
+	m_toResult = false;
+
 	OFFSET_X = STAGE_WIDTH / 2;
 	OFFSET_Y = STAGE_HEIGHT / 2;
 
 	switch (m_nowPlayMode)
 	{
-	case PlayMode::Select:
-		m_modeSelect.Update(elapsedTime);
-		break;
 	case PlayMode::Stage:
 		m_stageManager.Update(elapsedTime);
+
+		m_toResult = m_stageManager.ToResult();
 		break;
 	case PlayMode::Edit:
 		m_editManager.Update(elapsedTime);
@@ -77,24 +65,12 @@ void LogicCircuit::Update(float elapsedTime)
 	default:
 		break;
 	}
-
-	if(m_stageManager.IsReset() || m_editManager.IsReset() || m_freeManager.IsReset())
-	{
-		m_stageManager.Reset();
-		m_editManager.Reset();
-		m_freeManager.Reset();
-
-		Initialize(PlayMode::Select);
-	}
 }
 
 void LogicCircuit::Render()
 {
 	switch (m_nowPlayMode)
 	{
-	case PlayMode::Select:
-		m_modeSelect.Render();
-		break;
 	case PlayMode::Stage:
 		m_stageManager.Render();
 		break;
@@ -107,6 +83,13 @@ void LogicCircuit::Render()
 	default:
 		break;
 	}
+}
+
+void LogicCircuit::Finalize()
+{
+	m_stageManager.Finalize();
+	m_editManager.Finalize();
+	m_freeManager.Finalize();
 }
 
 void LogicCircuit::SaveBlockColors()
@@ -149,7 +132,7 @@ void LogicCircuit::LoadBlockColors()
 	int color;
 
 	// í èÌéû
-	std::ifstream ifs("Resources/Datas/NornalColors.csv");
+	std::ifstream ifs(GetAbsolutePath(L"Resources/Datas/NornalColors.csv"));
 
 	if (ifs.is_open())
 	{
@@ -177,7 +160,7 @@ void LogicCircuit::LoadBlockColors()
 	ifs.close();
 
 	// êMçÜì_ìîéû
-	std::ifstream ifs2("Resources/Datas/SignalColors.csv");
+	std::ifstream ifs2(GetAbsolutePath(L"Resources/Datas/SignalColors.csv"));
 
 	if (ifs2.is_open()) 
 	{

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <sstream>
 #include <stack>
+#include <thread>
 
 
 // Dxlib

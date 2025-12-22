@@ -3,17 +3,19 @@
 #pragma region StageUI
 
 StageUI::StageUI(StageData& stageData)
-	: m_button{ { BUTTON_SIZE.x / 2, Screen::HEIGHT / 2}, BUTTON_SIZE, false, 0xEEEEEE }
+	: m_button{ { BUTTON_SIZE.x / 2, Screen::HEIGHT / 2}, BUTTON_SIZE, false, 0xEEEEEE, false }
 	, m_nowState{ State::Hide }
 	, m_position { -Screen::WIDTH * (2.0f / 5), 0 }
 	, m_easingX{ 0 }
 	, m_textInputManager{ &m_conditionString, {Screen::WIDTH * (1.0f / 5), 75} , {Screen::WIDTH * (1.0f / 3), 50}}
-	, m_widthInput{ &m_widthStr, {Screen::WIDTH * (1.0f / 10), 150}, {100, 30} }
-	, m_heightInput{ &m_heightStr, {Screen::WIDTH * (3.0f / 10), 150}, {100, 30} }
+	, m_widthInput{ &m_widthStr, {Screen::WIDTH * (1.0f / 15), 150}, {100, 30} }
+	, m_heightInput{ &m_heightStr, {Screen::WIDTH * (3.0f / 15), 150}, {100, 30} }
+	, m_tutorialSelect{ {Screen::WIDTH * (5.0f / 15), 150}, {100, 30} }
 	, m_scrollHeight{ 0 }
 	, m_inputNum{ 0 }
 	, m_outputNum{ 0 }
 	, m_stageData{ stageData }
+	, m_starCondition{ Vector2D{m_position.x + Screen::WIDTH / 5, m_position.y + Screen::HEIGHT * (3.0f / 8)} }
 {
 	for(int i = 0; i < std::pow(2, Cell::CELL_MAX_COUNT[{TYPE_OTHERS, SUBTYPE_INPUT}]); i++)
 	{
@@ -27,7 +29,16 @@ void StageUI::Initialize()
 	m_widthInput.Initialize(true);
 	m_heightInput.Initialize(true);
 
+	m_tutorialSelect.Initialize();
+
+	m_tutorialSelect.AddChoice(L"0: None");
+	m_tutorialSelect.AddChoice(L"1: Start");
+	m_tutorialSelect.AddChoice(L"2: Select");
+//	m_tutorialSelect.AddChoice(L"3: None");
+
 	for (auto& setting : m_settings) setting->Initialize();
+
+	m_starCondition.Initialize();
 }
 
 void StageUI::Update(float elapsedTime)
@@ -42,20 +53,24 @@ void StageUI::Update(float elapsedTime)
 	}
 
 	if (m_scrollHeight > 0) m_scrollHeight = 0;
-	if (m_scrollHeight < -(std::pow(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 2))) m_scrollHeight = -(std::pow(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 2));
+	if (m_scrollHeight < -(std::pow(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 4))) m_scrollHeight = -(std::powf(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 4));
+
+	// リザルト設定の更新
+	m_starCondition.SetPos(Vector2D{ m_position.x + Screen::WIDTH / 5, m_position.y + Screen::HEIGHT * (3.0f / 8) });
+	m_starCondition.Update();
 
 	// 設定の更新
 	if(m_inputNum > 0)
-	for (int i = 0; i < std::pow(2, m_inputNum); i++)
-	{
-		float posY = m_position.y + Screen::HEIGHT * (1.0f / 2) + m_scrollHeight + i * Screen::HEIGHT * (1.0f / 4);
+		for (int i = 0; i < std::pow(2, m_inputNum); i++)
+		{
+			float posY = m_position.y + Screen::HEIGHT * (3.0f / 4) + m_scrollHeight + i * Screen::HEIGHT * (1.0f / 4);
 
-		m_settings[i]->ChangeInputNum(m_inputNum);
-		m_settings[i]->ChangeOutputNum(m_outputNum);
-		m_settings[i]->SetPos({ m_position.x + Screen::WIDTH * (1.0f / 5), posY });
+			m_settings[i]->ChangeInputNum(m_inputNum);
+			m_settings[i]->ChangeOutputNum(m_outputNum);
+			m_settings[i]->SetPos({ m_position.x + Screen::WIDTH * (1.0f / 5), posY });
 
-		if(posY >= Screen::HEIGHT * (2.0f / 7)) m_settings[i]->Update(elapsedTime);
-	}
+			if (posY >= Screen::HEIGHT * (3.0f / 8) && posY <= Screen::HEIGHT * (9.0f / 8)) m_settings[i]->Update(elapsedTime);
+		}
 
 	// テキストボックスの更新
 	m_textInputManager.Update();
@@ -63,9 +78,11 @@ void StageUI::Update(float elapsedTime)
 	m_heightInput.Update();
 
 	m_textInputManager.SetPos({ m_position.x + (Screen::WIDTH * (1.0f / 5)), 75 });
-	m_widthInput.SetPos({ m_position.x + (Screen::WIDTH * (1.0f / 10)), 150 });
-	m_heightInput.SetPos({ m_position.x + (Screen::WIDTH * (3.0f / 10)), 150 });
+	m_widthInput.SetPos({ m_position.x + Screen::WIDTH* (1.0f / 15), 140 });
+	m_heightInput.SetPos({ m_position.x + Screen::WIDTH* (3.0f / 15), 140 });
+	m_tutorialSelect.SetPos({ m_position.x + Screen::WIDTH* (5.0f / 15), 140 });
 
+	m_tutorialSelect.Update();
 	// ボタンの更新
 	m_button.Update();
 	m_button.ChengePos({ m_position.x + Screen::WIDTH * (2.f / 5) + BUTTON_SIZE.x / 2, Screen::HEIGHT / 2});
@@ -85,7 +102,7 @@ void StageUI::Update(float elapsedTime)
 
 	// ステージサイズ
 	m_stageData.SetStageSize({ 
-		(m_widthStr.size() > 0 ? std::stoi(m_widthStr) : 0), 
+		(m_widthStr.size()  > 0 ? std::stoi(m_widthStr) : 0), 
 		(m_heightStr.size() > 0 ? std::stoi(m_heightStr) : 0)
 	});
 }
@@ -99,29 +116,50 @@ void StageUI::Render()
 	if (m_inputNum > 0)
 		for (int i = 0; i < std::pow(2, m_inputNum); i++)
 		{
-			float posY = m_position.y + Screen::HEIGHT * (1.0f / 2) + m_scrollHeight + i * Screen::HEIGHT * (1.0f / 4);
+			float posY = m_position.y + Screen::HEIGHT * (3.0f / 4) + m_scrollHeight + i * Screen::HEIGHT * (1.0f / 4);
 
-			if (posY >= Screen::HEIGHT * (2.0f / 7)) m_settings[i]->Render();
+			if (posY >= Screen::HEIGHT * (3.0f / 8) && posY <= Screen::HEIGHT * (9.0f / 8)) m_settings[i]->Render();
 		}
 
 	// 上部の描画
-	DrawBox(0, 0, m_position.x + Screen::WIDTH * (2.f / 5), Screen::HEIGHT * (2.f / 7), 0x777777, true);
+	DrawBox(0, 0, m_position.x + Screen::WIDTH * (2.f / 5), Screen::HEIGHT * (1.f / 4), 0x777777, true);
 
 	// 入力ボックスの描画
 	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * ((1.f / 5) - (1.f / 6))), m_position.y + 50 - 24, 0xffffff, GetFontHandle(24), L"条件文入力");
-	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * (1.f / 10)) - (100 / 2), m_position.y + 135 - 16, 0xffffff, GetFontHandle(16), L"幅入力");
-	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * (3.f / 10)) - (100 / 2), m_position.y + 135 - 16, 0xffffff, GetFontHandle(16), L"高さ入力");
+	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * (1.f / 15)) - (100 / 2), m_position.y + 135 - 26, 0xffffff, GetFontHandle(16), L"幅入力");
+	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * (3.f / 15)) - (100 / 2), m_position.y + 135 - 26, 0xffffff, GetFontHandle(16), L"高さ入力");
+	DrawFormatStringToHandle(m_position.x + (Screen::WIDTH * (5.f / 15)) - (100 / 2), m_position.y + 135 - 26, 0xffffff, GetFontHandle(16), L"チュートリアル");
 
-	m_widthInput.Render();
-	m_heightInput.Render();
-	m_textInputManager.Render();
+	if(m_starCondition.GetIsActive())
+	{
+		m_widthInput.Render();
+		m_heightInput.Render();
+		m_tutorialSelect.Render();
+		m_textInputManager.Render();
+
+		m_starCondition.Render();
+	}
+	else
+	{
+		m_starCondition.Render();
+
+		m_widthInput.Render();
+		m_heightInput.Render();
+		m_tutorialSelect.Render();
+		m_textInputManager.Render();
+	}
 
 	// カーソルの描画
-	float height = Screen::HEIGHT * ((m_scrollHeight) / (-(std::pow(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 2))));
+	float height = Screen::HEIGHT * ((m_scrollHeight) / (-(std::pow(2, m_inputNum) * Screen::HEIGHT * (1.0f / 4) - Screen::HEIGHT * (1.f / 2)))) / 2 + Screen::HEIGHT / 2;
 	DrawCircle(m_position.x + 10, height, 10, 0xDDDDDD, true);
 
 	// ボタンの描画
 	m_button.Render();
+}
+
+void StageUI::Finalize()
+{
+	m_button.Finalize();
 }
 
 bool StageUI::PointIsOnMe(Vector2D point)
@@ -132,6 +170,18 @@ bool StageUI::PointIsOnMe(Vector2D point)
 	bool b = (point.x > buttonPos.x - BUTTON_SIZE.x && point.x < buttonPos.x + BUTTON_SIZE.x) && (point.y > buttonPos.y - BUTTON_SIZE.y && point.y < buttonPos.y + BUTTON_SIZE.y);
 
 	return a || b;
+}
+
+void StageUI::Save(json& data)
+{
+	m_starCondition.SaveToJson(data);
+
+	wchar_t num = L' ';
+
+	if (m_tutorialSelect.GetChoiced() == L"") num = '0';
+	else num = m_tutorialSelect.GetChoiced()[0];
+
+	data["Tutorial"] = (num - '0');
 }
 
 void StageUI::StateUpdate(float elapsedTime)

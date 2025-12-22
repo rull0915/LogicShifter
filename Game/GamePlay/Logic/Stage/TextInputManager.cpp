@@ -13,7 +13,7 @@ TextInputManager::TextInputManager(std::wstring* change, Vector2D pos, Vector2D 
 void TextInputManager::Initialize(bool numOnly)
 {
 	// キー入力ハンドルの作成
-	m_keyInputHandle = MakeKeyInput(255, false, false, numOnly);
+	if(m_keyInputHandle == -1) m_keyInputHandle = MakeKeyInput(255, false, false, numOnly);
 }
 
 void TextInputManager::Update()
@@ -43,20 +43,26 @@ void TextInputManager::Update()
 
 void TextInputManager::Render()
 {
-	DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, 0x555555, true);
+	DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, 0xBBBBBB, true);
 
 	// キー入力中なら
 	if (CheckKeyInput(m_keyInputHandle) == 0) 
 	{
 		// 入力時のフォントを変更する
 		SetKeyInputStringFont(GetFontHandle(static_cast<int>(m_size.y * (1.0f / 2))));
+		SetKeyInputStringColor2(DX_KEYINPSTRCOLOR_NORMAL_STR, 0x444444);
+
+		TCHAR test[255];
+		GetKeyInputString(test, m_keyInputHandle);
+		int width = GetDrawFormatStringWidthToHandle(GetFontHandle(m_size.y / 2), test);
 
 		// 入力中の文字列を描画する
-		DrawKeyInputString(m_position.x - m_size.x / 2, m_position.y - m_size.y / 4, m_keyInputHandle);
+		DrawKeyInputString(m_position.x - width / 2, m_position.y - m_size.y / 4, m_keyInputHandle);
 	}
 	else
 	{
-		DrawFormatStringToHandle(m_position.x - m_size.x / 2, m_position.y - m_size.y / 4, 0xffffff, GetFontHandle(m_size.y / 2), m_changeString->c_str());
+		int width = GetDrawFormatStringWidthToHandle(GetFontHandle(m_size.y / 2), m_changeString->c_str());
+		DrawFormatStringToHandle(m_position.x - width / 2, m_position.y - m_size.y / 4, 0, GetFontHandle(m_size.y / 2), m_changeString->c_str());
 	}
 
 }

@@ -5,7 +5,6 @@ ModeManager::ModeManager()
 	, m_nextCells{}
 	, m_cameraPos{ Screen::WIDTH / 2, Screen::HEIGHT / 2 }
 	, m_cameraScale{ 1 }
-	, m_resetButton{ {Screen::WIDTH / 2 - 50, 50}, {75, 75}, true, m_ghIcons["Reset"]}
 {
 }
 
@@ -136,18 +135,18 @@ void ModeManager::BorderRender()
 		5
 	);
 	DrawLine(
-		(STAGE_WIDTH - OFFSET_X) * (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
-		(STAGE_HEIGHT - OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
 		(-OFFSET_X) * (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
+		(STAGE_HEIGHT - OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
+		(STAGE_WIDTH - OFFSET_X)* (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
 		(STAGE_HEIGHT - OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
 		0xffffff,
 		5
 	);
 	DrawLine(
 		(STAGE_WIDTH - OFFSET_X) * (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
-		(STAGE_HEIGHT - OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
-		(STAGE_WIDTH - OFFSET_X) * (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
 		(-OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
+		(STAGE_WIDTH - OFFSET_X) * (BLOCK_SIZE * scale) - m_cameraPos.x + offsetX,
+		(STAGE_HEIGHT - OFFSET_Y) * (BLOCK_SIZE * scale) - m_cameraPos.y + offsetY,
 		0xffffff,
 		5
 	);

@@ -6,7 +6,7 @@ SelectUI::SelectUI(CircuitEditer* pParent)
 	, m_nowState{ State::Hide }
 	, m_easingX{ 0 }
 	, m_position{ Screen::WIDTH, 0 }
-	, m_slideButton{ {Screen::WIDTH - BUTTON_SIZE.x / 2, Screen::HEIGHT / 2}, BUTTON_SIZE, false, 0xEEEEEE }
+	, m_slideButton{ {Screen::WIDTH - BUTTON_SIZE.x / 2, Screen::HEIGHT / 2}, BUTTON_SIZE, false, 0xEEEEEE, false }
 	, m_buttons{}
 	, m_blockExButton{}
 	, m_colorPallet{}
@@ -35,6 +35,12 @@ void SelectUI::Initialize(PlayMode playMode)
 	// ブロック説明用ボタンの追加
 	Button blockEx = Button({ m_position + Vector2D{100, 80} }, { 80, 80 }, true, m_ghIcons["Block"]);
 	m_blockExButton = std::make_unique<Button>(std::move(blockEx));
+
+	m_nowState = State::Hide;
+
+	m_position = { Screen::WIDTH, 0 };
+
+	m_slideButton.ChengePos({ m_position.x - BUTTON_SIZE.x / 2, Screen::HEIGHT / 2 });
 }
 
 void SelectUI::Update(float elapsedTime)
@@ -227,6 +233,21 @@ void SelectUI::Render()
 
 	// カラーパレットの描画
 	m_colorPallet.Render();
+}
+
+void SelectUI::Finalize()
+{
+//	m_blockExButton->Finalize();
+	m_slideButton.Finalize();
+
+	for (auto& button : m_buttons) button.second->Finalize();
+
+	for (auto& button : m_blockButtons)
+	{
+		button.second.first->Finalize();
+		button.second.second->Finalize();
+	}
+
 }
 
 bool SelectUI::GetInSelectUI(Vector2DInt screenPos)

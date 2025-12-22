@@ -5,6 +5,11 @@ void DrawQuadrangle(Vector3D p1, Vector3D p2, Vector3D p3, Vector3D p4, int colo
 	DrawQuadrangleAA(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y, color, fillFrag);
 }
 
+void DrawTriangle(Vector2D p1, Vector2D p2, Vector2D p3, int color, bool fillFrag)
+{
+	DrawTriangleAA(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, color, fillFrag);
+}
+
 void MyDrawBox(Vector2D p1, Vector2D p2, SquareMatrix3 view, int color, bool fillFrag)
 { 
 	Vector3D p[4] = { {p1.x, p1.y, 1}, {p1.x, p2.y, 1}, {p2.x, p2.y, 1}, {p2.x, p1.y, 1} };
@@ -91,4 +96,51 @@ void MyDrawExtendFormatStringToHandleToCenter(int x, int y, float rateX, float r
 	GetDrawExtendFormatStringSizeToHandle(&width, &height, &lineCount, rateX, rateY, fontHandle, string);
 
 	DrawExtendFormatStringToHandle(x - width / 2, y - height / 2, rateX, rateY, color, fontHandle, string);
+}
+
+void MyDrawStar(Vector2D centerPos, float radius, float inRadius, int color, bool fillFrag)
+{
+	Vector2D outPoints[5] =
+	{
+		centerPos + radius * Vector2D{ cosf(ToRadian(-90)), sinf(ToRadian(-90)) },
+		centerPos + radius * Vector2D{ cosf(ToRadian(-18)), sinf(ToRadian(-18)) },
+		centerPos + radius * Vector2D{ cosf(ToRadian(54)), sinf(ToRadian(54)) },
+		centerPos + radius * Vector2D{ cosf(ToRadian(126)), sinf(ToRadian(126)) },
+		centerPos + radius * Vector2D{ cosf(ToRadian(198)), sinf(ToRadian(198)) }
+	};
+	Vector2D inPoints[5] =
+	{
+		centerPos + inRadius * Vector2D{ cosf(ToRadian(-54)), sinf(ToRadian(-54)) },
+		centerPos + inRadius * Vector2D{ cosf(ToRadian(18)), sinf(ToRadian(18)) },
+		centerPos + inRadius * Vector2D{ cosf(ToRadian(90)), sinf(ToRadian(90)) },
+		centerPos + inRadius * Vector2D{ cosf(ToRadian(162)), sinf(ToRadian(162)) },
+		centerPos + inRadius * Vector2D{ cosf(ToRadian(234)), sinf(ToRadian(234)) }
+	};
+
+	if (fillFrag)
+	{
+		DrawTriangle(outPoints[0], inPoints[4], inPoints[0], color, fillFrag);
+		DrawTriangle(outPoints[1], inPoints[0], inPoints[1], color, fillFrag);
+		DrawTriangle(outPoints[2], inPoints[1], inPoints[2], color, fillFrag);
+		DrawTriangle(outPoints[3], inPoints[2], inPoints[3], color, fillFrag);
+		DrawTriangle(outPoints[4], inPoints[3], inPoints[4], color, fillFrag);
+
+		DrawTriangle(centerPos, inPoints[4], inPoints[0], color, fillFrag);
+		DrawTriangle(centerPos, inPoints[0], inPoints[1], color, fillFrag);
+		DrawTriangle(centerPos, inPoints[1], inPoints[2], color, fillFrag);
+		DrawTriangle(centerPos, inPoints[2], inPoints[3], color, fillFrag);
+		DrawTriangle(centerPos, inPoints[3], inPoints[4], color, fillFrag);
+
+		DrawLine(inPoints[0].x, inPoints[0].y, inPoints[1].x, inPoints[1].y, color, 2);
+		DrawLine(inPoints[1].x, inPoints[1].y, inPoints[2].x, inPoints[2].y, color, 2);
+		DrawLine(inPoints[2].x, inPoints[2].y, inPoints[3].x, inPoints[3].y, color, 2);
+		DrawLine(inPoints[3].x, inPoints[3].y, inPoints[4].x, inPoints[4].y, color, 2);
+		DrawLine(inPoints[4].x, inPoints[4].y, inPoints[0].x, inPoints[0].y, color, 2);
+
+		DrawLine(inPoints[0].x, inPoints[0].y, centerPos.x, centerPos.y, color, 2);
+		DrawLine(inPoints[1].x, inPoints[1].y, centerPos.x, centerPos.y, color, 2);
+		DrawLine(inPoints[2].x, inPoints[2].y, centerPos.x, centerPos.y, color, 2);
+		DrawLine(inPoints[3].x, inPoints[3].y, centerPos.x, centerPos.y, color, 2);
+		DrawLine(inPoints[4].x, inPoints[4].y, centerPos.x, centerPos.y, color, 2);
+	}
 }

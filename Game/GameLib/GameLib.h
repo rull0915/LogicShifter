@@ -1,12 +1,17 @@
 #pragma once
 
+#include <Shlwapi.h>
+#pragma comment(lib, "Shlwapi.lib")
+
+// スレッドの数
+extern int m_threadNum;
+
 // ----- 列挙型宣言 ----- //
 enum class PlayMode
 {
-	Select,
 	Stage,
 	Edit,
-	Free,
+	Free
 };
 
 // ----- 構造体宣言 ----- //
@@ -126,3 +131,9 @@ inline int Rounding(float num)
 	if (num < a + 0.5f) return a;
 	else return a + 1;
 }
+
+// 絶対パスに変換する関数
+std::wstring GetAbsolutePath(std::wstring relativePath);
+
+// 文字コード変換
+std::wstring utf8_to_wstring(const std::string& utf8);

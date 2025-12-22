@@ -1,5 +1,7 @@
 #include "GameLib.h"
 
+int m_threadNum = 0;
+
 Vector3D ToScreen(Vector4D v)
 {
 	Vector3D a = Vec4ToVec3(v);
@@ -50,5 +52,36 @@ bool IsCollide(AABB a, AABB b)
 bool IsCollide(AttackAABB at, AABB a)
 {
 	return IsCollide(at.collide, a);
+}
+
+std::wstring GetAbsolutePath(std::wstring relativePath)
+{
+	// ステージ情報の読み込み
+	wchar_t iniFileFolderPath[_MAX_PATH];
+	memset(iniFileFolderPath, NULL, _countof(iniFileFolderPath));
+	GetModuleFileName(NULL, iniFileFolderPath, _countof(iniFileFolderPath));
+
+	PathRemoveFileSpec(iniFileFolderPath);
+
+	std::wstring path = iniFileFolderPath;
+	path += L"\\" + relativePath;
+
+	return path;
+}
+
+std::wstring utf8_to_wstring(const std::string& utf8)
+{
+	if (utf8.empty()) return L"";
+
+	int size_needed = MultiByteToWideChar(CP_UTF8, 0, utf8.c_str(), -1, nullptr, 0);
+	std::wstring result(size_needed, 0);
+
+	MultiByteToWideChar(CP_UTF8, 0,
+		utf8.c_str(), -1,
+		&result[0], size_needed
+	);
+
+	result.pop_back(); // 終端の\0を削る
+	return result;
 }
 

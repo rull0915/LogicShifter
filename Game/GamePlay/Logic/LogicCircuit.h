@@ -3,7 +3,6 @@
 #include "../EditManager.h"
 #include "../StageManager.h"
 #include "../FreeManager.h"
-#include "../ModeSelect.h"
 
 class LogicCircuit
 {
@@ -13,9 +12,12 @@ private:
 	FreeManager m_freeManager;
 	EditManager m_editManager;
 
-	ModeSelect m_modeSelect;
-
 	PlayMode m_nowPlayMode;
+
+	// 選択されたファイル名
+	std::wstring m_selectedFileName;
+
+	bool m_toResult;
 
 public:
 	LogicCircuit();
@@ -26,6 +28,13 @@ public:
 	void Update(float elapsedTime);
 
 	void Render();
+
+	void Finalize();
+
+	// ファイルをセットする関数
+	void SetFileName(const std::wstring& fileName) { m_selectedFileName = fileName; }
+
+	bool ToResult() const { return m_toResult; }
 
 private:
 	// ブロックの色の保存

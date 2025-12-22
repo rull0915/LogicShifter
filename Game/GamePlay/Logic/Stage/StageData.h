@@ -28,7 +28,7 @@ public:
 	StageData(std::vector<PackedCell>& stage);
 
 	// セーブ
-	void Save();
+	void Save(json& data);
 
 	// ゲッター
 	Vector2DInt GetStageSize() const { return m_stageSize; }

@@ -1,4 +1,13 @@
+#pragma once
+
 // ----- マウス関連 ----- //
+
+enum class MouseMode
+{
+	Normal,
+	Erase,
+	Move,
+};
 
 // マウスの入力
 extern int m_mouseInput;
@@ -8,9 +17,13 @@ extern int m_oldMouseInput;
 extern Vector2DInt m_mousePos;
 extern Vector2DInt m_oldMousePos;
 
+// マウスの描画モード
+extern MouseMode m_mouseDrawMode;
+
 extern float mouseWheelRot;
 
 extern void MouseUpdate();
+extern void MouseRender();
 extern int MouseDown();
 extern int MouseEnter();
 extern int MouseUp();
