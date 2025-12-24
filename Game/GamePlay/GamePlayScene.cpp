@@ -19,6 +19,9 @@ void GamePlayScene::Initialize()
 	m_logic.SetFileName(m_pGame->GetStageFileName());
 
 	m_logic.Initialize(m_pGame->GetPlayMode());
+
+	// bgm‚ÌÄ¶
+	Sound::FadeIn(Sound::Type::GamePlayBgm, 0.5f);
 }
 
 // XVŠÖ” 
@@ -46,4 +49,7 @@ void GamePlayScene::Render()
 void GamePlayScene::Finalize()
 {
 	m_logic.Finalize();
+
+	// bgm‚Ì’â~
+	Sound::FadeOut(Sound::Type::GamePlayBgm, 0.5f);
 }

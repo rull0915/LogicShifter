@@ -2,6 +2,7 @@
 
 #include "../Game/Common/Scene.h"
 #include "../Game/Common/UI/Button.h"
+#include "../Game/Common/Particles/BaseParticle.h"
 
 // クラスの前方宣言
 class Game;
@@ -33,6 +34,9 @@ private:
 
 	// スタートボタン
 	Button m_startButton;
+
+	// 背景パーティクル
+	BaseParticle m_particle;
 
 	// 関数宣言 -------------------------------
 public:

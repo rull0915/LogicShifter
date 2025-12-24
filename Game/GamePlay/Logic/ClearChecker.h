@@ -43,6 +43,8 @@ private:
 public:
 	ClearChecker(std::vector<PackedCell>& m_stage, std::vector<PackedCell>& m_nextStage, Conditions& con);
 
+	void Reset();
+
 	void Initialize(std::vector<PackedCell>& stage);
 
 	bool Update(float elapsedTime);

@@ -76,12 +76,12 @@ void SelectUI::Update(float elapsedTime)
 			{
 			case Function::Save:
 
-				m_pParent->SaveCells(SaveFileDialog());
+				m_pParent->SaveCells(SaveFileDialog(false));
 				
 				break;
 			case Function::Load:
 				
-				m_pParent->LoadCells(LoadFileDialog());
+				m_pParent->LoadCells(LoadFileDialog(false));
 				
 				break;
 			case Function::Reset:

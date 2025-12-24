@@ -3,7 +3,7 @@
 #include <Shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
 
-std::wstring SaveFileDialog()
+std::wstring SaveFileDialog(bool stageMode)
 {
 	SetMouseDispFlag(true);
 
@@ -26,7 +26,8 @@ std::wstring SaveFileDialog()
 	PathRemoveFileSpec(iniFileFolderPath);
 
 	std::wstring path = iniFileFolderPath;
-	path += L"\\Resources\\Stages";
+	if (stageMode) path += L"\\Resources\\Stages";
+	else path += L"\\Resources\\FreeStages";
 
 	// フィルター文字列のバッファー
 	ofn.lpstrFilter = L"ステージ\0*.json\0";
@@ -57,7 +58,7 @@ std::wstring SaveFileDialog()
 	return L"";
 }
 
-std::wstring LoadFileDialog()
+std::wstring LoadFileDialog(bool stageMode)
 {
 	SetMouseDispFlag(true);
 
@@ -81,7 +82,8 @@ std::wstring LoadFileDialog()
 	PathRemoveFileSpec(iniFileFolderPath);
 
 	std::wstring path = iniFileFolderPath;
-	path += L"\\Resources\\Stages";
+	if (stageMode) path += L"\\Resources\\Stages";
+	else path += L"\\Resources\\FreeStages";
 
 	// フィルター文字列のバッファー
 	ofn.lpstrFilter = L"ステージ\0*.json\0";

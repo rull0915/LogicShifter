@@ -43,12 +43,12 @@ void IrisTransition::Render()
 	{
 	case Transition::Mode::In:
 
-		radius = m_maxRadius - m_maxRadius * (Easing::Linear(m_elapsedTime / m_transSec));
+		radius = m_maxRadius - m_maxRadius * (Easing::EaseInQuad(m_elapsedTime / m_transSec));
 
 		break;
 	case Transition::Mode::Out:
 
-		radius = m_maxRadius * (Easing::Linear(m_elapsedTime / m_transSec));
+		radius = m_maxRadius * (Easing::EaseInQuad(m_elapsedTime / m_transSec));
 
 		break;
 	default:

@@ -6,7 +6,7 @@
 TitleScene::TitleScene(Game* pGame)
 	: Scene(pGame->GetSceneManager())
 	, m_pGame(pGame)
-	, m_startButton{ Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT / 2 + 40 }, Vector2D{ Screen::WIDTH / 6, Screen::HEIGHT / 18 }, false, 0x333333, true}
+	, m_startButton{ Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT / 2 + 40 }, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 10 }, false, 0x333333, true}
 {
 }
 
@@ -25,20 +25,31 @@ void TitleScene::Initialize()
 	}
 
 	m_backScreen = MakeScreen(64, 36);
+
+	LoadTitleMap();
+
+	// bgmの再生
+	Sound::FadeIn(Sound::Type::TitleBgm, 0.5f);
 }
 
 void TitleScene::Update(float elapsedTime)
 {
+	static float m_x = 0;
+	m_x += elapsedTime * (DX_PI_F / 2);
+
+	m_startButton.ChengePos({ Screen::WIDTH / 2, Screen::HEIGHT / 2 + 150 + 10 * sinf(m_x) });
+
 	m_startButton.Update();
 
 	// 右クリックされたら
 	if (m_startButton.GetIsPressed())
 	{
 		ChangeScene("ModeSelect",
-			std::make_unique<IrisTransition>(1.0f, Transition::Mode::In, 0x1f1e33),
-			std::make_unique<IrisTransition>(1.0f, Transition::Mode::Out, 0x1f1e33));
+			std::make_unique<IrisTransition>(1.0f, Transition::Mode::In, 0x888888),
+			std::make_unique<IrisTransition>(1.0f, Transition::Mode::Out, 0x888888));
 	}
 
+	// 背景にブロックを置く処理
 	if (MouseEnter() & MOUSE_INPUT_LEFT)
 	{
 		Vector2DInt grid = ToGrid({(float)m_mousePos.x, (float)m_mousePos.y});
@@ -52,10 +63,13 @@ void TitleScene::Update(float elapsedTime)
 				SetDrawScreen(m_backScreen);
 				DrawPixel(grid.x, grid.y, m_backGround[grid.y][grid.x]);
 				SetDrawScreen(DX_SCREEN_BACK);
+
+				Sound::Play(Sound::Type::Put, DX_PLAYTYPE_BACK);
 			}
 		}
 	}
 
+	// 背景のブロックを消す処理
 	else if (MouseEnter() & MOUSE_INPUT_RIGHT)
 	{
 		Vector2DInt grid = ToGrid({ (float)m_mousePos.x, (float)m_mousePos.y });
@@ -69,6 +83,8 @@ void TitleScene::Update(float elapsedTime)
 				SetDrawScreen(m_backScreen);
 				DrawPixel(grid.x, grid.y, 0x000000);
 				SetDrawScreen(DX_SCREEN_BACK);
+
+				Sound::Play(Sound::Type::Put, DX_PLAYTYPE_BACK);
 			}
 		}
 	}
@@ -90,15 +106,17 @@ void TitleScene::Render()
 		DrawLine(0, i * size, Screen::WIDTH, i * size, (i % 5 == 0 ? 0x999999 : 0x555555));
 	}
 
-	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT / 2 - 30, 0xffffff, GetFontHandle(64), TITLE);
+//	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT / 2 - 30, 0xffffff, GetFontHandle(64), TITLE);
 
 	m_startButton.Render();
 
-	MyDrawFormatStringToHandleToCenter(m_startButton.GetPos().x, m_startButton.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 27), L"START");
+	MyDrawFormatStringToHandleToCenter(m_startButton.GetPos().x, m_startButton.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 20), L"START");
 }
 
 void TitleScene::Finalize()
 {
+	// bgmの停止
+	Sound::FadeOut(Sound::Type::TitleBgm, 0.5f);
 }
 
 Vector2DInt TitleScene::ToGrid(Vector2D pos)
@@ -125,4 +143,31 @@ int TitleScene::GetRandColor()
 	if (random == 9999) return Cell::COLORS[{TYPE_OTHERS, SUBTYPE_INPUT}];
 
 	return Cell::COLORS[{TYPE_INPUT, SUBTYPE_BUTTON}];
+}
+
+void TitleScene::LoadTitleMap()
+{
+	// ファイルのロード
+	// ファイルから読み込み
+	std::ifstream ifs(GetAbsolutePath(L"Resources/Datas/Title.json"));
+
+	json stage;
+	if (ifs.is_open()) ifs >> stage;
+	ifs.close();
+
+	SetDrawScreen(m_backScreen);
+
+	Vector2DInt pos;
+
+	for (auto info : stage["Stage"])
+	{
+		pos.x = info["PosX"];
+		pos.y = info["PosY"];
+
+		m_backGround[pos.y + 5][pos.x + 14] = 0xCCCCCC;
+
+		DrawPixel(pos.x + 14, pos.y + 5, 0xCCCCCC);
+	}
+
+	SetDrawScreen(DX_SCREEN_BACK);
 }

@@ -6,8 +6,8 @@ ModeSelectScene::ModeSelectScene(Game* pGame)
 	, m_pGame{ pGame }
 	, m_buttons{}
 	, m_particle{}
-	, m_titleButton{ { Screen::WIDTH / 3, Screen::HEIGHT * (7.0f / 8)}, { Screen::WIDTH / 5, Screen::HEIGHT / 16}, false, 0xAAAAAA, true }
-	, m_exitButton{ { Screen::WIDTH * (2.0f / 3), Screen::HEIGHT * (7.0f / 8)}, {Screen::WIDTH / 5, Screen::HEIGHT / 16}, false, 0xAAAAAA, true}
+	, m_titleButton{ { Screen::WIDTH / 3, Screen::HEIGHT * (11.0f / 12)}, { Screen::WIDTH / 5, Screen::HEIGHT / 16}, false, 0xAAAAAA, true }
+	, m_exitButton{ { Screen::WIDTH * (2.0f / 3), Screen::HEIGHT * (11.0f / 12)}, {Screen::WIDTH / 5, Screen::HEIGHT / 16}, false, 0xAAAAAA, true}
 {
 	m_buttons.clear();
 
@@ -22,6 +22,8 @@ void ModeSelectScene::Initialize()
 
 	m_titleButton.Initialize();
 	m_exitButton.Initialize();
+
+	Sound::FadeIn(Sound::Type::SelectBgm, 0.5f);
 }
 
 void ModeSelectScene::Update(float elapsedTime)
@@ -82,10 +84,6 @@ void ModeSelectScene::Render()
 
 	for (auto&button : m_buttons) button.second->Render();
 
-//	MyDrawFormatStringToHandleToCenter(Screen::WIDTH * (2.f / 4), Screen::HEIGHT * (7.f / 16), 0x222222, GetFontHandle(48), L"EditMode");
-//	MyDrawFormatStringToHandleToCenter(Screen::WIDTH * (2.f / 4), Screen::HEIGHT * (10.f / 16), 0x222222, GetFontHandle(48), L"FreeMode");
-//	MyDrawFormatStringToHandleToCenter(Screen::WIDTH * (2.f / 4), Screen::HEIGHT * (13.f / 16), 0x222222, GetFontHandle(48), L"StageMode");
-
 	MyDrawFormatStringToHandleToCenter(Screen::WIDTH * (2.f / 4), Screen::HEIGHT * (1.f / 12), 0xFFFFFF, GetFontHandle(80), L"ModeSelect");
 
 	m_titleButton.Render();
@@ -101,4 +99,6 @@ void ModeSelectScene::Finalize()
 
 	m_titleButton.Finalize();
 	m_exitButton.Finalize();
+
+	Sound::FadeOut(Sound::Type::SelectBgm, 0.5f);
 }

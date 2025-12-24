@@ -145,6 +145,14 @@ void Tutorial::Initialize(TutorialType type)
 
 		break;
 
+	case TutorialType::Not:
+
+		m_tutorials.push(OnceTutorial(Vector2D{ Screen::WIDTH / 2 + 32, Screen::HEIGHT / 2 + 32 }, Vector2D{ 64, 64 }, L"Not演算ブロックです", Vector2D{ 80, 80 }));
+		m_tutorials.push(OnceTutorial(Vector2D{ Screen::WIDTH / 2 + 32, Screen::HEIGHT / 2 + 32 }, Vector2D{ 64, 64 }, L"OutPutのようにAnd,Orの出力を受け取ります", Vector2D{ 80, 80 }));
+		m_tutorials.push(OnceTutorial(Vector2D{ Screen::WIDTH / 2 + 32, Screen::HEIGHT / 2 + 32 }, Vector2D{ 64, 64 }, L"受け取った出力を反転し、出力します", Vector2D{ 80, 80 }));
+
+		break;
+
 	default:
 		break;
 	}

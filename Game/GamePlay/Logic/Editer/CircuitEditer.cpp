@@ -196,7 +196,11 @@ void CircuitEditer::PasteRander()
 		int color = Cell::COLORS[{GetType(cell.second), GetSubType(cell.second)}];
 		// •`‰æ
 		DrawCell(m_mouseIndex.x + cell.first.x, m_mouseIndex.y + cell.first.y, m_cameraPos, 1.0f / m_cameraScale, cell.second);
-		DrawStringOnGrid(m_mouseIndex.x + cell.first.x, m_mouseIndex.y + cell.first.y, m_cameraPos, 1.0f / m_cameraScale, color, L"A");
+
+		TCHAR a[1];
+		a[0] = 127;
+
+//		DrawStringOnGrid(m_mouseIndex.x + cell.first.x, m_mouseIndex.y + cell.first.y, m_cameraPos, 1.0f / m_cameraScale, 0xffffff, a);
 	}
 
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

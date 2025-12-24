@@ -35,6 +35,8 @@
 #include "Game/GameLib/Resources.h"
 #include "Game/GameLib/Mouse.h"
 
+#include "Game/GameLib/Sound.h"
+
 #include "Game/GameLib/OpenFileDialog.h"
 
 // jsonŠÖ˜A

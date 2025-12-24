@@ -36,12 +36,12 @@ private:
 enum class TutorialType
 {
 	None = 0,
-	Start,
-	Operation,
-	Select,
-	And,
-	Or,
-	Not,
+	Start,		//1
+	Operation,	//2
+	Select,		//3
+	And,		//4
+	Or,			//5
+	Not,		//6
 };
 
 // チュートリアル基底クラス

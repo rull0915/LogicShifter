@@ -1,6 +1,6 @@
 #pragma once
 
 
-std::wstring SaveFileDialog();
+std::wstring SaveFileDialog(bool stageMode = true);
 
-std::wstring LoadFileDialog();
+std::wstring LoadFileDialog(bool stageMode = true);

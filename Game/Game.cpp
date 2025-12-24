@@ -34,6 +34,8 @@ void Game::Initialize()
 	m_sceneManager.SetStartScene("Title");
 
 	m_pause.Initialize();
+
+	Sound::Load();
 }
 
 void Game::Update(float elapsedTime)
@@ -45,6 +47,8 @@ void Game::Update(float elapsedTime)
 	m_mouseDrawMode = MouseMode::Normal;
 
 	MouseUpdate();
+
+	Sound::Update(elapsedTime);
 
 	if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay") m_pauseButton.Update();
 

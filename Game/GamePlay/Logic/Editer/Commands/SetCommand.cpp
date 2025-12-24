@@ -20,6 +20,9 @@ bool SetCommand::Execute()
 	// ê›íu
 	m_receiver.SetCell(m_pos, m_after);
 
+	if (m_after != 0) Sound::Play(Sound::Type::Put, DX_PLAYTYPE_BACK);
+	else Sound::Play(Sound::Type::Delete, DX_PLAYTYPE_BACK);
+
 	return true;
 }
 

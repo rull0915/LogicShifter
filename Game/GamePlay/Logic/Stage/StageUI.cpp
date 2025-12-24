@@ -33,8 +33,11 @@ void StageUI::Initialize()
 
 	m_tutorialSelect.AddChoice(L"0: None");
 	m_tutorialSelect.AddChoice(L"1: Start");
-	m_tutorialSelect.AddChoice(L"2: Select");
-//	m_tutorialSelect.AddChoice(L"3: None");
+	m_tutorialSelect.AddChoice(L"2: Operation");
+	m_tutorialSelect.AddChoice(L"3: Select");
+	m_tutorialSelect.AddChoice(L"4: And");
+	m_tutorialSelect.AddChoice(L"5: Or");
+	m_tutorialSelect.AddChoice(L"6: Not");
 
 	for (auto& setting : m_settings) setting->Initialize();
 

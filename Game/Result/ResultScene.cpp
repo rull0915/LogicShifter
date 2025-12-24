@@ -34,14 +34,21 @@ void ResultScene::Initialize()
 	{
 		if (m_thirdConditionStr == THIRD_CONDITIONS[i]) m_thirdConditionID = i;
 	}
+
+	Sound::Play(Sound::Type::Clear, DX_PLAYTYPE_BACK);
+	Sound::FadeIn(Sound::Type::GamePlayBgm, 0.5f);
 }
 
 void ResultScene::Update(float elapsedTime)
 {
-	if(MouseUp() & MOUSE_INPUT_LEFT)
-	ChangeScene("Select",
-		std::make_unique<SlideTransition>(0.5f, Transition::Mode::In, 0x666666, ToRadian(30)),
-		std::make_unique<SlideTransition>(0.5f, Transition::Mode::Out, 0x666666, ToRadian(-150)));
+	if (MouseUp() & MOUSE_INPUT_LEFT)
+	{
+		ChangeScene("Select",
+			std::make_unique<SlideTransition>(0.5f, Transition::Mode::In, 0x666666, ToRadian(30)),
+			std::make_unique<SlideTransition>(0.5f, Transition::Mode::Out, 0x666666, ToRadian(-150)));
+
+		Sound::Play(Sound::Type::Decide, DX_PLAYTYPE_BACK);
+	}
 }
 
 void ResultScene::Render()
@@ -86,6 +93,7 @@ void ResultScene::Render()
 
 void ResultScene::Finalize()
 {
+	Sound::FadeOut(Sound::Type::GamePlayBgm, 0.5f);
 }
 
 std::wstring ResultScene::GetThirdCondition()

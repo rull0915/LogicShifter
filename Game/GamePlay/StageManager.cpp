@@ -39,6 +39,8 @@ void StageManager::Initialize()
 
 	m_cameraPos = { Screen::WIDTH / 2, Screen::HEIGHT / 2 };
 	m_cameraScale = 1.0f;
+
+	m_clearChecker.Reset();
 }
 
 void StageManager::Update(float elapsedTime)

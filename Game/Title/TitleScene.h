@@ -51,5 +51,7 @@ private:
 
 	// ƒ‰ƒ“ƒ_ƒ€‚ÈF‚ğ•Ô‚·ŠÖ”
 	int GetRandColor();
+
+	void LoadTitleMap();
 };
 

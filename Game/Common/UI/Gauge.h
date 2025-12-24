@@ -39,9 +39,6 @@ private:
 	// イージング用の変数
 	float m_easingX;
 
-	// マスクスクリーン
-	int m_maskScreen;
-
 	// -------- 関数宣言 -------- //
 public:
 	Gauge(Vector2D pos, Vector2D size, GaugeMode mode, int backColor, int barColor);

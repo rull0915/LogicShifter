@@ -1,5 +1,7 @@
 #include "Gauge.h"
 
+#include "../Game/Common/MaskManager.h"
+
 Gauge::Gauge(Vector2D pos, Vector2D size, GaugeMode mode, int backColor, int barColor)
 	: m_position{ pos }
 	, m_size{ size }
@@ -7,21 +9,12 @@ Gauge::Gauge(Vector2D pos, Vector2D size, GaugeMode mode, int backColor, int bar
 	, m_backColor{ backColor }
 	, m_barColor{ barColor }
 	, m_ratio{ 0 }
-	, m_maskScreen{ -1 }
 {
 }
 
 void Gauge::Initialize()
 {
 	m_ratio = 0;
-
-	if(m_maskScreen == -1) m_maskScreen = MakeScreen(Screen::WIDTH, Screen::HEIGHT, TRUE);
-
-	// マスク機能の初期化を行う
-	CreateMaskScreen();
-
-	// 作成したスクリーンをマスク用グラフィックとして登録する
-	SetMaskScreenGraph(m_maskScreen);
 
 	m_isMoving = false;
 }
@@ -47,20 +40,13 @@ void Gauge::Update(float elapsedTime)
 
 void Gauge::Render()
 {
-	// 描画先をマスク用の画像に変更
-	SetDrawScreen(m_maskScreen);
-
-	// マスク用の画像をクリア
-	ClearDrawScreen();
-
+	MaskManager::GetInstance().StartDrawMask();
+	
 	MyDrawRoundBox((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
 
-	SetMaskReverseEffectFlag(1);
+	MaskManager::GetInstance().FinishDrawMask();
 
-	// 描画先を裏画面に変更
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	SetUseMaskScreenFlag(TRUE);
+	MaskManager::GetInstance().SetMask(true);
 
 	MyDrawRoundBox((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
 
@@ -76,9 +62,7 @@ void Gauge::Render()
 		break;
 	}
 
-	SetMaskReverseEffectFlag(0);
-
-	SetUseMaskScreenFlag(FALSE);
+	MaskManager::GetInstance().CancelMask();
 }
 
 void Gauge::SetRatio(float ratio)

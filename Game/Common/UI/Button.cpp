@@ -43,7 +43,12 @@ void Button::Update()
 	// 左クリックが離されたら
 	if(MouseUp() & MOUSE_INPUT_LEFT)
 	{
-		if (MouseIsOnButton() && m_pressedOnMe) m_isPressed = true;
+		if (MouseIsOnButton() && m_pressedOnMe)
+		{
+			Sound::Play(Sound::Type::Decide, DX_PLAYTYPE_BACK);
+
+			m_isPressed = true;
+		}
 		m_pressedOnMe = false;
 	}
 	// 右クリックが離されたら

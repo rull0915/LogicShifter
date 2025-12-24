@@ -13,6 +13,17 @@ ClearChecker::ClearChecker(std::vector<PackedCell>& stage, std::vector<PackedCel
 	m_gauge.Initialize();
 }
 
+void ClearChecker::Reset()
+{
+	m_circuitSimulator.Initialize();
+
+	m_nowElapsedTime = 0;
+
+	m_isActive = false;
+
+	m_beforeStage.clear();
+}
+
 void ClearChecker::Initialize(std::vector<PackedCell>& stage)
 {
 	m_nowCheckingNum = -1;

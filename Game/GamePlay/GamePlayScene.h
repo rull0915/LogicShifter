@@ -5,8 +5,6 @@
 
 #include "Logic/LogicCircuit.h"
 
-#include "../Camera.h"
-
 #include "../Game/Common/UI/Gauge.h"
 
 // ƒNƒ‰ƒX‚Ì‘O•ûéŒ¾

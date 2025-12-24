@@ -21,6 +21,9 @@ SelectScene::~SelectScene()
 
 void SelectScene::Initialize()
 {
+	// 背景パーティクルの初期化
+	m_particle.Initialize(ShapeType::Block, 0.1f, { {0, Screen::HEIGHT / 2},{Screen::WIDTH, Screen::HEIGHT * 1.5} }, { {40, 40},{60, 60} });
+
 	// ステージ情報の読み込み
 	std::ifstream ifs(GetAbsolutePath(L"Resources\\Datas\\StageInfo.json"));
 
@@ -98,10 +101,14 @@ void SelectScene::Initialize()
 	m_moveButton.second.Initialize();
 
 	m_startButton.Initialize();
+
+	Sound::FadeIn(Sound::Type::SelectBgm, 0.5f);
 }
 
 void SelectScene::Update(float elapsedTime)
 {
+	m_particle.Update(elapsedTime);
+
 	// 移動ボタン
 	m_moveButton.first.Update();
 	m_moveButton.second.Update();
@@ -127,6 +134,8 @@ void SelectScene::Update(float elapsedTime)
 
 void SelectScene::Render()
 {
+	m_particle.Render(0x444444);
+
 	// ボタンの描画
 	m_moveButton.first.Render();
 	m_moveButton.second.Render();
@@ -168,4 +177,6 @@ void SelectScene::Finalize()
 
 	// ステージのスクリーン
 	m_ghScreens.clear();
+
+	Sound::FadeOut(Sound::Type::SelectBgm, 0.5f);
 }

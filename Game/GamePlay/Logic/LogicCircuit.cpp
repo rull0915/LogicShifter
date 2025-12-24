@@ -97,7 +97,7 @@ void LogicCircuit::SaveBlockColors()
 	// ファイルへ書き込み
 
 	// 通常時
-	std::ofstream file("Resources/Datas/NornalColors.csv");
+	std::ofstream file(GetAbsolutePath(L"Resources/Datas/NornalColors.csv"));
 
 	if (file.is_open())
 	{
@@ -110,7 +110,7 @@ void LogicCircuit::SaveBlockColors()
 	file.close();
 
 	// 信号点灯時
-	std::ofstream file2("Resources/Datas/SignalColors.csv");
+	std::ofstream file2(GetAbsolutePath(L"Resources/Datas/SignalColors.csv"));
 
 	if (file2.is_open())
 	{

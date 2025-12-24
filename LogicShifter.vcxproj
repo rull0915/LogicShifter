@@ -169,7 +169,6 @@
     <ClInclude Include="Game\GamePlay\FreeManager.h" />
     <ClInclude Include="Game\GamePlay\Logic\Editer\Commands\UndoEditCommand.h" />
     <ClInclude Include="Game\Common\UI\ColorPallet.h" />
-    <ClInclude Include="Game\Camera.h" />
     <ClInclude Include="Game\Common\MyRender.h" />
     <ClInclude Include="Game\Common\Scene.h" />
     <ClInclude Include="Game\Common\SceneManager.h" />
@@ -219,7 +218,6 @@
     <ClInclude Include="Game\Common\UI\SelectList.h" />
     <ClInclude Include="Game\GamePlay\Logic\Stage\StarCondition.h" />
     <ClInclude Include="Game\Result\ResultScene.h" />
-    <ClInclude Include="Game\GamePlay\Logic\Tutorial\StartTutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Common\Particles\BaseParticle.cpp" />
@@ -247,7 +245,6 @@
     <ClCompile Include="Game\GamePlay\FreeManager.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\CellInfo.cpp" />
     <ClCompile Include="Game\Common\UI\ColorPallet.cpp" />
-    <ClCompile Include="Game\Camera.cpp" />
     <ClCompile Include="Game\Common\MyRender.cpp" />
     <ClCompile Include="Game\Common\Scene.cpp" />
     <ClCompile Include="Game\Common\SceneManager.cpp" />
@@ -293,7 +290,6 @@
     <ClCompile Include="Game\Common\UI\SelectList.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Stage\StarCondition.cpp" />
     <ClCompile Include="Game\Result\ResultScene.cpp" />
-    <ClCompile Include="Game\GamePlay\Logic\Tutorial\StartTutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
