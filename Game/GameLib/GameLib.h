@@ -137,3 +137,11 @@ std::wstring GetAbsolutePath(std::wstring relativePath);
 
 // 文字コード変換
 std::wstring utf8_to_wstring(const std::string& utf8);
+
+/// <summary>
+/// グラデーション関数
+/// </summary>
+/// <param name="colors">遷移する色</param>
+/// <param name="ratio">現在の割合</param>
+/// <returns>カラーコード</returns>
+int Gradation(std::vector<int> colors, float ratio);

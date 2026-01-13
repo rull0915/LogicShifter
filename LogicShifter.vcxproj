@@ -24,6 +24,7 @@
     <ProjectGuid>{7b19bd62-45ea-446b-a597-72e470527d9a}</ProjectGuid>
     <RootNamespace>LogicShifter</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ICMaker</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -138,7 +139,9 @@
     </CudaLink>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\GameSetting.h" />
     <ClInclude Include="Game\Common\Particles\BaseParticle.h" />
+    <ClInclude Include="Game\GameLib\Colors.h" />
     <ClInclude Include="Game\GamePlay\Logic\Tutorial\BaseTutorial.h" />
     <ClInclude Include="Game\Common\ThreadPool.h" />
     <ClInclude Include="Game\GamePlay\Logic\ConditionChecker\BaseChecker.h" />
@@ -218,8 +221,10 @@
     <ClInclude Include="Game\Common\UI\SelectList.h" />
     <ClInclude Include="Game\GamePlay\Logic\Stage\StarCondition.h" />
     <ClInclude Include="Game\Result\ResultScene.h" />
+    <ClInclude Include="Game\Common\UI\SlideBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\GameSetting.cpp" />
     <ClCompile Include="Game\Common\Particles\BaseParticle.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Tutorial\BaseTutorial.cpp" />
     <ClCompile Include="Game\Common\ThreadPool.cpp" />
@@ -290,6 +295,7 @@
     <ClCompile Include="Game\Common\UI\SelectList.cpp" />
     <ClCompile Include="Game\GamePlay\Logic\Stage\StarCondition.cpp" />
     <ClCompile Include="Game\Result\ResultScene.cpp" />
+    <ClCompile Include="Game\Common\UI\SlideBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

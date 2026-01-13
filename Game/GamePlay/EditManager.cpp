@@ -82,6 +82,23 @@ void EditManager::Update(float elapsedTime)
 	// セーブボタンが押されたら
 	if (m_saveButton.GetIsPressed())
 	{
+		// 全ての設定がされていなければ
+		if (!m_stageUi.IsCompleted())
+		{
+			SetMouseDispFlag(true);
+
+			MessageBox(
+				NULL,
+				(LPCWSTR)L"未設定の項目があります\n全て設定してください",
+				(LPCWSTR)L"Error",
+				MB_OK | MB_ICONWARNING
+			);
+
+			SetMouseDispFlag(false);
+
+			return;
+		}
+
 		// jsonの作成
 		json data;
 

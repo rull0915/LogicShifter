@@ -19,6 +19,9 @@ private:
 	// •p“x
 	float m_frequency;
 
+	// õ–½
+	float m_span;
+
 	// ƒ‰ƒ“ƒ_ƒ€‚Ì•
 	std::pair<Vector2D, Vector2D> m_randomRange;
 
@@ -34,9 +37,9 @@ private:
 public:
 	BaseParticle();
 
-	void Initialize(ShapeType type, float freq, std::pair<Vector2D, Vector2D> posRange, std::pair<Vector2D, Vector2D> sizeRange);
+	void Initialize(ShapeType type, float freq, std::pair<Vector2D, Vector2D> posRange, std::pair<Vector2D, Vector2D> sizeRange, float span = 5);
 
-	void Update(float elapsedTime);
+	void Update(float elapsedTime, std::pair<int, int>velRange = {50, 150});
 
 	void Render(int color);
 

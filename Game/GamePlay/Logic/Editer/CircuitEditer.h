@@ -52,6 +52,9 @@ private:
 	// UI
 	SelectUI m_selectUI;
 
+	// Œo‰ßŽžŠÔ
+	float m_sumElapsedTime;
+
 public:
 	CircuitEditer(std::vector<PackedCell>& stage, Vector2D& cameraPos, float& cameraScale);
 

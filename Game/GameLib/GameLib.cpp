@@ -85,3 +85,61 @@ std::wstring utf8_to_wstring(const std::string& utf8)
 	return result;
 }
 
+int Gradation(std::vector<int> colors, float ratio)
+{
+	// サイズが0の場合
+	// 0を返す
+	if (colors.size() == 0) return 0;
+
+	// サイズが1の場合
+	// その色を返す
+	if (colors.size() == 1) return colors[0];
+
+	// サイズが2以上の場合
+	// 現在がどの位置にいるか調べる
+	int currentNum = 0;
+	int num = colors.size();
+
+	if (colors.size() == 2) currentNum = 0;
+	else 
+	{
+		for (int i = num - 2; i >= 0; i--)
+		{
+			// 基準を決める
+			float st = (1.0f / (num - 1)) * i;
+
+			// 割合が基準以上なら
+			if (ratio >= st) 
+			{
+				//現在の位置を確定
+				currentNum = i;
+
+				break;
+			}
+		}
+	}
+
+	// 色を決める
+	auto getR = [](int color) { return color >> 16 & 0xFF; };
+	auto getG = [](int color) { return color >> 8 & 0xFF; };
+	auto getB = [](int color) { return color >> 0 & 0xFF; };
+
+	float cRatio = (ratio - ((1.0f / (num - 1)) * currentNum)) * (num - 1);
+
+	// 変化前の色
+	int bR = getR(colors[currentNum]);
+	int bG = getG(colors[currentNum]);
+	int bB = getB(colors[currentNum]);
+
+	// 変化後の色
+	int aR = getR(colors[currentNum + 1]);
+	int aG = getG(colors[currentNum + 1]);
+	int aB = getB(colors[currentNum + 1]);
+
+	int r = bR + (aR - bR) * cRatio;
+	int g = bG + (aG - bG) * cRatio;
+	int b = bB + (aB - bB) * cRatio;
+
+	return GetColor(r, g, b);
+}
+

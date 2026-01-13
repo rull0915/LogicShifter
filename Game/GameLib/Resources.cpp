@@ -74,5 +74,7 @@ void LoadGraphics()
 	m_ghIcons["FreeMode"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/FreeMode.png").c_str());
 	m_ghIcons["EditMode"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/EditMode.png").c_str());
 
+	m_ghIcons["Title"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/TitleLogo.png").c_str());
+
 	m_ghMouseCursors = LoadGraph(GetAbsolutePath(L"Resources/Textures/MouseCursors.png").c_str());
 }

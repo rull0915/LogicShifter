@@ -63,7 +63,7 @@ void ModeSelectScene::Update(float elapsedTime)
 	m_titleButton.Update();
 	m_exitButton.Update();
 
-	if(m_titleButton.GetIsPressed())
+	if (m_titleButton.GetIsPressed())
 	{
 		// タイトルに移行
 		ChangeScene("Title",

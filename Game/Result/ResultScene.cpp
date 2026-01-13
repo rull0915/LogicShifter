@@ -10,6 +10,7 @@ ResultScene::ResultScene(Game* pGame)
 	, m_thirdConditionStr{}
 	, m_isSatisfied{ false, false, false }
 	, m_thirdConditionID{ -1 }
+	, m_particles{}
 {
 }
 
@@ -37,6 +38,17 @@ void ResultScene::Initialize()
 
 	Sound::Play(Sound::Type::Clear, DX_PLAYTYPE_BACK);
 	Sound::FadeIn(Sound::Type::GamePlayBgm, 0.5f);
+
+	// ÉpÅ[ÉeÉBÉNÉãÇÃèâä˙âª
+	m_particles[0].Initialize(ShapeType::Circle, 0.5f,
+		std::make_pair(Vector2D{ Screen::WIDTH * (13.0f / 36) - 60, Screen::HEIGHT * (3.0f / 8) }, Vector2D{ Screen::WIDTH * (13.0f / 36) + 60, Screen::HEIGHT * (3.0f / 8) }),
+		std::make_pair(Vector2D{ 5, 5 }, Vector2D{ 7, 7 }), 1.5f);
+	m_particles[1].Initialize(ShapeType::Circle, 0.5f,
+		std::make_pair(Vector2D{ Screen::WIDTH * (18.0f / 36) - 60, Screen::HEIGHT * (3.0f / 8) }, Vector2D{ Screen::WIDTH * (18.0f / 36) + 60, Screen::HEIGHT * (3.0f / 8) }),
+		std::make_pair(Vector2D{ 5, 5 }, Vector2D{ 7, 7 }), 1.5f);
+	m_particles[2].Initialize(ShapeType::Circle, 0.5f,
+		std::make_pair(Vector2D{ Screen::WIDTH * (23.0f / 36) - 60, Screen::HEIGHT * (3.0f / 8) }, Vector2D{ Screen::WIDTH * (23.0f / 36) + 60, Screen::HEIGHT * (3.0f / 8) }),
+		std::make_pair(Vector2D{ 5, 5 }, Vector2D{ 7, 7 }), 1.5f);
 }
 
 void ResultScene::Update(float elapsedTime)
@@ -49,6 +61,8 @@ void ResultScene::Update(float elapsedTime)
 
 		Sound::Play(Sound::Type::Decide, DX_PLAYTYPE_BACK);
 	}
+
+	for (int i = 0; i < 3; i++) m_particles[i].Update(elapsedTime, {30, 50});
 }
 
 void ResultScene::Render()
@@ -66,6 +80,8 @@ void ResultScene::Render()
 	// êØÇÃï`âÊ
 	// îwåi
 	DrawBox(Screen::WIDTH * (2.0f / 8), Screen::HEIGHT * (2.0f / 8), Screen::WIDTH * (6.0f / 8), Screen::HEIGHT * (4.0f / 8), 0x222A35, true);
+
+	for (int i = 0; i < 3; i++) if(m_isSatisfied[i]) m_particles[i].Render(0x80734C);
 
 	// êØ
 	MyDrawStar({ Screen::WIDTH * (13.0f / 36), Screen::HEIGHT * (3.0f / 8) }, Screen::HEIGHT / 12, Screen::HEIGHT / 30, (m_isSatisfied[0] ? 0xFFE699 : 0x595959), true);

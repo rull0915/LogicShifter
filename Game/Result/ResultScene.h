@@ -1,5 +1,6 @@
 #pragma once
 #include "../Game/Common/Scene.h"
+#include "../Game/Common/Particles/BaseParticle.h"
 
 class Game;
 
@@ -27,6 +28,9 @@ private:
 
 	// 満たしていたかどうか
 	bool m_isSatisfied[3];
+
+	// パーティクル
+	BaseParticle m_particles[3];
 
 	// 関数宣言 -------------------------------
 public:

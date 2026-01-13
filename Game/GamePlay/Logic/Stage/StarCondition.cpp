@@ -169,6 +169,22 @@ void StarCondition::SaveToJson(json& name)
 	name["Conditions"].push_back(third);
 }
 
+bool StarCondition::IsCompleted()
+{
+	bool con1 = m_secondString != L"";
+
+	const std::wstring& thirdCondition = m_selectList.GetChoiced();
+	bool con2 = thirdCondition != L"";
+
+	if (thirdCondition == THIRD_CONDITIONS[0])		con2 = m_cd_cell.GetChoiced() != L"";
+	else if (thirdCondition == THIRD_CONDITIONS[1]) con2 = m_cd_st_second != L"";
+	else if (thirdCondition == THIRD_CONDITIONS[2]) con2 = m_cd_st_count != L"";
+	else if (thirdCondition == THIRD_CONDITIONS[3]) con2 = m_cd_st_height != L"";
+	else if (thirdCondition == THIRD_CONDITIONS[4]) con2 = m_cd_st_width != L"";
+
+	return con1 && con2;
+}
+
 void StarCondition::PosUpdate()
 {
 	m_selectList.SetPos(m_pos + Vector2D{ 0, SIZE.y / 3 });

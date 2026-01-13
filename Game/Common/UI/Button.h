@@ -33,7 +33,9 @@ public:
 	void Finalize();
 
 	bool GetIsPressed() const { return m_isPressed; }
+	bool GetIsPressedOnMe() const { return m_pressedOnMe; }
 	bool GetIsPressedRight() const { return m_isPressedRight; }
+	bool GetIsPressedOnMeRight() const { return m_pressedOnMeRight; }
 
 	void ChengePos(Vector2D pos) { m_position = pos; }
 	void ChengeColor(int color) { m_color = color; }

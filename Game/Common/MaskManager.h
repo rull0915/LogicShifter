@@ -1,5 +1,10 @@
 #pragma once
 
+/* 使用方法
+* 
+* MaskManager::
+* */
+
 // シングルトン
 // マスク管理クラス
 class MaskManager

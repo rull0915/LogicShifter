@@ -63,6 +63,9 @@ public:
 	// jsonに保存する関数
 	void SaveToJson(json& json);
 
+	// 全ての項目が設定されたかを返す関数
+	bool IsCompleted();
+
 private:
 	// 各要素の位置の更新
 	void PosUpdate();

@@ -1,7 +1,6 @@
 #pragma once
 #include "../Game/Common/Scene.h"
-#include "../Game/Common/UI/SelectList.h"
-#include "../Game/GamePlay/Logic/Stage/StarCondition.h"
+#include "../Game/Common/UI/Button.h"
 
 class Game;
 

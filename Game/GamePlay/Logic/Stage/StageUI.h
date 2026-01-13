@@ -85,6 +85,8 @@ public:
 	bool PointIsOnMe(Vector2D point);
 
 	void Save(json& data);
+
+	bool IsCompleted();
 private:
 
 	void StateUpdate(float);

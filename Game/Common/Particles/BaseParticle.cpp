@@ -8,20 +8,22 @@ BaseParticle::BaseParticle()
 	, m_randomRange{ std::make_pair<Vector2D, Vector2D>({0, 0}, {0, 0}) }
 	, m_sizeRange{ std::make_pair<Vector2D, Vector2D>({0, 0}, {0, 0}) }
 	, m_isActive{ false }
+	, m_span{ 0 }
 {
 }
 
-void BaseParticle::Initialize(ShapeType type, float freq, std::pair<Vector2D, Vector2D> randomRange, std::pair<Vector2D, Vector2D> sizeRange)
+void BaseParticle::Initialize(ShapeType type, float freq, std::pair<Vector2D, Vector2D> randomRange, std::pair<Vector2D, Vector2D> sizeRange, float span)
 {
 	m_shapeType = type;
 	m_frequency = freq;
 	m_randomRange = randomRange;
 	m_sizeRange = sizeRange;
+	m_span = span;
 
 	m_isActive = true;
 }
 
-void BaseParticle::Update(float elapsedTime)
+void BaseParticle::Update(float elapsedTime, std::pair<int, int>velRange)
 {
 	static float sum = 0;
 	sum += elapsedTime;
@@ -35,7 +37,7 @@ void BaseParticle::Update(float elapsedTime)
 
 		Vector2D vel =
 		{
-			0, -50 - GetRand(100)
+			0, -velRange.first - GetRand((velRange.second - velRange.first))
 		};
 
 		Vector2D size =
@@ -45,7 +47,7 @@ void BaseParticle::Update(float elapsedTime)
 		}; 
 
 		// パーティクルの生成
-		m_particles.push_back(OnceParticle(m_shapeType, pos, vel, size, 5));
+		m_particles.push_back(OnceParticle(m_shapeType, pos, vel, size, m_span));
 
 		// リセット
 		sum = 0;

@@ -7,17 +7,20 @@ Pause::Pause(Game* pGame)
 	: Scene( pGame->GetSceneManager() )
  	, m_nowState{ State::None }
 	, m_isActive{ false }
-	, m_resume		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x3762AF }
-	, m_retry		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x3762AF }
-	, m_stageSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x3762AF }
-	, m_modeSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x3762AF }
+	, m_resume		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x3762AF }
+	, m_retry		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x3762AF }
+	, m_stageSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x3762AF }
+	, m_modeSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x3762AF }
+	, m_option		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH * (5.0f / 19), Screen::HEIGHT / 13}, false, 0x3762AF }
 
-	, m_invalidResume		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x595959 }
-	, m_invalidRetry		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x595959 }
-	, m_invalidStageSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x595959 }
-	, m_invalidModeSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 12 }, false, 0x595959 }
+	, m_invalidResume		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x595959 }
+	, m_invalidRetry		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x595959 }
+	, m_invalidStageSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x595959 }
+	, m_invalidModeSelect	{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x595959 }
+	, m_invalidOption		{ Vector2D{Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8)}, Vector2D{ Screen::WIDTH * (5.0f / 19), Screen::HEIGHT / 13}, false, 0x595959}
 
 	, m_cursorPos{ 0 }
+	, m_setting{}
 {
 }
 
@@ -37,33 +40,40 @@ void Pause::Initialize(State state)
 	m_invalidStageSelect.Initialize();
 	m_invalidModeSelect.Initialize();
 
+	m_setting.Initialize();
+
 	switch (m_nowState)
 	{
 	case Pause::State::StageMode:
 
-		m_resume.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (3.0f / 8) });
-		m_retry.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (4.0f / 8) });
-		m_stageSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (5.0f / 8) });
-		m_modeSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (6.0f / 8) });
+		m_resume.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (20.0f / 54) });
+		m_retry.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (25.0f / 54) });
+		m_stageSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (30.0f / 54) });
+		m_modeSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (35.0f / 54) });
+		m_option.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (42.0f / 54) });
 
-		m_invalidResume.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (3.0f / 8) });
-		m_invalidRetry.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (4.0f / 8) });
-		m_invalidStageSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (5.0f / 8) });
-		m_invalidModeSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (6.0f / 8) });
+		m_invalidResume.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (20.0f / 54) });
+		m_invalidRetry.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (25.0f / 54) });
+		m_invalidStageSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (30.0f / 54) });
+		m_invalidModeSelect.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (35.0f / 54) });
+		m_invalidOption.ChengePos(Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT * (42.0f / 54) });
 
 		break;
 	case Pause::State::OtherMode:
 	case Pause::State::StageSelect:
+	case Pause::State::Others:
 
-		m_resume.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8) });
-		m_retry.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8) });
-		m_stageSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8) });
-		m_modeSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8) });
+		m_resume.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (20.0f / 54) });
+		m_retry.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (25.0f / 54) });
+		m_stageSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (30.0f / 54) });
+		m_modeSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (35.0f / 54) });
+		m_option.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (42.0f / 54) });
 
-		m_invalidResume.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 8) });
-		m_invalidRetry.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 8) });
-		m_invalidStageSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 8) });
-		m_invalidModeSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 8) });
+		m_invalidResume.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (20.0f / 54) });
+		m_invalidRetry.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (25.0f / 54) });
+		m_invalidStageSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (30.0f / 54) });
+		m_invalidModeSelect.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (35.0f / 54) });
+		m_invalidOption.ChengePos(Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (42.0f / 54) });
 
 		break;
 	default:
@@ -77,7 +87,19 @@ void Pause::Update(float elapsedTime)
 {
 	if (!m_isActive) return;
 
-	// 描画
+	// オプションボタンの更新
+	m_option.Update();
+
+	if(m_option.GetIsPressed())
+	{
+		m_setting.SetIsActive(true);
+	}
+
+	m_setting.Update();
+
+	if (m_setting.GetIsActive()) return;
+
+	// ボタンの更新
 	switch (m_nowState)
 	{
 	case Pause::State::StageMode:
@@ -98,6 +120,17 @@ void Pause::Update(float elapsedTime)
 		m_invalidRetry.Update();
 		m_invalidStageSelect.Update();
 		m_modeSelect.Update();
+
+		break;
+
+	case Pause::State::Others:
+
+		m_resume.Update();
+		m_invalidRetry.Update();
+		m_invalidStageSelect.Update();
+		m_invalidModeSelect.Update();
+
+		break;
 
 		break;
 	default:
@@ -158,6 +191,9 @@ void Pause::Render()
 		0x333333, true
 	);
 
+	m_option.Render();
+	MyDrawFormatStringToHandleToCenter(m_option.GetPos().x, m_option.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 22), L"Setting");
+
 	// 描画
 	switch (m_nowState)
 	{
@@ -180,6 +216,17 @@ void Pause::Render()
 		m_modeSelect.Render();
 
 		break;
+
+	case Pause::State::Others:
+
+		m_resume.Render();
+		m_invalidRetry.Render();
+		m_invalidStageSelect.Render();
+		m_invalidModeSelect.Render();
+
+		break;
+
+		break;
 	default:
 		break;
 	}
@@ -188,6 +235,8 @@ void Pause::Render()
 	MyDrawFormatStringToHandleToCenter(m_retry.GetPos().x, m_retry.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 24), L"Retry");
 	MyDrawFormatStringToHandleToCenter(m_stageSelect.GetPos().x, m_stageSelect.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 24), L"StageSelect");
 	MyDrawFormatStringToHandleToCenter(m_modeSelect.GetPos().x, m_modeSelect.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 24), L"ModeSelect");
+
+	m_setting.Render();
 }
 
 void Pause::Finalize()

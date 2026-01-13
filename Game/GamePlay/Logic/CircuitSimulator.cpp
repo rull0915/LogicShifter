@@ -54,8 +54,8 @@ bool CircuitSimulator::UpdateOnCPU()
 {
 	for(int i = 0; i < m_tasks.size(); i++)
 	{
-		int left = i * (STAGE_WIDTH / m_tasks.size()) - OFFSET_X;
-		int right = (i == m_tasks.size() - 1 ? OFFSET_X + 1 : (i + 1) * (STAGE_WIDTH / m_tasks.size()) - OFFSET_X);
+		int left = i * (STAGE_WIDTH / m_tasks.size());
+		int right = (i == m_tasks.size() - 1 ? STAGE_WIDTH : (i + 1) * (STAGE_WIDTH / m_tasks.size()));
 
 		// タスクを追加
 		m_tasks[i] = ThreadPool::GetInstance().AddTask(
@@ -64,7 +64,7 @@ bool CircuitSimulator::UpdateOnCPU()
 			{
 				ToNextCellsOnThread(minX, minY, maxX, maxY);
 			},
-			left, -OFFSET_Y, right, OFFSET_Y + 1
+			left, 0, right, STAGE_HEIGHT
 		);
 	}
 
@@ -79,7 +79,10 @@ bool CircuitSimulator::UpdateOnCPU()
 
 PackedCell CircuitSimulator::getCellSafe(std::vector<PackedCell>& cells, int x, int y)
 {
-	if (x < 0 || x >= STAGE_WIDTH || y < 0 || y >= STAGE_HEIGHT) return 0b00000000;
+	if (x < 0 || x >= STAGE_WIDTH || y < 0 || y >= STAGE_HEIGHT)
+	{
+		return 0b00000000;
+	}
 	return cells[y * STAGE_WIDTH + x];
 }
 
@@ -89,9 +92,9 @@ void CircuitSimulator::ToNextCellsOnThread(int minX, int minY, int maxX, int max
 	{
 		for(int j = minX; j < maxX; j++)
 		{
-			int index = GetIndex(j, i);
-			int x = j + OFFSET_X;
-			int y = i + OFFSET_Y;
+			int index = i * STAGE_WIDTH + j;
+			int x = j;
+			int y = i;
 
 			if (index >= m_cells.size() || index < 0) continue;
 
@@ -238,3 +241,104 @@ void CircuitSimulator::ToNextCellsOnThread(int minX, int minY, int maxX, int max
 		}
 	}
 }
+//
+//void CircuitSimulator::ToNextCellsOnThread(int minX, int minY, int maxX, int maxY)
+//{
+//	for (int i = minY; i < maxY; i++)
+//	{
+//		for (int j = minX; j < maxX; j++)
+//		{
+//			int index = i * STAGE_WIDTH + j;
+//			int x = j;
+//			int y = i;
+//
+//			if (index >= m_cells.size() || index < 0) continue;
+//
+//			// 信号
+//			bool aroundUp = false, aroundDown = false, aroundLeft = false, aroundRight = false;
+//
+//			PackedCell cNow = m_cells[index];
+//
+//			if (cNow == 0)
+//			{
+//				m_nextCells[index] = 0;
+//				continue;
+//			}
+//
+//			// 隣接セル
+//			PackedCell cUp = getCellSafe(m_cells, x, y - 1);
+//			PackedCell cDown = getCellSafe(m_cells, x, y + 1);
+//			PackedCell cLeft = getCellSafe(m_cells, x - 1, y);
+//			PackedCell cRight = getCellSafe(m_cells, x + 1, y);
+//
+//			// 変換後のセル
+//			PackedCell nC = cNow;
+//
+//			bool signal = false;
+//
+//			int type = (GetType(cNow) << 2) | (GetSubType(cNow));
+//
+//			switch (type)
+//			{
+//				// ワイヤー
+//			case 0b0101:
+//				// 明るいワイヤー
+//			case 0b0111:
+//				// アウトプット(ステージ用)
+//			case 0b0011:
+//				// クロス
+//			case 0b0110:
+//				// And
+//			case 0b1001:
+//				// Or
+//			case 0b1010:
+//				// アウトプット
+//			case 0b1101:
+//				aroundLeft = (GetLeftSignal(cRight));   // 右セルが左向き信号
+//				aroundRight = (GetRightSignal(cLeft));  // 左セルが右向き
+//				aroundDown = (GetUpSignal(cDown));     // 下セルが上向き
+//				aroundUp = (GetDownSignal(cUp));   // 上セルが下向き
+//
+//				// 信号を受け取るかどうか
+//				signal = aroundDown || aroundUp || aroundLeft || aroundRight;
+//
+//				// ループ防止処理
+//				SetUpSignal(nC, signal && !GetDownSignal(cUp));
+//				SetDownSignal(nC, signal && !GetUpSignal(cDown));
+//				SetRightSignal(nC, signal && !GetLeftSignal(cRight));
+//				SetLeftSignal(nC, signal && !GetRightSignal(cLeft));
+//
+//				break;
+//
+//				// Not
+//			case 0b1110:
+//
+//				aroundUp = (GetType(cUp) == TYPE_INPUT && GetDownSignal(cUp));
+//				aroundDown = (GetType(cDown) == TYPE_INPUT && GetUpSignal(cDown));
+//				aroundRight = (GetType(cRight) == TYPE_INPUT && GetLeftSignal(cRight));
+//				aroundLeft = (GetType(cLeft) == TYPE_INPUT && GetRightSignal(cLeft));
+//
+//				signal = !((aroundUp || aroundDown) || (aroundLeft || aroundRight));
+//
+//				// 信号チェック
+//				SetUpSignal(nC, signal && GetType(cUp) == TYPE_WIRE);
+//				SetDownSignal(nC, signal && GetType(cDown) == TYPE_WIRE);
+//				SetRightSignal(nC, signal && GetType(cRight) == TYPE_WIRE);
+//				SetLeftSignal(nC, signal && GetType(cLeft) == TYPE_WIRE);
+//
+//				break;
+//
+//			default:
+//				break;
+//			}
+//
+//			if (m_nextCells[index] != nC)
+//			{
+//				m_isSame = false;
+//			}
+//
+//			// コピー
+//			m_nextCells[index] = nC;
+//		}
+//	}
+//}

@@ -8,6 +8,7 @@ FreeManager::FreeManager()
 	, m_textBox{}
 	, m_nowElapsedTime{ 0 }
 	, m_playSpeed{ INT_MAX + 0.f }
+	, m_magnification{ 1 }
 {
 }
 
@@ -17,8 +18,8 @@ FreeManager::~FreeManager()
 
 void FreeManager::Initialize()
 {
-	STAGE_WIDTH = 300;
-	STAGE_HEIGHT = 300;
+	STAGE_WIDTH = 500;
+	STAGE_HEIGHT = 500;
 
 	OFFSET_X = STAGE_WIDTH / 2;
 	OFFSET_Y = STAGE_HEIGHT / 2;
@@ -41,6 +42,10 @@ void FreeManager::Initialize()
 		auto b = Button(button.second.first, BUTTON_SIZE, true, m_ghIcons[button.first]);
 		m_playButtons[button.first] = std::make_unique<Button>(std::move(b));
 	}
+
+	m_magnification = 1;
+
+	m_circuitSimulator.ResetGenerationNum();
 }
 
 void FreeManager::Update(float elapsedTime)
@@ -93,8 +98,20 @@ void FreeManager::Update(float elapsedTime)
 			}
 			else if (button.first == "PlayFast")
 			{
-				m_playSpeed = UPDATE_DISTANCE_FASTTEST;
-				m_circuitEditer.ChangeUIState(State::Closing);
+				if(m_playSpeed == UPDATE_DISTANCE_FASTTEST)
+				{
+					if(m_magnification < MAX_MAGNIFICATION)
+					{
+						m_magnification *= 2;
+					}
+				}
+				else
+				{
+					m_playSpeed = UPDATE_DISTANCE_FASTTEST;
+					m_circuitEditer.ChangeUIState(State::Closing);
+
+					m_magnification = 1;
+				}
 			}
 			else if (button.first == "Stop")m_playSpeed = INT_MAX + 0.f;
 			else if (button.first == "PlayOnce")
@@ -119,7 +136,7 @@ void FreeManager::Update(float elapsedTime)
 	{
 		if(m_playSpeed == UPDATE_DISTANCE_FASTTEST)
 		{
-			for(int i = 0; i < 10; i++) m_circuitSimulator.ToNextCells();
+			for(int i = 0; i < m_magnification; i++) m_circuitSimulator.ToNextCells();
 		}
 		else m_circuitSimulator.ToNextCells();
 
@@ -150,6 +167,16 @@ void FreeManager::Render()
 
 	// É{É^ÉìÇÃï`âÊ
 	for (auto& button : m_playButtons) button.second->Render();
+
+	// î{ó¶ÇÃï`âÊ
+	if(m_playSpeed == UPDATE_DISTANCE_FASTTEST)
+	{
+		std::wstring str = L"Å~" + std::to_wstring(m_magnification);
+		MyDrawFormatStringToHandleToCenter(m_playButtons["PlayFast"]->GetPos().x, m_playButtons["PlayFast"]->GetPos().y - 48, 0xffffff, GetFontHandle(24), str.c_str());
+	}
+
+	std::wstring genStr = std::to_wstring(m_circuitSimulator.GetGenerationNum()) + L"ê¢ë„";
+	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT - 48, 0xffffff, GetFontHandle(24), genStr.c_str());
 }
 
 void FreeManager::Finalize()

@@ -35,7 +35,7 @@ bool SaveCommand::Execute()
 		}
 	}
 
-	file << stage.dump(4);
+	file << stage.dump();
 
 	file.close();
 

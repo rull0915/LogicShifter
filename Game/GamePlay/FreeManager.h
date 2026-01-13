@@ -7,9 +7,17 @@
 
 class FreeManager : public ModeManager
 {
+	// 最大倍率
+	static constexpr int MAX_MAGNIFICATION =
+	#ifdef _DEBUG 
+		4;
+	#else 
+		64;
+	#endif
+
 	// 自動再生時の更新間隔
 	static constexpr float UPDATE_DISTANCE = 1.0f / 10;
-	static constexpr float UPDATE_DISTANCE_FAST = 1.0f / 30;
+	static constexpr float UPDATE_DISTANCE_FAST = 1.0f / 45;
 	static constexpr float UPDATE_DISTANCE_FASTTEST = 1.0f / 1000;
 
 	static constexpr Vector2D BUTTON_SIZE = { 50, 50 };
@@ -32,6 +40,8 @@ private:
 	TextBox m_textBox;
 
 	// スピード
+	int m_magnification;
+
 	float m_nowElapsedTime;
 	float m_playSpeed;
 

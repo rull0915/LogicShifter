@@ -187,6 +187,16 @@ void StageUI::Save(json& data)
 	data["Tutorial"] = (num - '0');
 }
 
+bool StageUI::IsCompleted()
+{
+	bool con1 = m_widthStr != L"";
+	bool con2 = m_heightStr != L"";
+	bool con3 = m_conditionString != L"";
+	bool con4 = m_starCondition.IsCompleted();
+
+	return (con1 && con2) && (con3 && con4);
+}
+
 void StageUI::StateUpdate(float elapsedTime)
 {
 	// ó‘Ô‚É‚æ‚è•ªŠò

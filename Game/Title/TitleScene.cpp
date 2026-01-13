@@ -37,7 +37,7 @@ void TitleScene::Update(float elapsedTime)
 	static float m_x = 0;
 	m_x += elapsedTime * (DX_PI_F / 2);
 
-	m_startButton.ChengePos({ Screen::WIDTH / 2, Screen::HEIGHT / 2 + 150 + 10 * sinf(m_x) });
+	m_startButton.ChengePos({ Screen::WIDTH / 2, Screen::HEIGHT * (5.0f / 6) + 10 * sinf(m_x) });
 
 	m_startButton.Update();
 
@@ -106,11 +106,13 @@ void TitleScene::Render()
 		DrawLine(0, i * size, Screen::WIDTH, i * size, (i % 5 == 0 ? 0x999999 : 0x555555));
 	}
 
-//	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT / 2 - 30, 0xffffff, GetFontHandle(64), TITLE);
-
 	m_startButton.Render();
 
 	MyDrawFormatStringToHandleToCenter(m_startButton.GetPos().x, m_startButton.GetPos().y, 0xffffff, GetFontHandle(Screen::HEIGHT / 20), L"START");
+
+	MaskManager::GetInstance().CancelMask();
+
+	DrawExtendGraph(Screen::WIDTH / 2 - 225, Screen::HEIGHT / 3 - 225, Screen::WIDTH / 2 + 225, Screen::HEIGHT / 3 + 225, m_ghIcons["Title"], true);
 }
 
 void TitleScene::Finalize()
@@ -159,15 +161,15 @@ void TitleScene::LoadTitleMap()
 
 	Vector2DInt pos;
 
-	for (auto info : stage["Stage"])
-	{
-		pos.x = info["PosX"];
-		pos.y = info["PosY"];
+	//for (auto info : stage["Stage"])
+	//{
+	//	pos.x = info["PosX"];
+	//	pos.y = info["PosY"];
 
-		m_backGround[pos.y + 5][pos.x + 14] = 0xCCCCCC;
+	//	m_backGround[pos.y + 5][pos.x + 14] = 0xCCCCCC;
 
-		DrawPixel(pos.x + 14, pos.y + 5, 0xCCCCCC);
-	}
+	//	DrawPixel(pos.x + 14, pos.y + 5, 0xCCCCCC);
+	//}
 
 	SetDrawScreen(DX_SCREEN_BACK);
 }

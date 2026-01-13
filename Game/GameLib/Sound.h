@@ -40,6 +40,7 @@ namespace Sound {
 		Put,
 		Delete,
 		Clear,
+		Crush,
 	};
 
 	extern std::map<Type, SoundInfo>m_soundInfo;
@@ -55,6 +56,8 @@ namespace Sound {
 	bool CheckPlay(Type type);
 
 	void ChangeVolumeAll();
+	void ChangeVolumeAllBGM(int val);
+	void ChangeVolumeAllSE(int val);
 	void ChangeVolume(Type type, int vol);
 
 	void FadeIn(Type type, float time);

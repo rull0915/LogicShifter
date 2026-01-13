@@ -18,6 +18,7 @@ namespace Sound
 		m_soundInfo[Type::Put].handle = LoadSoundMem(GetAbsolutePath(L"Resources/Sounds/カーソル移動9.mp3").c_str());
 		m_soundInfo[Type::Clear].handle = LoadSoundMem(GetAbsolutePath(L"Resources/Sounds/maou_se_onepoint23.mp3").c_str());
 		m_soundInfo[Type::Delete].handle = LoadSoundMem(GetAbsolutePath(L"Resources/Sounds/カーソル移動12.mp3").c_str());
+		m_soundInfo[Type::Crush].handle = LoadSoundMem(GetAbsolutePath(L"Resources/Sounds/maou_se_onepoint03.mp3").c_str());
 
 		for (auto& sound : m_soundInfo) sound.second.volume = 0xff;
 
@@ -95,6 +96,18 @@ namespace Sound
 				ChangeVolumeSoundMem(sound.second.volume * static_cast<float>(standardSeVolume) / 10, sound.second.handle);
 			}
 		}
+	}
+
+	void ChangeVolumeAllBGM(int val)
+	{
+		standardVolume = val;
+		ChangeVolumeAll();
+	}
+
+	void ChangeVolumeAllSE(int val)
+	{
+		standardSeVolume = val;
+		ChangeVolumeAll();
 	}
 
 	void ChangeVolume(Type type, int vol)

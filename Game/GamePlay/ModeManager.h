@@ -15,7 +15,7 @@ protected:
 
 	// スケールの限界値
 	float m_minScale = 0;
-	float m_maxScale = 30;
+	float m_maxScale = 50;
 
 	// ステージ
 	std::vector<PackedCell> m_cells;

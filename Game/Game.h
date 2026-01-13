@@ -36,6 +36,8 @@ private:
 
 	bool m_endFrag;
 
+	bool m_isPressed[5];
+
 public:
 	// ŠÖ”éŒ¾ ----------------------------------------
 

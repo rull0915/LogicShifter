@@ -13,6 +13,7 @@ CircuitEditer::CircuitEditer(std::vector<PackedCell>& stage, Vector2D& cameraPos
 	, m_isStart{ false }
 	, m_commandManager{}
 	, m_selectUI{ this }
+	, m_sumElapsedTime{ 0 }
 {
 }
 
@@ -25,25 +26,36 @@ void CircuitEditer::Initialize(PlayMode playMode)
 
 	m_stageReceiver.Initialize();
 	m_commandManager.Initialize();
+
+	m_sumElapsedTime = 0;
 }
 
 void CircuitEditer::Update(float elapsedTime)
 {
+	// 左クリックが押されたグリッドを取得
 	if (MouseDown() & MOUSE_INPUT_LEFT) m_downMousePos	= GetCellIndex(m_mousePos, m_cameraPos, 1.0f / m_cameraScale);
+	// 左クリックが離されたグリッドを取得
 	if (MouseUp() & MOUSE_INPUT_LEFT)	m_upMousePos	= GetCellIndex(m_mousePos, m_cameraPos, 1.0f / m_cameraScale);
 
+	// 現在のマウスのグリッドを取得
 	m_mouseIndex = GetCellIndex(m_mousePos, { static_cast<float>(m_cameraPos.x), static_cast<float>(m_cameraPos.y) }, 1.0f / m_cameraScale);
 
+	// UIの更新 
 	m_selectUI.Update(elapsedTime);
+
+	// 経過時間の加算
+	m_sumElapsedTime += elapsedTime;
 }
 
 void CircuitEditer::CellUpdate()
 {
 	if(MouseDown() & MOUSE_INPUT_LEFT || (!(MouseEnter() & MOUSE_INPUT_LEFT) && MouseDown() & MOUSE_INPUT_RIGHT))
 	{
+		// 次のcommandグループへ移行
 		m_commandManager.ToNextGroup();
 	}
 
+	// モードで分岐
 	switch (m_nowPutMode)
 	{
 	case CircuitEditer::PutMode::Put:
@@ -65,10 +77,23 @@ void CircuitEditer::CellUpdate()
 
 void CircuitEditer::Render()
 {
+	static int firstColor = 0xFF0000;
+	static int secondColor = 0x0000FF;
+
+	static std::vector<int> colors =
+	{
+		COLORS::GRAY75,
+		COLORS::STEEL_BLUE
+	};
+
+	float ratio = (sinf(m_sumElapsedTime * 2) + 1) / 2;
+
+	int color = Gradation(colors, ratio);
+
 	switch (m_nowPutMode)
 	{
 	case CircuitEditer::PutMode::Put:
-		RangeRender(m_mouseIndex - m_stageReceiver.GetCursorSize() + Vector2DInt{1, 1}, m_mouseIndex, m_cameraPos, 1.0f / m_cameraScale, 0xAAAAFF);
+		RangeRender(m_mouseIndex - m_stageReceiver.GetCursorSize() + Vector2DInt{1, 1}, m_mouseIndex, m_cameraPos, 1.0f / m_cameraScale, color);
 		break;
 	case CircuitEditer::PutMode::Copy:
 		if (m_isStart) RangeRender(m_downMousePos, m_mouseIndex, m_cameraPos, 1.0f / m_cameraScale, 0xFFAAAA);

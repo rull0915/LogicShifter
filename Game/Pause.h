@@ -2,6 +2,8 @@
 #include "Common/UI/Button.h"
 #include "../Game/Common/Scene.h"
 
+#include "GameSetting.h"
+
 class Game;
 
 // シングルトンのポーズクラス
@@ -15,6 +17,7 @@ public:
 		StageMode,
 		OtherMode,
 		StageSelect,
+		Others,
 	};
 
 	// ----- 変数宣言 ----- //
@@ -33,6 +36,8 @@ private:
 
 	Button m_modeSelect;
 
+	Button m_option;
+
 	// --- 無効ボタン --- //
 	Button m_invalidResume;
 
@@ -42,8 +47,13 @@ private:
 
 	Button m_invalidModeSelect;
 
+	Button m_invalidOption;
+
 	// カーソル位置
 	float m_cursorPos;
+
+	// 設定
+	GameSetting m_setting;
 
 	// ----- 関数宣言 ----- //
 public:
@@ -60,6 +70,7 @@ public:
 
 	// アクティブフラグを返す関数
 	bool GetIsActive() const { return m_isActive; }
+	void SetIsActive(bool isActive) { m_isActive = isActive; }
 
 private:
 	void DrawStageInfo();

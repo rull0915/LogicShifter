@@ -7,6 +7,7 @@ Game::Game()
 	, m_pause{ this }
 	, m_pauseButton{ Vector2D{ 100, Screen::HEIGHT - 50 }, Vector2D{ 150, 50 }, false, 0xBBBBBB, true}
 	, m_endFrag{ false }
+	, m_isPressed{}
 {
 	// äGÇÃì«Ç›çûÇ›
 	LoadGraphics();
@@ -15,6 +16,10 @@ Game::Game()
 	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_11, KEY_INPUT_RETURN);
 	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_12, KEY_INPUT_R);
 	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_13, KEY_INPUT_ESCAPE);
+	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_14, KEY_INPUT_C);
+	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_15, KEY_INPUT_U);
+	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_16, KEY_INPUT_S);
+	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_17, KEY_INPUT_H);
 }
 
 Game::~Game()
@@ -50,21 +55,35 @@ void Game::Update(float elapsedTime)
 
 	Sound::Update(elapsedTime);
 
-	if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay") m_pauseButton.Update();
+//	if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay")
+	{
+		m_pauseButton.Update();
+	}
 
 	if(m_pauseButton.GetIsPressed()) 
 	{
-		if(m_sceneManager.GetSceneName() == "Select")
+		if(m_pause.GetIsActive())
 		{
-			m_pause.Initialize(Pause::State::StageSelect);
+			m_pause.SetIsActive(false);
 		}
-		if (m_sceneManager.GetSceneName() == "GamePlay" && m_playMode == PlayMode::Stage)
+		else 
 		{
-			m_pause.Initialize(Pause::State::StageMode);
-		}
-		if (m_sceneManager.GetSceneName() == "GamePlay" && m_playMode != PlayMode::Stage)
-		{
-			m_pause.Initialize(Pause::State::OtherMode);
+			if (m_sceneManager.GetSceneName() == "Select")
+			{
+				m_pause.Initialize(Pause::State::StageSelect);
+			}
+			else if (m_sceneManager.GetSceneName() == "GamePlay" && m_playMode == PlayMode::Stage)
+			{
+				m_pause.Initialize(Pause::State::StageMode);
+			}
+			else if (m_sceneManager.GetSceneName() == "GamePlay" && m_playMode != PlayMode::Stage)
+			{
+				m_pause.Initialize(Pause::State::OtherMode);
+			}
+			else
+			{
+				m_pause.Initialize(Pause::State::Others);
+			}
 		}
 	}
 
@@ -72,6 +91,20 @@ void Game::Update(float elapsedTime)
 	if (!m_pause.GetIsActive()) m_sceneManager.Update(elapsedTime);
 
 	m_pause.Update(elapsedTime);
+
+	// âBÇµÉRÉ}ÉìÉh
+	if(GetKeyTrigger() & PAD_INPUT_14) m_isPressed[0] = true;
+	if(GetKeyTrigger() & PAD_INPUT_12) m_isPressed[1] = true;
+	if(GetKeyTrigger() & PAD_INPUT_15) m_isPressed[2] = true;
+	if(GetKeyTrigger() & PAD_INPUT_16) m_isPressed[3] = true;
+	if(GetKeyTrigger() & PAD_INPUT_17) m_isPressed[4] = true;
+
+	if((m_isPressed[0] && (m_isPressed[1] && m_isPressed[2])) && (m_isPressed[3] && m_isPressed[4]))
+	{
+		Sound::Play(Sound::Type::Crush, DX_PLAYTYPE_BACK);
+
+		for (bool& t : m_isPressed) t = false;
+	}
 }
 
 void Game::Render()
@@ -81,7 +114,7 @@ void Game::Render()
 
 	m_pause.Render();
 
-	if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay")
+	//if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay")
 	{
 		m_pauseButton.Render();
 
