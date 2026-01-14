@@ -95,7 +95,7 @@ void Pause::Update(float elapsedTime)
 		m_setting.SetIsActive(true);
 	}
 
-	m_setting.Update();
+	m_setting.Update(elapsedTime);
 
 	if (m_setting.GetIsActive()) return;
 

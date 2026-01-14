@@ -29,6 +29,8 @@ int GetFontHandle(int size, int tick)
 // フォントロード関数
 void LoadFonts()
 {
+	// フォントのロード
+	AddFontResourceExW(GetAbsolutePath(L"Resources/Fonts/Makinas-4-Flat.otf").c_str(), FR_PRIVATE, NULL);
 }
 
 // フォントハンドル削除関数
@@ -70,7 +72,7 @@ void LoadGraphics()
 	m_ghIcons["ArrowLU"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/Icons/ArrowLUIcon.png").c_str());
 	m_ghIcons["ArrowRU"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/Icons/ArrowRUIcon.png").c_str());
 
-	m_ghIcons["StageMode"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/StageMode.png").c_str());
+	m_ghIcons["StageMode"] =	LoadGraph(GetAbsolutePath(L"Resources/Textures/StageMode.png").c_str());
 	m_ghIcons["FreeMode"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/FreeMode.png").c_str());
 	m_ghIcons["EditMode"] =		LoadGraph(GetAbsolutePath(L"Resources/Textures/EditMode.png").c_str());
 

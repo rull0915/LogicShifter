@@ -1,5 +1,7 @@
 #include "DxLib.h"
 #include "Game/Game.h"
+#include "resource.h"
+#include "../Game/Common/ThreadPool.h"
 
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
@@ -16,7 +18,10 @@ int WINAPI WinMain(
     SetGraphMode(Screen::WIDTH, Screen::HEIGHT, 32);
 
     // ウインドウのタイトルを変更する
-    SetMainWindowText(L"CircuitMaker");
+    SetMainWindowText(L"ICMaker");
+
+    // 
+    SetWindowIconID(IDI_ICON1);        // ウインドウアイコンの設定
 
     // ウインドウモードへ変更
     ChangeWindowMode(TRUE);
@@ -31,11 +36,21 @@ int WINAPI WinMain(
     // 乱数の種の生成
     SRand(GetNowCount());
 
-    // フォントのロード
-    AddFontResourceExW(GetAbsolutePath(L"Resources/Fonts/Makinas-4-Flat.otf").c_str(), FR_PRIVATE, NULL);
-
     // マウス非表示
     SetMouseDispFlag(false);
+
+    // リソースの読み込み
+    {
+        // リソースの読み込みをタスクに追加
+        auto taskA = ThreadPool::GetInstance().AddTask(Sound::Load);
+        auto taskB = ThreadPool::GetInstance().AddTask(LoadGraphics);
+        auto taskC = ThreadPool::GetInstance().AddTask(LoadFonts);
+
+        // 終了待ち
+        taskA.get();
+        taskB.get();
+        taskC.get();
+    }
 
     // ゲームの初期化
     Game game;

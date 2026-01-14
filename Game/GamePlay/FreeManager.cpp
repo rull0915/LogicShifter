@@ -175,7 +175,7 @@ void FreeManager::Render()
 		MyDrawFormatStringToHandleToCenter(m_playButtons["PlayFast"]->GetPos().x, m_playButtons["PlayFast"]->GetPos().y - 48, 0xffffff, GetFontHandle(24), str.c_str());
 	}
 
-	std::wstring genStr = std::to_wstring(m_circuitSimulator.GetGenerationNum()) + L"ê¢ë„";
+	std::wstring genStr = std::to_wstring(m_circuitSimulator.GetGenerationNum()) + L"âÒçXêV";
 	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT - 48, 0xffffff, GetFontHandle(24), genStr.c_str());
 }
 

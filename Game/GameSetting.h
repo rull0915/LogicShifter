@@ -14,8 +14,17 @@ private:
 	// SE設定バー
 	SlideBar m_seBar;
 
+	// マウス感度設定バー
+	SlideBar m_sensitivityBar;
+
 	// アクティブフラグ
 	bool m_isActive;
+
+	// フルスクリーンフラグ
+	bool m_isFullScreen;
+
+	// 設定スイッチ
+	Switch m_settingSwitch;
 
 	// 終了ボタン
 	Button m_finishButton;
@@ -26,7 +35,7 @@ public:
 
 	void Initialize();
 
-	void Update();
+	void Update(float elapsedTime);
 
 	void Render();
 

@@ -222,6 +222,7 @@
     <ClInclude Include="Game\GamePlay\Logic\Stage\StarCondition.h" />
     <ClInclude Include="Game\Result\ResultScene.h" />
     <ClInclude Include="Game\Common\UI\SlideBar.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\GameSetting.cpp" />
@@ -300,6 +301,12 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ICMaker.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="x64\Release\Resources\Textures\TitleLogo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,7 +20,11 @@ extern Vector2DInt m_oldMousePos;
 // マウスの描画モード
 extern MouseMode m_mouseDrawMode;
 
+// マウスのホイールの移動量
 extern float mouseWheelRot;
+
+// マウスの感度
+extern float m_mouseSensitivity;
 
 extern void MouseUpdate();
 extern void MouseRender();

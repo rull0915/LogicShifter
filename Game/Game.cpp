@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../Game/Common/ThreadPool.h"
 
 Game::Game()
 	: m_key{}, m_oldKey{}
@@ -9,9 +10,6 @@ Game::Game()
 	, m_endFrag{ false }
 	, m_isPressed{}
 {
-	// 絵の読み込み
-	LoadGraphics();
-
 	// キーの追加
 	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_11, KEY_INPUT_RETURN);
 	SetJoypadInputToKeyInput(DX_INPUT_PAD1, PAD_INPUT_12, KEY_INPUT_R);
@@ -37,10 +35,6 @@ void Game::Initialize()
 
 	// 開始時のシーンをタイトルに設定
 	m_sceneManager.SetStartScene("Title");
-
-	m_pause.Initialize();
-
-	Sound::Load();
 }
 
 void Game::Update(float elapsedTime)
@@ -55,10 +49,7 @@ void Game::Update(float elapsedTime)
 
 	Sound::Update(elapsedTime);
 
-//	if (m_sceneManager.GetSceneName() == "Select" || m_sceneManager.GetSceneName() == "GamePlay")
-	{
-		m_pauseButton.Update();
-	}
+	m_pauseButton.Update();
 
 	if(m_pauseButton.GetIsPressed()) 
 	{
