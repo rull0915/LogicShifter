@@ -51,11 +51,11 @@ namespace Sound
 
 				if (info.second.mode == 1) 
 				{
-					ChangeVolume(info.first, ratio * 0xff);
+					ChangeVolume(info.first, static_cast<int>(ratio * 0xff));
 				}
 				if (info.second.mode == 2)
 				{
-					ChangeVolume(info.first, (1 - ratio) * 0xff);
+					ChangeVolume(info.first, static_cast<int>((1 - ratio) * 0xff));
 				}
 
 				// 1‚ð’´‚¦‚½‚ç
@@ -89,11 +89,11 @@ namespace Sound
 		{
 			if (static_cast<int>(sound.first) < static_cast<int>(Type::BgmCount))
 			{
-				ChangeVolumeSoundMem(sound.second.volume * static_cast<float>(standardVolume) / 10, sound.second.handle);
+				ChangeVolumeSoundMem(static_cast<int>(sound.second.volume * static_cast<float>(standardVolume) / 10), sound.second.handle);
 			}
 			else
 			{
-				ChangeVolumeSoundMem(sound.second.volume * static_cast<float>(standardSeVolume) / 10, sound.second.handle);
+				ChangeVolumeSoundMem(static_cast<int>(sound.second.volume * static_cast<float>(standardSeVolume) / 10), sound.second.handle);
 			}
 		}
 	}

@@ -42,21 +42,21 @@ void Gauge::Render()
 {
 	MaskManager::GetInstance().StartDrawMask();
 	
-	MyDrawRoundBox((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
+	MyDrawRoundBoxAA((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
 
 	MaskManager::GetInstance().FinishDrawMask();
 
 	MaskManager::GetInstance().SetMask(true);
 
-	MyDrawRoundBox((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
+	MyDrawRoundBoxAA((m_position - m_size / 2), (m_position + m_size / 2), min(m_size.x, m_size.y) / 4, m_backColor, true);
 
 	switch (m_mode)
 	{
 	case GaugeMode::Left:
-		DrawBox(m_position.x + m_size.x / 2 - m_ratio * m_size.x, m_position.y - m_size.y / 2 , m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_barColor, true);
+		DrawBoxAA(m_position.x + m_size.x / 2 - m_ratio * m_size.x, m_position.y - m_size.y / 2 , m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_barColor, true);
 		break;
 	case GaugeMode::Right:
-		DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x - m_size.x / 2 + m_ratio * m_size.x, m_position.y + m_size.y / 2, m_barColor, true);
+		DrawBoxAA(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x - m_size.x / 2 + m_ratio * m_size.x, m_position.y + m_size.y / 2, m_barColor, true);
 		break;
 	default:
 		break;

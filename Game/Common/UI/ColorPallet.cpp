@@ -6,8 +6,8 @@ ColorPallet::ColorPallet()
 	, m_v{ 0 }
 	, m_changeColor{ nullptr }
 	, m_isActive{ false }
-	, m_checkButton{ m_position + PUT_POS["CHECK_BUTTON"], {SIZE.x / 7, SIZE.x / 7}, true, m_ghIcons["Check"]}
-	, m_cancelButton{ m_position + PUT_POS["CANCEL_BUTTON"], {SIZE.x / 7, SIZE.x / 7}, true, m_ghIcons["Cancel"]}
+	, m_checkButton{ m_position + PUT_POS["CHECK_BUTTON"], ToVector2DFloat({SIZE.x / 7, SIZE.x / 7}), true, m_ghIcons["Check"]}
+	, m_cancelButton{ m_position + PUT_POS["CANCEL_BUTTON"], ToVector2DFloat({SIZE.x / 7, SIZE.x / 7}), true, m_ghIcons["Cancel"]}
 	, m_startColor{ 0 }
 {
 	m_screenSV = MakeScreen(16, 16, true);
@@ -66,7 +66,7 @@ void ColorPallet::Update()
 			(m_mousePos.x < m_position.x + PUT_POS["COLOR_RIGHTDOWN"].x && m_mousePos.y < m_position.y + PUT_POS["COLOR_RIGHTDOWN"].y))
 		{
 			// êFëäÇÃçXêV
-			m_h = (m_mousePos.y - (m_position.y + PUT_POS["COLOR_LEFTUP"].y)) / (PUT_POS["COLOR_RIGHTDOWN"].y - PUT_POS["COLOR_LEFTUP"].y) * 360;
+			m_h = static_cast<int>((m_mousePos.y - (m_position.y + PUT_POS["COLOR_LEFTUP"].y)) / (PUT_POS["COLOR_RIGHTDOWN"].y - PUT_POS["COLOR_LEFTUP"].y) * 360.0f);
 		}
 	}
 
@@ -125,38 +125,38 @@ void ColorPallet::Render()
 
 	// âÊñ Ç÷ÇÃï`âÊ
 	// ògÇÃï`âÊ
-	DrawBox(m_position.x, m_position.y, m_position.x + SIZE.x, m_position.y + SIZE.y, 0x333233, true);
+	DrawBoxAA(m_position.x, m_position.y, m_position.x + SIZE.x, m_position.y + SIZE.y, 0x333233, true);
 
 	// É^ÉCÉgÉãÇÃï`âÊ
 //	DrawFormatStringToHandle(m_position.x + (SIZE.x * (1.f / 16)), m_position.y + SIZE.y * (1.f / 80), 0xffffff, GetFontHandle(SIZE.y / 10), L"ChooseColor");
 
 	// ògÇÃï`âÊ
-	DrawBox(m_position.x, m_position.y + (SIZE.y * (3.0f / 32)), m_position.x + SIZE.x, m_position.y + SIZE.y, 0x474747, true);
+	DrawBoxAA(m_position.x, m_position.y + (SIZE.y * (3.0f / 32)), m_position.x + SIZE.x, m_position.y + SIZE.y, 0x474747, true);
 
 	// ç ìx ñæìxÇÃï`âÊ
-	DrawExtendGraph(m_position.x + PUT_POS["SQUARE_LEFTUP"].x, m_position.y + PUT_POS["SQUARE_LEFTUP"].y,
+	DrawExtendGraphF(m_position.x + PUT_POS["SQUARE_LEFTUP"].x, m_position.y + PUT_POS["SQUARE_LEFTUP"].y,
 		m_position.x + PUT_POS["SQUARE_RIGHTDOWN"].x, m_position.y + PUT_POS["SQUARE_RIGHTDOWN"].y,
 		m_screenSV, true);
 
 	// êFëäÇÃï`âÊ
-	DrawExtendGraph(m_position.x + PUT_POS["COLOR_LEFTUP"].x, m_position.y + PUT_POS["COLOR_LEFTUP"].y,
+	DrawExtendGraphF(m_position.x + PUT_POS["COLOR_LEFTUP"].x, m_position.y + PUT_POS["COLOR_LEFTUP"].y,
 		m_position.x + PUT_POS["COLOR_RIGHTDOWN"].x, m_position.y + PUT_POS["COLOR_RIGHTDOWN"].y,
 		m_screenH, true);
 
 	// åªç›ÇÃêFÇÃï`âÊ
-	DrawBox(m_position.x + PUT_POS["BOX_LEFTUP"].x, m_position.y + PUT_POS["BOX_LEFTUP"].y,
+	DrawBoxAA(m_position.x + PUT_POS["BOX_LEFTUP"].x, m_position.y + PUT_POS["BOX_LEFTUP"].y,
 		m_position.x + PUT_POS["BOX_RIGHTDOWN"].x, m_position.y + PUT_POS["BOX_RIGHTDOWN"].y,
 		HSVToRGB(m_h, m_s, m_v), true);
 
 	// ç ìxñæìxÉ|ÉCÉìÉ^ÇÃï`âÊ
-	int x = m_position.x + PUT_POS["SQUARE_LEFTUP"].x + (m_s * ((PUT_POS["SQUARE_RIGHTDOWN"].x - PUT_POS["SQUARE_LEFTUP"].x) / 255));
-	int y = m_position.y + PUT_POS["SQUARE_LEFTUP"].y + ((255 - m_v) * ((PUT_POS["SQUARE_RIGHTDOWN"].y - PUT_POS["SQUARE_LEFTUP"].y) / 255));
+	float x = m_position.x + PUT_POS["SQUARE_LEFTUP"].x + (m_s * ((PUT_POS["SQUARE_RIGHTDOWN"].x - PUT_POS["SQUARE_LEFTUP"].x) / 255));
+	float y = m_position.y + PUT_POS["SQUARE_LEFTUP"].y + ((255 - m_v) * ((PUT_POS["SQUARE_RIGHTDOWN"].y - PUT_POS["SQUARE_LEFTUP"].y) / 255));
 
 	DrawCircleAA(x, y, 5, 10, 0xffffff, true);
 	DrawCircleAA(x, y, 5, 10, 0x000000, false);
 
 	// êFëäÉoÅ[ÇÃï`âÊ
-	int yy = m_position.y + PUT_POS["COLOR_LEFTUP"].y + (m_h * ((PUT_POS["COLOR_RIGHTDOWN"].y - PUT_POS["COLOR_LEFTUP"].y) / 360));
+	float yy = m_position.y + PUT_POS["COLOR_LEFTUP"].y + (m_h * ((PUT_POS["COLOR_RIGHTDOWN"].y - PUT_POS["COLOR_LEFTUP"].y) / 360));
 
 	DrawBoxAA(m_position.x + PUT_POS["COLOR_LEFTUP"].x - 3, yy - 3, m_position.x + PUT_POS["COLOR_RIGHTDOWN"].x + 3, yy + 3, 0xffffff, true);
 	DrawBoxAA(m_position.x + PUT_POS["COLOR_LEFTUP"].x - 3, yy - 3, m_position.x + PUT_POS["COLOR_RIGHTDOWN"].x + 3, yy + 3, 0x000000, false);

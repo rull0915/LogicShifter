@@ -8,7 +8,7 @@ void DrawCell(int indexX, int indexY, Vector2D cameraPos, float cameraScale, Pac
 
 	int color = Cell::COLORS[{GetType(cell), GetSubType(cell)}];
 
-	DrawBox(
+	DrawBoxAA(
 		indexX * (BLOCK_SIZE * cameraScale) - cameraPos.x + offsetX, 
 		indexY * (BLOCK_SIZE * cameraScale) - cameraPos.y + offsetY, 
 		(indexX + 1) * (BLOCK_SIZE * cameraScale) - cameraPos.x + offsetX, 
@@ -39,7 +39,7 @@ void RangeRender(Vector2DInt first, Vector2DInt second, Vector2D cameraPos, floa
 	float offsetX = Screen::WIDTH / 2 + Screen::WIDTH / 2 * cameraScale;
 	float offsetY = Screen::HEIGHT / 2 + Screen::HEIGHT / 2 * cameraScale;
 
-	DrawBox((first.x) * (BLOCK_SIZE * cameraScale) - cameraPos.x + offsetX, 
+	DrawBoxAA((first.x) * (BLOCK_SIZE * cameraScale) - cameraPos.x + offsetX, 
 		(first.y) * (BLOCK_SIZE * cameraScale) - cameraPos.y + offsetY, 
 		(second.x + 1) * (BLOCK_SIZE * cameraScale) - cameraPos.x + offsetX, 
 		(second.y + 1) * (BLOCK_SIZE * cameraScale) - cameraPos.y + offsetY, 

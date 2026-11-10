@@ -24,20 +24,20 @@ void TextBox::Render(bool mode)
 
 	if(mode)
 	{
-		DrawBox(m_position.x, m_position.y, m_position.x + len, m_position.y + fontSize * lineNum, 0xAAAAAA, true);
+		DrawBoxAA(m_position.x, m_position.y, m_position.x + len, m_position.y + fontSize * lineNum, 0xAAAAAA, true);
 
 		if (m_isActive)
 		{
-			DrawFormatStringToHandle(m_position.x, m_position.y, 0x222222, GetFontHandle(fontSize), m_str.c_str());
+			DrawFormatStringFToHandle(m_position.x, m_position.y, 0x222222, GetFontHandle(fontSize), m_str.c_str());
 		}
 	}
 	else 
 	{
-		DrawBox(m_position.x - len, m_position.y, m_position.x, m_position.y + fontSize * lineNum, 0xAAAAAA, true);
+		DrawBoxAA(m_position.x - len, m_position.y, m_position.x, m_position.y + fontSize * lineNum, 0xAAAAAA, true);
 
 		if (m_isActive)
 		{
-			DrawFormatStringToHandle(m_position.x - len, m_position.y, 0x222222, GetFontHandle(fontSize), m_str.c_str());
+			DrawFormatStringFToHandle(m_position.x - len, m_position.y, 0x222222, GetFontHandle(fontSize), m_str.c_str());
 		}
 	}
 }

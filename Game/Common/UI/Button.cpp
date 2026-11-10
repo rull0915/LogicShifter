@@ -76,8 +76,8 @@ void Button::Render()
 	{		
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);
 
-		if(MouseEnter() & MOUSE_INPUT_LEFT) DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, GetColor(70, 70, 90), true);
-		else DrawBox(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, GetColor(220, 220, 240), true);
+		if(MouseEnter() & MOUSE_INPUT_LEFT) DrawBoxAA(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, GetColor(70, 70, 90), true);
+		else DrawBoxAA(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, GetColor(220, 220, 240), true);
 
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
@@ -99,11 +99,14 @@ void Button::ShapeRender()
 {
 	if (m_mode)
 	{
-		DrawExtendGraph(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_ghButton, true);
+		DrawExtendGraphF(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_ghButton, true);
 	}
 	else
 	{
-		if (m_isRounding) MyDrawRoundBox({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }, { m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }, (m_size.x < m_size.y ? m_size.x : m_size.y) / 10, m_color, true);
+		if (m_isRounding) MyDrawRoundBox(
+			ToVector2DInt({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }), 
+			ToVector2DInt({ m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }),
+			static_cast<int>((m_size.x < m_size.y ? m_size.x : m_size.y) / 10), m_color, true);
 		else DrawBoxAA(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_color, true);
 	}
 }
@@ -112,11 +115,14 @@ void Button::ShapeRenderAA()
 {
 	if (m_mode)
 	{
-		DrawExtendGraph(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_ghButton, true);
+		DrawExtendGraphF(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_ghButton, true);
 	}
 	else
 	{
-		if (m_isRounding) MyDrawRoundBoxAA({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }, { m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }, (m_size.x < m_size.y ? m_size.x : m_size.y) / 10, m_color, true);
+		if (m_isRounding) MyDrawRoundBox(
+			ToVector2DInt({ m_position.x - m_size.x / 2, m_position.y - m_size.y / 2 }), 
+			ToVector2DInt({ m_position.x + m_size.x / 2, m_position.y + m_size.y / 2 }), 
+			static_cast<int>((m_size.x < m_size.y ? m_size.x : m_size.y) / 10), m_color, true);
 		else DrawBoxAA(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2, m_position.x + m_size.x / 2, m_position.y + m_size.y / 2, m_color, true);
 	}
 }

@@ -107,7 +107,7 @@ void SlideTransition::Render()
 		break;
 	}
 
-	DrawQuadrangle(
+	DrawQuadrangleAA(
 		m_points["StartLeft"].x, m_points["StartLeft"].y,
 		m_points["StartRight"].x, m_points["StartRight"].y,
 		endRight.x, endRight.y,

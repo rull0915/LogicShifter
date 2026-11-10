@@ -31,19 +31,19 @@ void BaseParticle::Update(float elapsedTime, std::pair<int, int>velRange)
 	if(sum >= m_frequency)
 	{
 		Vector2D pos = {
-			min(m_randomRange.first.x, m_randomRange.second.x) + GetRand(abs(m_randomRange.second.x - m_randomRange.first.x)),
-			min(m_randomRange.first.y, m_randomRange.second.y) + GetRand(abs(m_randomRange.second.y - m_randomRange.first.y))
+			min(m_randomRange.first.x, m_randomRange.second.x) + GetRand(static_cast<int>(abs(m_randomRange.second.x - m_randomRange.first.x))),
+			min(m_randomRange.first.y, m_randomRange.second.y) + GetRand(static_cast<int>(abs(m_randomRange.second.y - m_randomRange.first.y)))
 		};
 
 		Vector2D vel =
 		{
-			0, -velRange.first - GetRand((velRange.second - velRange.first))
+			0.0f, static_cast<float>(- velRange.first - GetRand((velRange.second - velRange.first)))
 		};
 
 		Vector2D size =
 		{
-			min(m_sizeRange.first.x, m_sizeRange.second.x) + GetRand(abs(m_sizeRange.second.x - m_sizeRange.first.x)),
-			min(m_sizeRange.first.y, m_sizeRange.second.y) + GetRand(abs(m_sizeRange.second.y - m_sizeRange.first.y))
+			min(m_sizeRange.first.x, m_sizeRange.second.x) + GetRand(static_cast<int>(abs(m_sizeRange.second.x - m_sizeRange.first.x))),
+			min(m_sizeRange.first.y, m_sizeRange.second.y) + GetRand(static_cast<int>(abs(m_sizeRange.second.y - m_sizeRange.first.y)))
 		}; 
 
 		// パーティクルの生成
@@ -109,7 +109,7 @@ void OnceParticle::Update(float elapsedTime)
 void OnceParticle::Render(int color)
 {
 
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, GetAlpha() * 255);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, (int)(GetAlpha() * 255));
 
 	switch (m_type)
 	{

@@ -200,9 +200,7 @@ void SelectUI::Update(float elapsedTime)
 		// ボタン上にマウスがあれば
 		if (button.second.first->MouseIsOnButton())
 		{
-			Vector2DInt pos;
-			GetMousePoint(&pos.x, &pos.y);
-			m_textBox.Update(true, { pos.x + 0.f, pos.y + 0.f }, blockButtonExplains[button.first]);
+			m_textBox.Update(true, { m_mousePos.x + 0.f, m_mousePos.y + 0.f }, blockButtonExplains[button.first]);
 		}
 
 		// 加算

@@ -97,13 +97,13 @@ int Gradation(std::vector<int> colors, float ratio)
 
 	// サイズが2以上の場合
 	// 現在がどの位置にいるか調べる
-	int currentNum = 0;
-	int num = colors.size();
+	size_t currentNum = 0;
+	size_t num = colors.size();
 
 	if (colors.size() == 2) currentNum = 0;
 	else 
 	{
-		for (int i = num - 2; i >= 0; i--)
+		for (size_t i = num - 2; i >= 0; i--)
 		{
 			// 基準を決める
 			float st = (1.0f / (num - 1)) * i;
@@ -136,9 +136,9 @@ int Gradation(std::vector<int> colors, float ratio)
 	int aG = getG(colors[currentNum + 1]);
 	int aB = getB(colors[currentNum + 1]);
 
-	int r = bR + (aR - bR) * cRatio;
-	int g = bG + (aG - bG) * cRatio;
-	int b = bB + (aB - bB) * cRatio;
+	int r = static_cast<int>(bR + (aR - bR) * cRatio);
+	int g = static_cast<int>(bG + (aG - bG) * cRatio);
+	int b = static_cast<int>(bB + (aB - bB) * cRatio);
 
 	return GetColor(r, g, b);
 }

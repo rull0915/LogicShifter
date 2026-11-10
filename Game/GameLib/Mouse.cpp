@@ -18,14 +18,14 @@ void MouseUpdate()
 	int x = 0, y = 0;
 	GetMousePoint(&x, &y);
 
-	float diffX = x - (Screen::WIDTH / 2), diffY = y - (Screen::HEIGHT / 2);
+	int diffX = x - (Screen::WIDTH / 2), diffY = y - (Screen::HEIGHT / 2);
 
 	// マウス座標を中心に固定
 	SetMousePoint(Screen::WIDTH / 2, Screen::HEIGHT / 2);
 
 	// ゲーム内の仮想座標
 	static Vector2D virtualMousePos = Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT / 2 };
-	virtualMousePos += Vector2D{ diffX, diffY } * m_mouseSensitivity;
+	virtualMousePos += Vector2D{ static_cast<float>(diffX), static_cast<float>(diffY) } * m_mouseSensitivity;
 
 	// 画面内に補正
 	if (virtualMousePos.x < 0) virtualMousePos.x = 0;

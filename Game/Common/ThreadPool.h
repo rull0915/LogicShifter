@@ -48,7 +48,7 @@ public:
 	}
 
 	// スレッド数を返す関数
-	int GetThreadCount() const { return m_threads.size(); }
+	size_t GetThreadCount() const { return m_threads.size(); }
 
 	// タスク追加関数
 	template<class F, class... Args>

@@ -26,8 +26,6 @@ int WINAPI WinMain(
     // ウインドウモードへ変更
     ChangeWindowMode(TRUE);
 
-    SetAlwaysRunFlag(TRUE);
-
     if (DxLib_Init() == -1)    // ＤＸライブラリ初期化処理
     {
         return -1;              // エラーが起きたら直ちに終了

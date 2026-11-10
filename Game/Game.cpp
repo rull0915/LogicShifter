@@ -109,7 +109,10 @@ void Game::Render()
 	{
 		m_pauseButton.Render();
 
-		MyDrawFormatStringToHandleToCenter(m_pauseButton.GetPos().x, m_pauseButton.GetPos().y, 0x000000, GetFontHandle(32), L"Pause");
+		MyDrawFormatStringToHandleToCenter(
+			static_cast<int>(m_pauseButton.GetPos().x), 
+			static_cast<int>(m_pauseButton.GetPos().y), 
+			0x000000, GetFontHandle(32), L"Pause");
 	}
 
 	m_sceneManager.TransitionRender();

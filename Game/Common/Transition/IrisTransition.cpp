@@ -55,7 +55,11 @@ void IrisTransition::Render()
 		break;
 	}
 
-	DrawCircle(m_centerPos.x, m_centerPos.y, radius, 0x000000, true);
+	DrawCircle(
+		static_cast<int>(m_centerPos.x), 
+		static_cast<int>(m_centerPos.y), 
+		static_cast<int>(radius), 
+		0x000000, true);
 
 	MaskManager::GetInstance().FinishDrawMask();
 

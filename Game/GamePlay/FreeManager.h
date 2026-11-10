@@ -12,7 +12,7 @@ class FreeManager : public ModeManager
 	#ifdef _DEBUG 
 		4;
 	#else 
-		64;
+		16;
 	#endif
 
 	// ©“®Ä¶‚ÌXVŠÔŠu

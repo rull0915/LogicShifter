@@ -98,7 +98,7 @@ void SceneManager::TransitionRender()
 // 開始シーンの設定
 void SceneManager::SetStartScene(const std::string& startSceneName)
 {
-	RequestSceneChange(startSceneName, std::make_unique<FadeTransition>(0, Transition::Mode::In, 0x000000), std::make_unique<FadeTransition>(1.0f, Transition::Mode::Out, 0x000000));
+	RequestSceneChange(startSceneName, std::make_unique<FadeTransition>(0.0f, Transition::Mode::In, 0x000000), std::make_unique<FadeTransition>(1.0f, Transition::Mode::Out, 0x000000));
 }
 
 void SceneManager::RequestSceneChange(const std::string& requestSceneName, std::unique_ptr<SceneTransition> inTrans, std::unique_ptr<SceneTransition> outTrans)

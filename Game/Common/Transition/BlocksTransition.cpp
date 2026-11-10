@@ -25,7 +25,7 @@ void BlocksTransition::Initialize()
 	}
 
 	// 開始地点が所属するブロックを探索
-	Vector2DInt startPos = { m_startPos.x / (Screen::WIDTH / m_divisionNum.x), m_startPos.y / (Screen::HEIGHT / m_divisionNum.y) };
+	Vector2DInt startPos = { static_cast<int>(m_startPos.x / (Screen::WIDTH / m_divisionNum.x)), static_cast<int>(m_startPos.y / (Screen::HEIGHT / m_divisionNum.y)) };
 
 	if (startPos.x >= m_divisionNum.x) startPos.x = m_divisionNum.x - 1;
 	if (startPos.y >= m_divisionNum.y) startPos.y = m_divisionNum.y - 1;
@@ -101,7 +101,7 @@ bool BlocksTransition::Update(float elapsedTime)
 
 void BlocksTransition::Render()
 {
-	Vector2D blockSize = { Screen::WIDTH / m_divisionNum.x, Screen::HEIGHT / m_divisionNum.y };
+	Vector2D blockSize = { static_cast<float>(Screen::WIDTH) / m_divisionNum.x, static_cast<float>(Screen::HEIGHT) / m_divisionNum.y };
 
 	for (int i = 0; i < m_divisionNum.y; i++)
 	{
@@ -112,13 +112,13 @@ void BlocksTransition::Render()
 			case Transition::Mode::In:
 				if (m_blockMap[i][j] <= m_canDrawNum)
 				{
-					DrawBox(blockSize.x * j, blockSize.y * i, blockSize.x * (j + 1), blockSize.y * (i + 1), m_blocksColor, true);
+					DrawBoxAA(blockSize.x * j, blockSize.y * i, blockSize.x * (j + 1), blockSize.y * (i + 1), m_blocksColor, true);
 				}
 				break;
 			case Transition::Mode::Out:
 				if (m_blockMap[i][j] >= m_canDrawNum)
 				{
-					DrawBox(blockSize.x * j, blockSize.y * i, blockSize.x * (j + 1), blockSize.y * (i + 1), m_blocksColor, true);
+					DrawBoxAA(blockSize.x * j, blockSize.y * i, blockSize.x * (j + 1), blockSize.y * (i + 1), m_blocksColor, true);
 				}
 				break;
 			default:

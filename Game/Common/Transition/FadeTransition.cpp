@@ -44,7 +44,7 @@ void FadeTransition::Render()
 		break;
 	}
 
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(alpha));
 
 	DrawBox(0, 0, Screen::WIDTH, Screen::HEIGHT, m_fadeColor, true);
 

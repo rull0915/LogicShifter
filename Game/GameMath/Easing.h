@@ -22,22 +22,22 @@ namespace Easing
 
 	inline float EaseInOutQuad(float x)
 	{
-		return x < 0.5 ? 2 * x * x : 1 - std::pow(-2 * x + 2, 2) / 2;
+		return x < 0.5f ? 2.0f * x * x : 1.0f - std::powf(-2.0f * x + 2.0f, 2.0f) / 2;
 	}
 
 	inline float EaseOutQuart(float x)
 	{
-		return (1 - std::pow(1 - x, 4));
+		return (1.0f - std::powf(1 - x, 4));
 	}
 
 	inline float EaseInExpo(float x)
 	{
-		return x == 0 ? 0 : std::pow(2, 10 * x - 10);
+		return x == 0 ? 0 : std::powf(2, 10 * x - 10);
 	}
 
 	inline float EaseOutExpo(float x)
 	{
-		return x == 1.0f ? 1.0f : 1.0f - std::pow(2.0f, -10.0f * x);
+		return x == 1.0f ? 1.0f : 1.0f - std::powf(2.0f, -10.0f * x);
 	}
 
 	inline float EaseOutBounce(float x) {
@@ -59,6 +59,6 @@ namespace Easing
 	}
 
 	inline float EaseInBounce(float x) {
-		return 1 - EaseOutBounce(1 - x);
+		return 1.0f - EaseOutBounce(1.0f - x);
 	}
 }

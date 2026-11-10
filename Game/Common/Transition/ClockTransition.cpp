@@ -65,57 +65,57 @@ void ClockTransition::ClockRender()
 	if (m_angle >= DX_PI_F * (0.0f / 4) && m_angle < DX_PI_F * (1.0f / 4))
 	{
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(m_centerPos.x, 0, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, 0, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (1.0f / 4) && m_angle < DX_PI_F * (2.0f / 4))
 	{
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(DX_PI_F / 4), -cosf(DX_PI_F / 4) };
 		Vector2D pos2 = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(m_centerPos.x, 0, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
-		DrawTriangle(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, 0, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (2.0f / 4) && m_angle < DX_PI_F * (3.0f / 4))
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, m_centerPos.y, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, m_centerPos.y, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, Screen::WIDTH, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, Screen::WIDTH, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (3.0f / 4) && m_angle < DX_PI_F * (4.0f / 4))
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, m_centerPos.y, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, m_centerPos.y, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(DX_PI_F * (3.0f / 4)), -cosf(DX_PI_F * (3.0f / 4)) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, Screen::WIDTH, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, Screen::WIDTH, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
 		Vector2D pos2 = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (4.0f / 4) && m_angle < DX_PI_F * (5.0f / 4))
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, pos.x, pos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (5.0f / 4) && m_angle < DX_PI_F * (6.0f / 4))
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(DX_PI_F * (5.0f / 4)), -cosf(DX_PI_F * (5.0f / 4)) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, pos.x, pos.y, m_clockColor, true);
 		Vector2D pos2 = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
 	}
 	else if (m_angle >= DX_PI_F * (6.0f / 4) && m_angle < DX_PI_F * (7.0f / 4))
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
-		DrawBox(0, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(0, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, 0, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, 0, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
 	}
 	else
 	{
-		DrawBox(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
-		DrawBox(0, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(m_centerPos.x, 0, Screen::WIDTH, Screen::HEIGHT, m_clockColor, true);
+		DrawBoxAA(0, m_centerPos.y, m_centerPos.x, Screen::HEIGHT, m_clockColor, true);
 		Vector2D pos = m_centerPos + m_maxRadius * Vector2D{ sinf(DX_PI_F * (7.0f / 4)), -cosf(DX_PI_F * (7.0f / 4)) };
-		DrawTriangle(m_centerPos.x, m_centerPos.y, 0, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
+		DrawTriangleAA(m_centerPos.x, m_centerPos.y, 0, m_centerPos.y, pos.x, pos.y, m_clockColor, true);
 		Vector2D pos2 = m_centerPos + m_maxRadius * Vector2D{ sinf(m_angle), -cosf(m_angle) };
-		DrawTriangle(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
+		DrawTriangleAA(pos2.x, pos2.y, pos.x, pos.y, m_centerPos.x, m_centerPos.y, m_clockColor, true);
 	}
 }

@@ -18,8 +18,8 @@ FreeManager::~FreeManager()
 
 void FreeManager::Initialize()
 {
-	STAGE_WIDTH = 500;
-	STAGE_HEIGHT = 500;
+	STAGE_WIDTH = 1024;
+	STAGE_HEIGHT = 1024;
 
 	OFFSET_X = STAGE_WIDTH / 2;
 	OFFSET_Y = STAGE_HEIGHT / 2;

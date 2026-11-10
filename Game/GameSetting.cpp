@@ -1,9 +1,9 @@
 #include "GameSetting.h"
 #include "../Game/Common/ThreadPool.h"
 GameSetting::GameSetting()
-	: m_bgmBar{ Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (2.0f / 7)}, 20, 0xCCCCCC, 0x888888}
-	, m_seBar { Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (3.0f / 7)}, 20, 0xCCCCCC, 0x888888}
-	, m_sensitivityBar { Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (4.0f / 7)}, 20, 0xCCCCCC, 0x888888}
+	: m_bgmBar{ Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (2.0f / 7) + 16}, 20, 0xCCCCCC, 0x888888}
+	, m_seBar { Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (3.0f / 7) + 16}, 20, 0xCCCCCC, 0x888888}
+	, m_sensitivityBar { Screen::WIDTH / 3, Vector2D{ Screen::WIDTH / 2 - 20, Screen::HEIGHT * (4.0f / 7) + 16}, 20, 0xCCCCCC, 0x888888}
 	, m_finishButton{ Vector2D{ Screen::WIDTH / 2, Screen::HEIGHT * (6.0f / 7)}, Vector2D{ Screen::WIDTH / 4, Screen::HEIGHT / 14 }, false, 0x3762AF }
 	, m_isFullScreen{ false }
 	, m_settingSwitch{ m_isFullScreen, Vector2D{ Screen::WIDTH * (4.0f / 7), Screen::HEIGHT * (5.0f / 7)},  Vector2D{ Screen::WIDTH / 14, Screen::HEIGHT / 20 } }
@@ -63,6 +63,8 @@ void GameSetting::Render()
 	// 画面を暗く
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
 	DrawBox(0, 0, Screen::WIDTH, Screen::HEIGHT, 0x000000, true);
+
+	DrawBox(Screen::WIDTH * (1.0f / 7), Screen::HEIGHT * (1.0f / 7), Screen::WIDTH * (6.0f / 7), Screen::HEIGHT * (6.0f / 7), 0x555555, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	// 設定の文字列
@@ -71,9 +73,9 @@ void GameSetting::Render()
 	MyDrawFormatStringToHandleToCenter(Screen::WIDTH / 2, Screen::HEIGHT / 8, 0x000000, GetFontHandle(Screen::HEIGHT / 12), L"設定");
 
 	// スライドバーの描画
-	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (2.0f / 7) - 32, 0xffffff, GetFontHandle(32), L"BGM Volume");
-	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 7) - 32, 0xffffff, GetFontHandle(32), L"SE Volume");
-	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 7) - 32, 0xffffff, GetFontHandle(32), L"マウス感度");
+	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (2.0f / 7) - 16, 0xffffff, GetFontHandle(32), L"BGM Volume");
+	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (3.0f / 7) - 16, 0xffffff, GetFontHandle(32), L"SE Volume");
+	MyDrawFormatStringToHandleToCenter( Screen::WIDTH / 2, Screen::HEIGHT * (4.0f / 7) - 16, 0xffffff, GetFontHandle(32), L"マウス感度");
 	m_bgmBar.Render();
 	m_seBar.Render();
 	m_sensitivityBar.Render();

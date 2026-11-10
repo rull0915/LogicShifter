@@ -64,8 +64,16 @@ void SelectList::Update()
 void SelectList::Render()
 {
 	m_standardButton.Render();
-	if(m_choicedIndex == 0 || m_isOpen) MyDrawFormatStringToHandleToCenter(m_standardButton.GetPos().x, m_standardButton.GetPos().y, 0x000000, GetFontHandle(m_aChouiceSize.y / 2), L"‘I‘ð");
-	else MyDrawFormatStringToHandleToCenter(m_standardButton.GetPos().x, m_standardButton.GetPos().y, 0x000000, GetFontHandle(m_aChouiceSize.y / 2), m_choiced.c_str());
+	if(m_choicedIndex == 0 || m_isOpen) 
+		MyDrawFormatStringToHandleToCenter(
+			static_cast<int>(m_standardButton.GetPos().x), 
+			static_cast<int>(m_standardButton.GetPos().y), 
+			0x000000, GetFontHandle(static_cast<int>(m_aChouiceSize.y / 2)), L"‘I‘ð");
+
+	else MyDrawFormatStringToHandleToCenter(
+		static_cast<int>(m_standardButton.GetPos().x), 
+		static_cast<int>(m_standardButton.GetPos().y), 
+		0x000000, GetFontHandle(static_cast<int>(m_aChouiceSize.y / 2)), m_choiced.c_str());
 
 	if(m_isOpen)
 	{
@@ -73,17 +81,20 @@ void SelectList::Render()
 		{
 			button.second->Render();
 
-			MyDrawFormatStringToHandleToCenter(button.second->GetPos().x, button.second->GetPos().y, 0x000000, GetFontHandle(m_aChouiceSize.y / 2), button.first.c_str());
+			MyDrawFormatStringToHandleToCenter(
+				static_cast<int>(button.second->GetPos().x), 
+				static_cast<int>(button.second->GetPos().y), 
+				0x000000, GetFontHandle(static_cast<int>(m_aChouiceSize.y / 2)), button.first.c_str());
 		}
 
 		if (m_choicedIndex != 0) 
 		{
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, 80);
-			DrawBox(m_position.x - m_aChouiceSize.x / 2, m_position.y - m_aChouiceSize.y / 2, m_position.x + m_aChouiceSize.x / 2, m_position.y + m_aChouiceSize.y / 2, 0xAAAAFF, true);
+			DrawBoxAA(m_position.x - m_aChouiceSize.x / 2, m_position.y - m_aChouiceSize.y / 2, m_position.x + m_aChouiceSize.x / 2, m_position.y + m_aChouiceSize.y / 2, 0xAAAAFF, true);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		}
 
-		DrawLine(
+		DrawLineAA(
 			m_standardButton.GetPos().x - m_aChouiceSize.x / 2, m_standardButton.GetPos().y + m_aChouiceSize.y / 2,
 			m_standardButton.GetPos().x + m_aChouiceSize.x / 2, m_standardButton.GetPos().y + m_aChouiceSize.y / 2,
 			0x444444

@@ -5,7 +5,7 @@ CirclesTransition::CirclesTransition(float transTime, Transition::Mode mode, int
 	, m_circlesColor{ circlesColor }
 	, m_circlesNum{ circlesNum }
 {
-	m_maxRadius = sqrt((Screen::WIDTH / m_circlesNum / 2) * (Screen::WIDTH / m_circlesNum / 2) * 2);
+	m_maxRadius = sqrtf((static_cast<float>(Screen::WIDTH) / m_circlesNum / 2) * (static_cast<float>(Screen::WIDTH) / m_circlesNum / 2) * 2);
 }
 
 void CirclesTransition::Initialize()
@@ -25,9 +25,9 @@ bool CirclesTransition::Update(float elapsedTime)
 
 void CirclesTransition::Render()
 {
-	int cell = (Screen::WIDTH / m_circlesNum / 2);
+	float cell = (static_cast<float>(Screen::WIDTH / m_circlesNum / 2));
 
-	int posX = -cell, posY = -cell;
+	float posX = -cell, posY = -cell;
 
 	while (posY < Screen::HEIGHT)
 	{
@@ -42,10 +42,10 @@ void CirclesTransition::Render()
 			switch (m_mode)
 			{
 			case Transition::Mode::In:
-				DrawCircle(posX, posY, m_maxRadius * Easing::EaseOutQuad(m_elapsedTime / m_transSec), m_circlesColor, true);
+				DrawCircleAA(posX, posY, m_maxRadius * Easing::EaseOutQuad(m_elapsedTime / m_transSec), m_circlesColor, true);
 				break;
 			case Transition::Mode::Out:
-				DrawCircle(posX, posY, m_maxRadius * Easing::EaseInQuad(1 - m_elapsedTime / m_transSec), m_circlesColor, true);
+				DrawCircleAA(posX, posY, m_maxRadius * Easing::EaseInQuad(1 - m_elapsedTime / m_transSec), m_circlesColor, true);
 				break;
 			default:
 				break;

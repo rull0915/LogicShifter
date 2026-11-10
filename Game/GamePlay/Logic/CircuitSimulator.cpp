@@ -16,7 +16,7 @@ CircuitSimulator::CircuitSimulator(std::vector<PackedCell>& cells, std::vector<P
 void CircuitSimulator::Initialize()
 {
 	// •ªŠ„”‚ðŒˆ’è
-	int divNum = (ThreadPool::GetInstance().GetThreadCount() / 2 < STAGE_WIDTH ? ThreadPool::GetInstance().GetThreadCount() / 2 : STAGE_WIDTH);
+	size_t divNum = (ThreadPool::GetInstance().GetThreadCount() / 2 < STAGE_WIDTH ? ThreadPool::GetInstance().GetThreadCount() / 2 : STAGE_WIDTH);
 
 	m_tasks.resize(divNum);
 }
@@ -54,8 +54,8 @@ bool CircuitSimulator::UpdateOnCPU()
 {
 	for(int i = 0; i < m_tasks.size(); i++)
 	{
-		int left = i * (STAGE_WIDTH / m_tasks.size());
-		int right = (i == m_tasks.size() - 1 ? STAGE_WIDTH : (i + 1) * (STAGE_WIDTH / m_tasks.size()));
+		size_t left = i * (STAGE_WIDTH / m_tasks.size());
+		size_t right = (i == m_tasks.size() - 1 ? STAGE_WIDTH : (i + 1) * (STAGE_WIDTH / m_tasks.size()));
 
 		// ƒ^ƒXƒN‚ð’Ç‰Á
 		m_tasks[i] = ThreadPool::GetInstance().AddTask(

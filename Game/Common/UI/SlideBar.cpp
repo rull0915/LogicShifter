@@ -44,7 +44,7 @@ void SlideBar::Update()
 	if(m_isMoving)
 	{
 		// ボタンのX座標をマウスに合わせる
-		m_buttonCenterPos.x = m_mousePos.x;
+		m_buttonCenterPos.x = static_cast<float>(m_mousePos.x);
 
 		// バーからはみ出したら補正
 		if (m_buttonCenterPos.x < m_barCenterPos.x - m_barWidth / 2) m_buttonCenterPos.x = m_barCenterPos.x - m_barWidth / 2;
@@ -55,7 +55,7 @@ void SlideBar::Update()
 void SlideBar::Render()
 {
 	// バーの描画
-	DrawLine(
+	DrawLineAA(
 		m_barCenterPos.x - m_barWidth / 2, m_barCenterPos.y,
 		m_barCenterPos.x + m_barWidth / 2, m_barCenterPos.y,
 		m_barColor, m_buttonRadius / 2
